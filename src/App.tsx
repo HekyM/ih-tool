@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 
 import { Menu } from './features/menu/Menu'
 import { Counter } from './features/counter/Counter'
@@ -14,7 +14,7 @@ import './App.css'
 function App() {
   return (
     <div className="App">
-      <Router basename={process.env.PUBLIC_URL}>
+      <Router >
         <table id='mainContainer'>
           <tbody>
             <tr>

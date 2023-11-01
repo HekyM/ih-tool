@@ -91,7 +91,7 @@ let _heroesData: HeroesData = {
             "1": ['Flora', 'Ithaqua', 'Onkirimaru'],
             "2": ['Gustin', 'Jahra', 'Saja'],
             "3": ['Tix', 'Mihm', 'Annabelle'],
-            "4": ['Carrie', 'Amen-Ra', 'Mystic Fairy - Freya'],
+            "4": ['Carrie', 'Amen-Ra', 'Freya'],
        },
     },
     "Tix": {
