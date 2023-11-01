@@ -1,0 +1,82 @@
+html {
+  overflow-y: scroll;
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #3c434a;
+  text-align: left;
+  font-family: Tahoma,Verdana,Segoe,sans-serif;  
+  background-color: #b8ae93;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#mainContainer {
+  width: calc(100px + 950px + 20em);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+}
+#menuContainer, #fakeMenuContainer {
+  vertical-align: top;
+  width: calc(55px + 10em);
+  min-width: calc(55px + 10em);
+  max-width: calc(55px + 10em);
+  z-index: 30;
+  position: relative;
+}
+#menu {
+  background-color: #ecdfbf;
+  padding: 0;
+  width: calc(50px + 10em);
+  position: fixed;
+  top: 12px;
+}
+.menuText {
+  display: initial;
+}
+@media (max-width: 1450px) {
+  #mainContainer {
+    width: calc(50px + 950px);
+  }
+  #menuContainer, #fakeMenuContainer {
+    width: 55px;
+    min-width: 55px;
+    max-width: 55px;
+  }
+  #menu {
+    width: 50px;
+    min-width: 50px;
+    max-width: 50px;
+  }
+  .menuText {
+    display: none;
+  }
+}
+#contentContainer {
+  vertical-align: top;
+  padding-bottom: 70vh;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
