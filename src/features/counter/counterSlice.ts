@@ -1,6 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import _ from 'lodash';
+import {
+  timers as defaultTimers,
+  weeklies as defaultWeeklies,
+} from './backup'
 
 
 export const removeTimersStorage = () => {localStorage.removeItem('ih-tool:timers')}
@@ -86,15 +90,6 @@ function saveCustomTimers(timers: Timer[]) {
   pasteTimersStorage(JSON.stringify(timers.filter(timer => 'private' !== timer.type)));
 }
 
-const defaultCustomTimers: Timer[] = [
-  {
-    t: 0, //1695062820000
-    dsc: "Monthly reset", 
-    type: 'custom', 
-    r: 2629800000, //30 + month 
-  },
-];
-
 function repeatTimer(timer: Timer, nowTime: number): Timer {
   if (timer.t && timer.r) {
     while (timer.t < nowTime) {
@@ -106,7 +101,7 @@ function repeatTimer(timer: Timer, nowTime: number): Timer {
 
 function loadCustomTimers(nowTime: number): Timer[] {
   const customData = copyTimersStorage()
-  const customTimers: Timer[] = customData ? JSON.parse(customData) : defaultCustomTimers
+  const customTimers: Timer[] = customData ? JSON.parse(customData) : defaultTimers
   customTimers.forEach((timer) => {
     if (!timer.rm) {
       repeatTimer(timer, nowTime)
@@ -119,17 +114,6 @@ function loadCustomTimers(nowTime: number): Timer[] {
 function saveCustomWeeklies(weeklies: Weekly[]) {
   pasteWeekliesStorage(JSON.stringify(weeklies.map(weekly => weekly.settings)));
 }
-
-const defaultCustomWeekliesSettings: (WeeklyDays | WeeklyOnOff) [] = [
-  {dsc: "Tower",          d: [0,0,0,0,1,1,1]},
-  {dsc: "IDA Arena",      t: 0, on: 2, off: 3},
-  {dsc: "Team Arena",     d: [0,0,0,0,1,1,1]},
-  {dsc: "Free Arena",     d: [0,1,1,1,0,0,0]},
-  {dsc: "Star Arena",     t: 0, on: 2, off: 3},
-  {dsc: "Aspen Dungeon",  t: 1694131200000, on: 2, off: 3},
-  {dsc: "Void Vortex",    t: 0, on: 2, off: 3},
-  {dsc: "Guild Wars",     t: 0, on: 13, sign: 7, off: 14}, //GW on 13d (7d sign in)
-];
 
 function settings2Weekly(nowTime: number, utcToday: number, settings: WeeklyDays | WeeklyOnOff): Weekly {
   if (_.has(settings, 'd')) {
@@ -182,7 +166,7 @@ function settings2Weekly(nowTime: number, utcToday: number, settings: WeeklyDays
 
 function loadCustomWeeklies(): Weekly[] {
   const customData = copyWeekliesStorage()
-  const customWeekliesSettings: (WeeklyDays | WeeklyOnOff) [] = customData ? JSON.parse(customData) : defaultCustomWeekliesSettings
+  const customWeekliesSettings: (WeeklyDays | WeeklyOnOff) [] = customData ? JSON.parse(customData) : defaultWeeklies
   const customWeeklies: Weekly[] = [];
   customWeekliesSettings.forEach((settings) => {
     customWeeklies.push(settings2Weekly(nowTime, utcToday, settings))

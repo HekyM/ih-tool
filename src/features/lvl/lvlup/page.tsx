@@ -34,13 +34,14 @@ export function LevelUp() {
         <table className='ihContainer ihDataTable no-footer w-max'>
             <thead>
                 <tr>
-                    <td colSpan={1}>
+                    <td>
                         {numbers === 'long'
                         ? <FontAwesomeIcon className='btn-role' icon={faToggleOff} style={{width: '1.5em', fontSize: 'larger'}} onClick={() => setNumbers('short')} title='toggle numbers format'/>
                         : <FontAwesomeIcon className='btn-role' icon={faToggleOn} style={{width: '1.5em', fontSize: 'larger'}} onClick={() => setNumbers('long')} title='toggle numbers format'/>
                         } 
                     </td>
-                    <td colSpan={9} style={{borderBottom: '3px solid #bd916e'}}>{selected === null ? '#' : '\u03A3'}</td>
+                    <td></td>
+                    <td colSpan={4} style={{borderBottom: '3px solid #bd916e'}}>{selected === null ? '#' : '\u03A3'}</td>
 
                     <td style={{width: '5em'}}>
                         {-1 === selected
@@ -50,16 +51,21 @@ export function LevelUp() {
                     </td>
                 </tr>
                 <tr>
+                    <td></td>
+                    <td></td>
+                    <td><div className='dataIconCell'><Icon size='sm' src={ImageSrc.resources('x-stone')}  title={'X-Stone'}/></div></td>
+                    <td><div className='dataIconCell'><Icon size='sm' src={ImageSrc.resources('stone')} title={'Hero Promotion Stone'}/></div></td>
+                    <td><div className='dataIconCell'><Icon size='sm' src={ImageSrc.resources('gold')}  title={'Gold'}/></div></td>
+                    <td><div className='dataIconCell'><Icon size='sm' src={ImageSrc.resources('spirit')}  title={'Spirit'}/></div></td>
+                    <td></td>
+                </tr>
+                <tr>
                     <td style={{width: '4em'}}></td>
                     <td></td>
-                    <td style={{width: '4em'}}></td>
-                    <td style={{width: '1em'}}></td>
                     <td style={{width: '5em'}}></td>
-                    <td style={{width: '1em'}}></td>
+                    <td style={{width: '5em'}}></td>
                     <td style={{width: '9em'}}></td>
-                    <td style={{width: '1em'}}></td>
                     <td style={{width: '9em'}}></td>
-                    <td style={{width: '1em'}}></td>
 
                     <td style={{width: '5em'}}></td>
                 </tr>
@@ -69,14 +75,10 @@ export function LevelUp() {
                     <tr key={'tree-'+i}>
                         <td style={{textAlign: 'left'}}>{data.lvl}</td>
                         <td></td>
-                        <td style={{textAlign: 'right'}}>{data.x !== undefined && <BigNumber value={data.x} mode={numbers}/>}</td>
-                        <td>{data.x !== undefined && <Icon size='xsm' src={ImageSrc.resources('x-stone')}  title={'X-Stone'}/>}</td>
-                        <td style={{textAlign: 'right'}}><BigNumber value={data.stone} mode={numbers}/></td>
-                        <td><Icon size='xsm' src={ImageSrc.resources('stone')} title={'Hero Promotion Stone'}/></td>
-                        <td style={{textAlign: 'right'}}><BigNumber value={data.gold} mode={numbers}/></td>
-                        <td><Icon size='xsm' src={ImageSrc.resources('gold')}  title={'Gold'}/></td>
-                        <td style={{textAlign: 'right'}}><BigNumber value={data.spirit} mode={numbers}/></td>
-                        <td><Icon size='xsm' src={ImageSrc.resources('spirit')}  title={'Spirit'}/></td>
+                        <td style={{textAlign: 'right'}}>{data.x !== undefined && <BigNumber value={data.x} mode={numbers} style={{paddingRight: '.5em'}}/>}</td>
+                        <td style={{textAlign: 'right'}}><BigNumber value={data.stone} mode={numbers} style={{paddingRight: '.5em'}}/></td>
+                        <td style={{textAlign: 'right'}}><BigNumber value={data.gold} mode={numbers} style={{paddingRight: '.5em'}}/></td>
+                        <td style={{textAlign: 'right'}}><BigNumber value={data.spirit} mode={numbers} style={{paddingRight: '.5em'}}/></td>
 
                         <td>
                             {i === selected
