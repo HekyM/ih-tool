@@ -1,6 +1,6 @@
 import React from 'react';
 
-const imagesRoot = "./assets/images"
+const imagesRoot = process.env.PUBLIC_URL + "/assets/images"
 const imagesExt = ".webp"
 
 export interface IconProps extends React.ImgHTMLAttributes<HTMLImageElement> {

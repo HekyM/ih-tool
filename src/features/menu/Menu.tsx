@@ -44,7 +44,7 @@ export function Menu() {
         <div id='menu' className='ihContainer'>
             { sidebarItems.map((item,i) =>
                  <NavLink end className='menuItem' key={i} to={item.path}>
-                     <Icon size='sm' src={item.icon} alt={`Go to item.title`} /><span className='menuText'>{item.title}</span>
+                     <Icon size='sm' src={item.icon} alt={'Go to ' + item.title} /><span className='menuText'>{item.title}</span>
                 </NavLink>
             ) }
         </div>

@@ -14,7 +14,7 @@ import './App.css'
 function App() {
   return (
     <div className="App">
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <table id='mainContainer'>
           <tbody>
             <tr>
