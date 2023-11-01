@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ih-tool/static/css/main.6994b64c.css",
+    "main.js": "/ih-tool/static/js/main.218ac84e.js",
+    "static/js/651.058990fd.chunk.js": "/ih-tool/static/js/651.058990fd.chunk.js",
+    "index.html": "/ih-tool/index.html",
+    "main.6994b64c.css.map": "/ih-tool/static/css/main.6994b64c.css.map",
+    "main.218ac84e.js.map": "/ih-tool/static/js/main.218ac84e.js.map",
+    "651.058990fd.chunk.js.map": "/ih-tool/static/js/651.058990fd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6994b64c.css",
+    "static/js/main.218ac84e.js"
+  ]
+}
