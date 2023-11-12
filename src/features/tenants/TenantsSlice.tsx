@@ -10,6 +10,7 @@ export interface TenantsFilterState {
     faction: string | null;
     class: string[];
     imprintable: boolean;
+    applyOnTranscendence: boolean;
 }
 
 const initialState: TenantsFilterState = {
@@ -19,6 +20,7 @@ const initialState: TenantsFilterState = {
     faction: null,
     class: [],
     imprintable: false,
+    applyOnTranscendence: false,
 };
 
 const toNull = (item: any) => {
@@ -56,11 +58,14 @@ export const tenantsFilterSlice = createSlice({
     ci_filter_imprintable: (state) => {
         state.imprintable = !state.imprintable
     },
+    ci_filter_transcendence: (state) => {
+        state.applyOnTranscendence = !state.applyOnTranscendence
+    },
   },
 });
 
 export const tenantsFilter = (state: RootState) => state.tenants;
 
-export const { ci_select_hero, ci_filter_ho, ci_filter_tenant, ci_filter_faction, ci_filter_class, ci_filter_imprintable } = tenantsFilterSlice.actions;
+export const { ci_select_hero, ci_filter_ho, ci_filter_tenant, ci_filter_faction, ci_filter_class, ci_filter_imprintable, ci_filter_transcendence } = tenantsFilterSlice.actions;
 
 export default tenantsFilterSlice.reducer;

@@ -9,7 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import {
     tenantsFilter,
-    ci_select_hero, ci_filter_ho, ci_filter_tenant, ci_filter_faction, ci_filter_class, ci_filter_imprintable
+    ci_select_hero, ci_filter_ho, ci_filter_tenant, ci_filter_faction, ci_filter_class, ci_filter_imprintable, ci_filter_transcendence
 } from './TenantsSlice';
 
 const tenantHeroes = heroes.filter(hero => hero.tenants !== undefined || hero.tenant)
@@ -58,6 +58,12 @@ export function TenantFilters() {
                                     src={ImageSrc.faction(heroClass)} title={heroClass}
                                     onClick={() => dispatch(ci_filter_class(heroClass))} />
                             )}
+                            <input
+                                type="checkbox"
+                                name="Apply on Transcendence"
+                                title="Apply on Transcendence"
+                                checked={filterState.applyOnTranscendence} 
+                                onChange={() => dispatch(ci_filter_transcendence())}/>
                         </div>
                     </td>
                     <td style={{verticalAlign: 'top'}}>
@@ -88,7 +94,7 @@ export function TenantsRow(props: {
         else
             className += ' unchecked'
 
-        if (!ho && hero.faction !== 'Transcendence' && (filter.class.includes(hero.class) || (filter.imprintable && !hero.imprint)))
+        if (!ho && (filter.applyOnTranscendence || hero.faction !== 'Transcendence') && (filter.class.includes(hero.class) || (filter.imprintable && !hero.imprint)))
             className += ' disabled'
 
         return className

@@ -71,12 +71,25 @@ const tinyImgStyle = {
   marginBottom: '-.35em',
 }
 
-//const monthsShort: string[] = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+/*const timeOptions = {
+  //weekday: "short" as const,
+  hourCycle: 'h23' as const,
+  hour: '2-digit' as const,
+  minute: '2-digit' as const,
+  day: "2-digit" as const,
+  month: "short" as const,
+  year: "numeric" as const,
+};*/
+
+//const months: string[] = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+const monthsShort: string[] = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
 const daysShort: string[] = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 function DateTime(t: number) {
   if (t === 0) return ''
   let time = new Date(t)
-  return daysShort[time.getDay()] + '  ' + zeroPad(time.getDate(), 2) + "-" + zeroPad(time.getMonth(), 2) + "-" + time.getFullYear() + ' ' + zeroPad(time.getHours(), 2) + ':' + zeroPad(time.getMinutes(), 2)
+  //return daysShort[time.getDay()] + '  ' + time.toLocaleString('en-US', timeOptions)
+  //return time.toLocaleString('en-US', {'dateStyle': 'medium', 'timeStyle': 'short'});
+  return daysShort[time.getDay()] + '  ' + zeroPad(time.getDate(), 2) + "-" + zeroPad(time.getMonth()+1, 2) + "-" + time.getFullYear() + ' ' + zeroPad(time.getHours(), 2) + ':' + zeroPad(time.getMinutes(), 2)
 }
 
 const evIcons = ['a-free', 'a-ida', 'a-star', 'a-trial', 'aspen', 'b', 'csg', 'd', 'fw', 'guild', 'm', 'rg', 's-dragon', 's-sl', 'se', 'starland', 'tower', 'va', 'vv', 'w']
@@ -104,16 +117,6 @@ function EventTimer() {
   const setModalUpdateIndex = (index: number|null|undefined) => {
     dispatch(timerIndex(index))
   }
-
-  /*const options = {
-    weekday: "short" as const,
-    hourCycle: 'h23' as const,
-    hour: '2-digit' as const,
-    minute: '2-digit' as const,
-    day: "2-digit" as const,
-    month: "short" as const,
-    year: "numeric" as const,
-  };*/
 
   return (
     <>
@@ -505,8 +508,8 @@ function WeaklyEvents() {
   }
 
   const eventDaysTitle = (event: Weekly): string|undefined => {
-    if(event.d[getUTCToday(now)] === 0 && event.on !== undefined) return 'Start ' + event.on + ' days'
-    if(event.d[getUTCToday(now)] !== 0 && event.off !== undefined) return 'Ends ' + event.off + ' days'
+    if(event.d[getUTCToday(now)] === 0 && event.on !== undefined) return 'Start: ' + event.on + ' days'
+    if(event.d[getUTCToday(now)] !== 0 && event.off !== undefined) return 'End: ' + event.off + ' days'
     return undefined
   }
   
@@ -952,8 +955,6 @@ function WeeklyEventsTable() {
 }
 
 function SpecialEventsTable() {
-  //const months: string[] = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
-  const monthsShort: string[] = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
   const days: number[] = Object.entries(SpecialEvents).map(([name, data]) => data.days).filter(i => i !== undefined) as number[]
   const next = Math.min(...days, 999)
   return (
