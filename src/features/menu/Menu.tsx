@@ -33,6 +33,11 @@ export const sidebarItems = [
         icon: ImageSrc.layout('daylies')
     },
     {
+        title: 'Big Events',
+        path: '/bigevents',
+        icon: ImageSrc.event('m')
+    },
+    {
         title: 'Others',
         path: '/others',
         icon: ImageSrc.layout('images')

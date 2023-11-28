@@ -4,7 +4,7 @@ const imagesRoot = process.env.PUBLIC_URL + "/assets/images"
 const imagesExt = ".webp"
 
 export interface IconProps extends React.ImgHTMLAttributes<HTMLImageElement> {
-    size: "tiny" | "xsm" | "sm" | "md" | "lg" | "text" | "btn" | "preview";
+    size: "tiny" | "xsm" | "sm" | "md" | "lg" | "text" | "btn" | "preview" | "preview-l" | "preview-full";
 }
 
 const defaultIconProps: IconProps = {
@@ -41,6 +41,8 @@ export class ImageSrc {
         `${imagesRoot}/resources/${name.replaceAll(' ', '-').toLowerCase()}${imagesExt}`
     static event = (name: string) =>
         `${imagesRoot}/layout/events/${name.replaceAll(' ', '-').toLowerCase()}${imagesExt}`
+    static events = (event: string, name: string) =>
+        `${imagesRoot}/events/${event}/${name.replaceAll(' ', '-').toLowerCase()}${imagesExt}`
 
     static info = 
         `${imagesRoot}/layout/i${imagesExt}`

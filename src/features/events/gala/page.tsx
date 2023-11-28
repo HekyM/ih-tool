@@ -1,9 +1,62 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Chart } from "react-google-charts";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
+import { Icon, ImageSrc } from '../../../components/Images';
+import { sum } from 'lodash';
 
 import { galaGoogleData } from '../../../data/gala';
+
+const awakensTiers = ['E-', 'E', 'E+', 'D-', 'D', 'D+', 'C-', 'C', 'C+', 'B-', 'B', 'B+', 'A-', 'A', 'A+', 'S'];
+const awakensPercent = {
+    'SG': [4.3, 19.8, 28.8, 20, 9.2, 4.8, 4.4, 4.3, 2.13, 1.62, 0.55, 0.0745, 0.015, 0.0065, 0.0025, 0.0015],
+    //'..': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    'B-': [0, 0, 0, 0, 0, 0, 0, 0, 0, 90.10575, 8, 1.5, 0.3, 0.065, 0.025, 0.00425],
+    'B' : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 92.0295, 7, 0.7, 0.15, 0.1, 0.0205],
+    'B+': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 95.485, 3.5, 0.45, 0.5, 0.065],
+    'A-': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 97.053, 2.5, 0.3, 0.147],
+    'A' : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 98.005, 1.5, 0.495],
+    'A+': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 99.01, 0.99],
+    //S: 99.61, 0.3, 0.09
+};
+
+const floadNumner = (key: string, value: number) => {
+    if (value === 0) return <React.Fragment key={key}><td></td><td></td></React.Fragment>
+    var numarray=value.toString().split('.')
+    return <React.Fragment key={key}><td className='cellL'>{numarray[0]}</td><td className='cellR'>.{numarray[1] || 0}</td></React.Fragment>
+}
+
+export function Awakens() {
+    const sumsGK = Object.fromEntries(Object
+        .entries(awakensPercent)
+        .map(([k, o]) => [k, sum(Object.values(o).slice(12))])
+    );
+
+    return (
+        <table className='ihDataTable no-footer w-max'>    
+            <thead>
+                <tr>
+                    <th>%</th>
+                    {awakensTiers.slice(9).map((tier, i) => 
+                        <th colSpan={2} key={'tier-'+tier}><Icon size='sm' src={ImageSrc.events('awakens', 'tier-'+tier)}  title={tier+' Awakening'}/></th>
+                    )}
+                    <th>A- ++</th>
+                </tr>
+            </thead>
+            <tbody>
+                {Object.entries(awakensPercent).map(([stone, data], i) =>
+                    <tr key={'stone-'+stone}>
+                        <td><Icon size='sm' src={ImageSrc.events('awakens', 'stone-'+stone)}  title={stone+' Stone'}/></td>
+                        {data.slice(9).map((value, i) => 
+                            floadNumner('p-'+i, value)
+                        )}
+                        <td>{ Math.round(sumsGK[stone]* 1000)/1000}</td>
+                    </tr>
+                )}
+            </tbody>
+        </table>
+    )
+}
 
 
 const galaChartConfig = {
@@ -74,6 +127,9 @@ export function EventsGala() {
                 <option value={300}>300</option>
             </select>
             <GalaPointsChart points={showPoints} data={galaGoogleData[showPoints]} />
+        </div>
+        <div className='ihContainer'>
+            <Awakens/>
         </div>
         <div className='ihContainer'>
             <b>200 vs 300 points in Gala events</b>

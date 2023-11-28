@@ -79,3 +79,27 @@ export function ImgModal(props: React.ImgHTMLAttributes<HTMLImageElement> )  {
         </div>
     );
 };
+
+interface ImgModalLinkProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+    text: string;
+}
+
+export function ImgModalLink(props: ImgModalLinkProps )  {
+    const [isOpen, setIsOpen] = useState(false);
+    const images: ImagesListType = [{
+        src: props.src || ImageSrc.info,
+        loading: 'lazy',
+        alt: props.alt || '',
+    }]
+
+    return (
+        <div className='ImgModal'>
+            <ImgGalery 
+                images={images} 
+                showIndex={0}
+                isOpen={isOpen} onClose={() => setIsOpen(false)}
+            />
+            <span className='btn-role' onClick={() => { setIsOpen(!isOpen);}}>{props.text}</span>
+        </div>
+    );
+};

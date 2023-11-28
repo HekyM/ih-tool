@@ -23,6 +23,10 @@ export function Images() {
         <div className='ihContainer'>
             <ImgModal src={ImageSrc.raw('others/train')} style={imgStyle} alt='Treasure Train Level Up'/>
         </div>
+        <div className='collapsibleTrigger' style={sectionStyle}>Arcade Spells</div>
+        <div className='ihContainer'>
+            <ImgModal src={ImageSrc.raw('others/arcade')} style={imgStyle} alt='Arcade Spells'/>
+        </div>
         </div>
       </div>
     );

@@ -6,6 +6,7 @@ import { Counter } from './features/counter/Counter'
 import { HeroesTable } from './features/heroes/Heroes'
 import { TenantsTable } from './features/tenants/Tenants'
 import { Events } from './features/events/Events'
+import { BigEvents } from './features/bigevents/BigEvents'
 import { Leveling } from './features/lvl/lvl'
 import { Daylies } from './features/daylies/daylies'
 import { Images } from './features/images'
@@ -29,6 +30,7 @@ function App() {
                 <Route path='/events' element={<Events />} />
                 <Route path='/lvl' element={<Leveling />} />
                 <Route path='/daylies' element={<Daylies />} />
+                <Route path='/bigevents' element={<BigEvents />} />
                 <Route path='/others' element={<Images />} />
               </Routes>
             </td>

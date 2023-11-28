@@ -50,6 +50,14 @@ input, select {
   background-color: #f4eddb;
 }
 
+.cellL {
+  text-align: right;
+  padding-right: 0 !important;
+}
+.cellR {
+  text-align: left;
+  padding-left: 0 !important;
+}
 
 .btn {
   border-radius: 5px;
@@ -152,6 +160,17 @@ img {
 .icon-preview {
   width: 32%;
   height: auto;
+  border-radius: 10px;
+}
+.icon-preview-l {
+  width: 48%;
+  height: auto;
+  border-radius: 10px;
+}
+.icon-preview-full {
+  width: 98%;
+  height: auto;
+  border-radius: 10px;
 }
 .icon.disabled {
   filter: opacity(30%);

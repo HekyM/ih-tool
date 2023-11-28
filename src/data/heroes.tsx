@@ -23,7 +23,7 @@ export interface  HeroesData {
 // hero: 140x140 (25)
 // shard: 158x158 (25)
 
-// last update: Chaosbound Spirit - Gaggie
+// last update: Yorhm Tum
 /* 
 */
 
@@ -52,7 +52,7 @@ let _heroesData: HeroesData = {
              "1": ['Tix', 'Ithaqua', 'Natalie'],
              "2": ['Eloise', 'Natasha', 'Geester'],
              "3": ['Onkirimaru', 'Saja', 'Betty'],
-             "4": ['Annabelle', 'Tussilago'],
+             "4": ['Annabelle', 'Tussilago', 'Yorhm Tum'],
         },
     },
     "Annabelle": {
@@ -792,7 +792,7 @@ let _heroesData: HeroesData = {
         "elite": true,
         "imprint": true,
         "tenants": {
-             "1": ['Rogan', 'Saja'],
+             "1": ['Rogan', 'Saja', 'Yorhm Tum'],
              "2": ['Aylamak'],
              "3": ['Azrael', 'Natalie'],
              "4": ['Natasha'],
@@ -1043,7 +1043,7 @@ let _heroesData: HeroesData = {
              "1": ['Aranea', 'Carrie', 'Betty'],
              "2": ['Drake', 'Gloria'],
              "3": ['Mockman', 'Fiona'],
-             "4": ['Phorcys', 'Amen-Ra'],
+             "4": ['Phorcys', 'Amen-Ra', 'Yorhm Tum'],
         },
     },
     "Mockman": {
@@ -1186,7 +1186,20 @@ let _heroesData: HeroesData = {
         "elite": false,
         "imprint": false,
     },
-    /* === Light heroes ============================================================================================= */ 
+    /* === Light heroes ============================================================================================= */
+    "Yorhm Tum": {
+        "faction": "Light",
+        "class": "Assassin",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+            "1": ['Geester', 'Azrael'],
+            "2": ['Freya', 'Tussilago'],
+            "3": ['Betty'],
+            "4": ['Drake'],
+       },
+    }, 
     "Natalie": {
         "faction": "Light",
         "class": "Ranger",
@@ -1195,7 +1208,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
             "1": ['Eos', 'Geester'],
-            "2": ['Vulkan'],
+            "2": ['Vulkan', 'Yorhm Tum'],
             "3": ['Elena', 'Betty'],
             "4": ['Freya'],
        },
@@ -1382,7 +1395,7 @@ let _heroesData: HeroesData = {
         "tenants": {
              "1": ['Betty', 'Geester'],
              "2": ['Lord of Death - Azrael', 'Elena'],
-             "3": ['Azrael'],
+             "3": ['Azrael', 'Yorhm Tum'],
              "4": ['Bloodtide Queen - Aranea', 'Natalie'],
         },
     }, 
