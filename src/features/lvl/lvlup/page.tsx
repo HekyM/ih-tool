@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { 
   faCircleChevronLeft, faCircle,
-  faToggleOn, faToggleOff,
 } from '@fortawesome/free-solid-svg-icons'
 import { Icon, ImageSrc } from '../../../components/Images';
 import { BigNumber } from '../../../components/BigNumber'
@@ -12,7 +11,6 @@ const accumulate = (arr: number[]) => arr.map((sum => value => sum += value)(0))
 
 export function LevelUp() {
     const [selected, setSelected] = useState<number|null>(null);
-    const [numbers, setNumbers] = useState<'long'|'short'>('long');
 
     //const levelup: {lvl: number, stone: number, spirit: number, gold: number}[] = Object.values(leveling).map((data) => { return {lvl: data.lvl, stone: _.get(data, 'stone') | 0, spirit:  _.get(data, 'spirit') | 0, gold:  _.get(data, 'gold') | 0}})
     //console.log(levelup)
@@ -32,34 +30,20 @@ export function LevelUp() {
 
     return (
         <table className='ihContainer ihDataTable no-footer w-max'>
-            <thead>
+            <thead className='multi-row'>
                 <tr>
-                    <td>
-                        {numbers === 'long'
-                        ? <FontAwesomeIcon className='btn-role' icon={faToggleOff} style={{width: '1.5em', fontSize: 'larger'}} onClick={() => setNumbers('short')} title='toggle numbers format'/>
-                        : <FontAwesomeIcon className='btn-role' icon={faToggleOn} style={{width: '1.5em', fontSize: 'larger'}} onClick={() => setNumbers('long')} title='toggle numbers format'/>
-                        } 
-                    </td>
-                    <td></td>
-                    <td colSpan={4} style={{borderBottom: '3px solid #bd916e'}}>{selected === null ? '#' : '\u03A3'}</td>
+                    <th></th>
+                    <th></th>
+                    <th colSpan={4} style={{borderBottom: '3px solid #bd916e'}}>{selected === null ? '#' : '\u03A3'}</th>
 
-                    <td style={{width: '5em'}}>
+                    <th style={{width: '5em'}}>
                         {-1 === selected
                         ? <FontAwesomeIcon className='btn-role' icon={faCircleChevronLeft} style={{width: '1.5em', fontSize: 'larger'}} onClick={() => setSelected(null)}/>
                         : <FontAwesomeIcon className='btn-role' icon={faCircle} style={{width: '1.5em', fontSize: 'larger'}} onClick={() => setSelected(-1)}/>
                         }
-                    </td>
+                    </th>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td><div className='dataIconCell'><Icon size='sm' src={ImageSrc.resources('x-stone')}  title={'X-Stone'}/></div></td>
-                    <td><div className='dataIconCell'><Icon size='sm' src={ImageSrc.resources('stone')} title={'Hero Promotion Stone'}/></div></td>
-                    <td><div className='dataIconCell'><Icon size='sm' src={ImageSrc.resources('gold')}  title={'Gold'}/></div></td>
-                    <td><div className='dataIconCell'><Icon size='sm' src={ImageSrc.resources('spirit')}  title={'Spirit'}/></div></td>
-                    <td></td>
-                </tr>
-                <tr>
+                <tr className='spacer'>
                     <td style={{width: '4em'}}></td>
                     <td></td>
                     <td style={{width: '5em'}}></td>
@@ -69,16 +53,25 @@ export function LevelUp() {
 
                     <td style={{width: '5em'}}></td>
                 </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th><div className='dataIconCell'><Icon size='sm' src={ImageSrc.resources('x-stone')}  title={'X-Stone'}/></div></th>
+                    <th><div className='dataIconCell'><Icon size='sm' src={ImageSrc.resources('stone')} title={'Hero Promotion Stone'}/></div></th>
+                    <th><div className='dataIconCell'><Icon size='sm' src={ImageSrc.resources('gold')}  title={'Gold'}/></div></th>
+                    <th><div className='dataIconCell'><Icon size='sm' src={ImageSrc.resources('spirit')}  title={'Spirit'}/></div></th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
                 {levelup_data.map((data, i) => 
                     <tr key={'tree-'+i}>
                         <td style={{textAlign: 'left'}}>{data.lvl}</td>
                         <td></td>
-                        <td style={{textAlign: 'right'}}>{data.x !== undefined && <BigNumber value={data.x} mode={numbers} style={{paddingRight: '.5em'}}/>}</td>
-                        <td style={{textAlign: 'right'}}><BigNumber value={data.stone} mode={numbers} style={{paddingRight: '.5em'}}/></td>
-                        <td style={{textAlign: 'right'}}><BigNumber value={data.gold} mode={numbers} style={{paddingRight: '.5em'}}/></td>
-                        <td style={{textAlign: 'right'}}><BigNumber value={data.spirit} mode={numbers} style={{paddingRight: '.5em'}}/></td>
+                        <td style={{textAlign: 'right'}}><BigNumber value={data.x || 0}/></td>
+                        <td style={{textAlign: 'right'}}><BigNumber value={data.stone}/></td>
+                        <td style={{textAlign: 'right'}}><BigNumber value={data.gold}/></td>
+                        <td style={{textAlign: 'right'}}><BigNumber value={data.spirit}/></td>
 
                         <td>
                             {i === selected

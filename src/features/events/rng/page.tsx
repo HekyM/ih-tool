@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import { RNGprobability, RNGtries, RNGcompute, RNGtoggleShowAll, selectRNGRewards } from './slice';
 
 
-export function EventsRNG() {
+export function EventsGotchaRNG() {
     const state = useAppSelector(selectRNGRewards);
     const dispatch = useAppDispatch();
 

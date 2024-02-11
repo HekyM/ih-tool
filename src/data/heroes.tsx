@@ -1,11 +1,14 @@
 
+export type HeroClass = "Warrior" | "Mage"  | "Ranger" | "Assassin" | "Priest";
+export type HeroFaction = "Shadow" | "Fortress" | "Abyss" | "Forest" | "Dark" | "Light" | "Transcendence";
+
 export interface HeroData {
-    faction: "Shadow" | "Fortress" | "Abyss" | "Forest" | "Dark" | "Light" | "Transcendence";
-    class: "Warrior" | "Mage"  | "Ranger" | "Assassin" | "Priest";
+    faction: HeroFaction;
+    class: HeroClass;
     stars: number[];
     elite: boolean;
     imprint: boolean;
-    class_supplement?: "Warrior" | "Mage"  | "Ranger" | "Assassin" | "Priest";
+    class_supplement?: HeroClass;
     tenants?: {
         1: string[],
         2: string[],
@@ -13,6 +16,7 @@ export interface HeroData {
         4: string[],
     };
     tenant?: boolean;
+    short?: string;
 }
 
 export interface  HeroesData {
@@ -23,7 +27,7 @@ export interface  HeroesData {
 // hero: 140x140 (25)
 // shard: 158x158 (25)
 
-// last update: Yorhm Tum
+// last update: Interstellar Hunteress - Patricia
 /* 
 */
 
@@ -37,7 +41,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Annabelle', 'Holmes Young'],
-             "2": ['Azrael'],
+             "2": ['Azrael', 'Patricia'],
              "3": ['Onkirimaru'],
              "4": ['Eos'],
         },
@@ -793,7 +797,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Rogan', 'Saja', 'Yorhm Tum'],
-             "2": ['Aylamak'],
+             "2": ['Aylamak', 'Patricia'],
              "3": ['Azrael', 'Natalie'],
              "4": ['Natasha'],
         },
@@ -807,7 +811,7 @@ let _heroesData: HeroesData = {
         "tenants": {
              "1": ['Gloria', 'Russell', 'Waldeck'],
              "2": ['Xiahou', 'Inosuke', 'Holmes Young'],
-             "3": ['Rogan', 'Eloise'],
+             "3": ['Rogan', 'Eloise', 'Patricia'],
              "4": ['Elyvia', 'Flora', 'Geester'],
         },
     },
@@ -1033,6 +1037,19 @@ let _heroesData: HeroesData = {
         "imprint": false,
     },
     /* === Dark ============================================================================================= */
+    "Patricia": {
+        "faction": "Dark",
+        "class": "Ranger",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+             "1": ['Natalie', 'Freya'],
+             "2": ['Yorhm Tum', 'Waldeck'],
+             "3": ['Flora'],
+             "4": ['Aranea'],
+        },
+    },
     "Elena": {
         "faction": "Dark",
         "class": "Priest",
@@ -1207,7 +1224,7 @@ let _heroesData: HeroesData = {
         "elite": true,
         "imprint": true,
         "tenants": {
-            "1": ['Eos', 'Geester'],
+            "1": ['Eos', 'Geester', 'Patricia'],
             "2": ['Vulkan', 'Yorhm Tum'],
             "3": ['Elena', 'Betty'],
             "4": ['Freya'],
@@ -1223,7 +1240,7 @@ let _heroesData: HeroesData = {
             "1": ['Eos', 'Morax', 'Aylamak'],
             "2": ['Tussilago', 'Onkirimaru', 'Natalie'],
             "3": ['Andrea', 'Mockman', 'Gaggie'],
-            "4": ['Xiahou', 'Freya'],
+            "4": ['Xiahou', 'Freya', 'Patricia'],
        },
     },
     "Eos": {
@@ -1373,6 +1390,34 @@ let _heroesData: HeroesData = {
         "imprint": false,
     }, 
     /* === Transcendence ============================================================================================= */
+    "Interstellar Hunteress - Patricia": {
+        "faction": "Transcendence",
+        "class": "Ranger",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+             "1": ['Patricia', 'Gaggie'],
+             "2": ['Doppelganger - Natalia', 'Yorhm Tum'],
+             "3": ['Natalie'],
+             "4": ['Hypperspace Hunter - Aylamak'],
+        },
+        "short": "IHP",
+    },
+    "Lord of Sparkless - Yorhm Tum": {
+        "faction": "Transcendence",
+        "class": "Assassin",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+             "1": ['Yorhm Tum', 'Freya'],
+             "2": ['Mutated Fungus - Geester', 'Aylamak'],
+             "3": ['Geester'],
+             "4": ['Doppelganger - Natalia'],
+        },
+        "short": "LSYT",
+    },
     "Chaosbound Spirit - Gaggie": {
         "faction": "Transcendence",
         "class": "Warrior",
@@ -1385,7 +1430,8 @@ let _heroesData: HeroesData = {
              "3": ['Aylamak'],
              "4": ['Hypperspace Hunter - Aylamak', 'Vulkan'],
         },
-    },  
+        "short": "CSG",
+    },
     "Therapist of Blood - Betty": {
         "faction": "Transcendence",
         "class": "Mage",
@@ -1394,10 +1440,11 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Betty', 'Geester'],
-             "2": ['Lord of Death - Azrael', 'Elena'],
+             "2": ['Lord of Death - Azrael', 'Elena', 'Interstellar Hunteress - Patricia'],
              "3": ['Azrael', 'Yorhm Tum'],
              "4": ['Bloodtide Queen - Aranea', 'Natalie'],
         },
+        "short": "TBB",
     }, 
     "Doppelganger - Natalia": {
         "faction": "Transcendence",
@@ -1411,6 +1458,7 @@ let _heroesData: HeroesData = {
              "3": ['Eos', 'Aylamak'],
              "4": ['Doom Terminator - Vulkan', 'Chaosbound Spirit - Gaggie'],
         },
+        "short": "DGN",
     },
     "Mutated Fungus - Geester": {
         "faction": "Transcendence",
@@ -1422,8 +1470,9 @@ let _heroesData: HeroesData = {
              "1": ['Geester', 'Natalie'],
              "2": ['Lord of Death - Azrael', 'Vulkan', 'Chaosbound Spirit - Gaggie'],
              "3": ['Azrael', 'Gaggie'],
-             "4": ['Phantom Defier - Elena'],
+             "4": ['Phantom Defier - Elena', 'Lord of Sparkless - Yorhm Tum'],
         },
+        "short": "MFG",
     },
     "Hypperspace Hunter - Aylamak": {
         "faction": "Transcendence",
@@ -1433,10 +1482,11 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Aylamak', 'Saja'],
-             "2": ['Star Alchemist - Holmes Young', 'Vulkan'],
+             "2": ['Star Alchemist - Holmes Young', 'Vulkan', 'Lord of Sparkless - Yorhm Tum'],
              "3": ['Fiona', 'Geester'],
              "4": ['Sword Flash - Xia', 'Elena'],
         },
+        "short": "HHA",
     },
     "Phantom Defier - Elena": {
         "faction": "Transcendence",
@@ -1448,8 +1498,9 @@ let _heroesData: HeroesData = {
              "1": ['Elena', 'Mockman'],
              "2": ['Lord of Fear - Aspen', 'Aranea', 'Betty'],
              "3": ['Vulkan', 'Annabelle'],
-             "4": ['Fairy Queen - Vesa', 'Azrael'],
+             "4": ['Fairy Queen - Vesa', 'Azrael', 'Interstellar Hunteress - Patricia'],
         },
+        "short": "PDE",
     },
     "Doom Terminator - Vulkan": {
         "faction": "Transcendence",
@@ -1463,6 +1514,7 @@ let _heroesData: HeroesData = {
              "3": ['Azrael', 'Tussilago'],
              "4": ['Asmodel the Dauntless', 'Aranea', 'Doppelganger - Natalia'],
         },
+        "short": "DTV",
     },
     "Bloodtide Queen - Aranea": {
         "faction": "Transcendence",
@@ -1476,6 +1528,7 @@ let _heroesData: HeroesData = {
              "3": ['Freya', 'Annabelle'],
              "4": ['Scarlet Queen - Halora', 'Elena', 'Therapist of Blood - Betty'],
         },
+        "short": "BQA",
     },
     "Lord of Death - Azrael": {
         "faction": "Transcendence",
@@ -1489,6 +1542,7 @@ let _heroesData: HeroesData = {
              "3": ['Natasha', 'Holmes Young'],
              "4": ['Mystic Fairy - Freya', 'Aranea', 'Mutated Fungus - Geester'],
         },
+        "short": "LDA",
     },
     "Star Swordsman - Mockman": {
         "faction": "Transcendence",
@@ -1502,6 +1556,7 @@ let _heroesData: HeroesData = {
              "3": ['Eloise', 'Freya'],
              "4": ['Star Wing - Jahra', 'Saja', 'Hypperspace Hunter - Aylamak'],
         },
+        "short": "SSM",
     },
     "Mystic Fairy - Freya": {
         "faction": "Transcendence",
@@ -1515,6 +1570,7 @@ let _heroesData: HeroesData = {
              "3": ['Xiahou', 'Gloria'],
              "4": ['Asmodel the Dauntless', 'Eos', 'Doppelganger - Natalia'],
         },
+        "short": "MFF",
     },
     "Star Alchemist - Holmes Young": {
         "faction": "Transcendence",
@@ -1528,6 +1584,7 @@ let _heroesData: HeroesData = {
              "3": ['Saja', 'Eos'],
              "4": ['The Sun Devourer - Eos', 'Azrael', 'Hypperspace Hunter - Aylamak'],
         },
+        "short": "SAHY",
     },
     "The Sun Devourer - Eos": {
         "faction": "Transcendence",
@@ -1541,6 +1598,7 @@ let _heroesData: HeroesData = {
             "3": ['Xiahou', 'Natasha'],
             "4": ['Lord of Fear - Aspen', 'Vulkan', 'Doom Terminator - Vulkan'],
        },
+       "short": "SDE",
     },
     "Lord of Fear - Aspen": {
         "faction": "Transcendence",
@@ -1554,6 +1612,7 @@ let _heroesData: HeroesData = {
             "3": ['Onkirimaru', 'Amen-Ra'],
             "4": ['Asmodel the Dauntless', 'Mockman', 'Phantom Defier - Elena'],
        },
+       "short": "LFA",
     },
     "Fairy Queen - Vesa": {
         "faction": "Transcendence",
@@ -1567,6 +1626,7 @@ let _heroesData: HeroesData = {
             "3": ['Flora', 'Aranea'],
             "4": ['Star Wing - Jahra', 'Freya', 'Bloodtide Queen - Aranea'],
        },
+       "short": "FQV",
     },
     "Star Wing - Jahra": {
         "faction": "Transcendence",
@@ -1580,6 +1640,7 @@ let _heroesData: HeroesData = {
             "3": ['Eloise', 'Annabelle'],
             "4": ['Sword Flash - Xia', 'Holmes Young', 'Phantom Defier - Elena'],
        },
+       "short": "SWJ",
     },
     "Asmodel the Dauntless": {
         "faction": "Transcendence",
@@ -1593,6 +1654,7 @@ let _heroesData: HeroesData = {
             "3": ['Tussilago', 'Saja'],
             "4": ['Scarlet Queen - Halora', 'Eos', 'Doom Terminator - Vulkan'],
        },
+       "short": "ATD",
     },
     "Scarlet Queen - Halora": {
         "faction": "Transcendence",
@@ -1606,6 +1668,7 @@ let _heroesData: HeroesData = {
             "3": ['Gloria', 'Morax'],
             "4": ['Star Wing - Jahra', 'Delacium', 'Bloodtide Queen - Aranea'],
        },
+       "short": "SQH",
     },
     "Sword Flash - Xia": {
         "faction": "Transcendence",
@@ -1619,6 +1682,7 @@ let _heroesData: HeroesData = {
             "3": ['Onkirimaru', 'Inosuke'],
             "4": ['Asmodel the Dauntless', 'Gloria', 'Lord of Death - Azrael'],
        },
+       "short": "SFX",
     },
 }
 

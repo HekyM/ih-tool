@@ -41,6 +41,9 @@
 .centered {
   margin: auto;
 }
+.right {
+  float: right;
+}
 
 .down {
   vertical-align: -0.35em;
@@ -87,6 +90,9 @@ input, select {
 }
 .btn-danger:hover {
   background-color: rgb(70, 5, 5);
+}
+.btn-disabled {
+  background-color: lightgray;
 }
 
 label {
@@ -172,7 +178,7 @@ img {
   height: auto;
   border-radius: 10px;
 }
-.icon.disabled {
+.disabled {
   filter: opacity(30%);
 }
 
@@ -218,6 +224,22 @@ img {
 
 .compact-icons-picker > .icon {
   padding: 2px;
+}
+
+.hero-picker .icon {
+  cursor: pointer !important;
+  border-radius: 6px;
+  border: 1px solid transparent;
+}
+.hero-picker .icon.selected {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+.hero-picker .icon:hover {
+  background-color: #bd916e;
+}
+.hero-picker .icon.selected:hover {
+  background-color: #007bff;
 }
 
 .text-left {
@@ -315,6 +337,10 @@ img {
   font-size: larger;
 }
 
+tr.spacer > th, tr.spacer > td {
+  padding: 0px;
+}
+
 .ihTable { 
   border-collapse: separate; 
   border-spacing: 0 5px;
@@ -342,23 +368,50 @@ img {
 
 .ihDataTable {
   border-spacing: 0;
+  font-size: .9em;
 }
 .ihDataTable th, .ihDataTable td {
   padding-left: .2em;
   padding-right: .2em;
 }
 .dataIconCell {
-  background-color: #e3cc96;
-  padding-top: .05em;
-  padding-bottom: .1em;
+  margin-top: .1em;
+  border-right: 1px solid darkgray;
 }
-.ihDataTable > tbody > tr:hover > td:first-child {
-  border-top-left-radius: 5px; 
-  border-bottom-left-radius: 5px;
+.dataIconCell img {
+  width: 25px;
+  height: 25px;
 }
-.ihDataTable > tbody > tr:hover > td:last-child {
-  border-bottom-right-radius: 5px; 
-  border-top-right-radius: 5px;
+.ihDataTable .big-number {
+  padding-right: .3em;
+  border-right: 1px solid darkgray;
+}
+.ihDataTable > thead > tr > th{
+  background-color: #e1caaa;
+}
+.ihDataTable > thead > tr > th:first-child {
+  border-radius: 7px 0px 0px 7px;
+}
+.ihDataTable > thead > tr > th:last-child {
+  border-radius: 0px 7px 7px 0px;
+}
+.ihDataTable > thead.multi-row > tr:first-child > th:first-child {
+  border-radius: 7px 0px 0px 0px;
+}
+.ihDataTable > thead.multi-row > tr:last-child > th:first-child {
+  border-radius: 0px 0px 0px 7px;
+}
+.ihDataTable > thead.multi-row > tr:first-child > th:last-child {
+  border-radius: 0px 7px 0px 0px;
+}
+.ihDataTable > thead.multi-row > tr:last-child > th:last-child {
+  border-radius: 0px 0px 7px 0px;
+}
+.ihDataTable > thead.multi-row.with-title > tr:first-child > th {
+  border-radius: 7px 7px 0px 0px;
+}
+.ihDataTable > thead.delimiter > tr > th, .ihDataTable > thead.delimiter > tr > td {
+  background-color: inherit;
 }
 .ihDataTable > tbody > tr > td {
   border-bottom: 1px solid rgb(187, 186, 186);
@@ -376,6 +429,10 @@ img {
 }
 .ihDataTable > tbody > tr:hover > td {
   background-color: #f0e9c4 !important;
+}
+
+.ihGrigDataTable > tbody > tr > td {
+  border: 1px solid rgb(187, 186, 186);
 }
 
 th.col-img {
@@ -423,6 +480,9 @@ th.col-img {
   position: absolute;
 }
 
+.in-text {
+  font-size: .9em;
+}
 .in-text-input {
   font-size: .9em;
   margin-left: .5em;

@@ -4,43 +4,13 @@ import _ from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { 
   faCircleChevronLeft, faCircle,
-  faToggleOn, faToggleOff,
 } from '@fortawesome/free-solid-svg-icons'
 import { Dropdown } from '../../../components/Dropdown';
 import { Icon, ImageSrc } from '../../../components/Images';
 import { BigNumber } from '../../../components/BigNumber'
-import { imprintsFull } from '../../../data/lvl';
+import { imprintsFull, imprintsNodes, imprintsTotal } from '../../../data/lvl';
 
 const accumulate = (arr: number[]) => arr.map((sum => value => sum += value)(0));
-
-const imprintsNodes = {
-    'V1': {
-        "HP":           sum(imprintsFull.V1.HP),
-        "Attack":       sum(imprintsFull.V1.Attack),
-        "Attack HP":    sum(imprintsFull.V1['Attack HP']),
-    },
-    'V2': {
-        "HP":           sum(imprintsFull.V2.HP),
-        "Attack":       sum(imprintsFull.V2.Attack),
-        "Attack HP":    sum(imprintsFull.V2['Attack HP']),
-    },
-    'V3': {
-        "HP":           sum(imprintsFull.V3.HP),
-        "Attack":       sum(imprintsFull.V3.Attack),
-        "Attack HP":    sum(imprintsFull.V3['Attack HP']),
-    },
-    'V4': {
-        "HP":           sum(imprintsFull.V4.HP),
-        "Attack":       sum(imprintsFull.V4.Attack),
-        "Speed":    sum(imprintsFull.V4['Speed']),
-    },
-}
-const imprintsTotal = {
-    'V1': sum(Object.values(imprintsNodes.V1)),
-    'V2': sum(Object.values(imprintsNodes.V2)),
-    'V3': sum(Object.values(imprintsNodes.V3)),
-    'V4': sum(Object.values(imprintsNodes.V4)),
-}
 
 const ability = {
     'V1': 'P1',
@@ -54,7 +24,6 @@ export function Imprints() {
     const [nodesHP, setNodesHP] = useState(0);
     const [nodesAttack, setNodesAttack] = useState(0);
     const [nodesAttackHP, setNodesAttackHP] = useState(0);
-    const [numbers, setNumbers] = useState<'long'|'short'>('long');
 
     interface  NodesSelected {
         [details: string] : {value: number, set: (value: number) => void, max: number, sum: number };
@@ -63,7 +32,7 @@ export function Imprints() {
         "HP":           {value: nodesHP, set: setNodesHP, max: 30, sum: sum(_.get(imprintsFull, `V${selected+2}.HP`, [0]).slice(nodesHP))},
         "Attack":       {value: nodesAttack, set: setNodesAttack, max: 30, sum: sum(_.get(imprintsFull, `V${selected+2}.Attack`, [0]).slice(nodesAttack))},
         "Attack HP":    {value: nodesAttackHP, set: setNodesAttackHP, max: 10, sum: sum(_.get(imprintsFull, `V${selected+2}.Attack HP`, [0]).slice(nodesAttackHP))},
-        "Speed":    {value: nodesAttackHP, set: setNodesAttackHP, max: 10, sum: sum(_.get(imprintsFull, `V${selected+2}.Speed`, [0]).slice(nodesAttackHP))},
+        "Speed":        {value: nodesAttackHP, set: setNodesAttackHP, max: 10, sum: sum(_.get(imprintsFull, `V${selected+2}.Speed`, [0]).slice(nodesAttackHP))},
     }
     const num = (key: string, value: number, setValue: (value: number) => void) => {
         return (
@@ -83,30 +52,29 @@ export function Imprints() {
     }
 
     return (
+        <>
         <table className='ihContainer ihDataTable no-footer w-max'>
                 
             <thead>
                 <tr>
-                    <td colSpan={2}>
-                        {numbers === 'long'
-                        ? <FontAwesomeIcon className='btn-role' icon={faToggleOff} style={{width: '1.5em'}} onClick={() => setNumbers('short')} title='toggle numbers format'/>
-                        : <FontAwesomeIcon className='btn-role' icon={faToggleOn} style={{width: '1.5em'}} onClick={() => setNumbers('long')} title='toggle numbers format'/>
-                        } 
-                    </td>
-                    <td></td>
-                    <td colSpan={2} style={{borderBottom: '3px solid #bd916e'}}>#</td>
-                    <td></td>
-                    <td colSpan={2} style={{borderBottom: '3px solid #bd916e'}}>&Sigma;</td>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th colSpan={2} style={{borderBottom: '3px solid #bd916e'}}>#</th>
+                    <th></th>
+                    <th colSpan={2} style={{borderBottom: '3px solid #bd916e'}}>&Sigma;</th>
+                    <th></th>
                 </tr>
-                <tr>
+                <tr className='spacer'>
                     <td style={{width: '5em'}}></td>
-                    <td style={{width: '5em'}}></td>
+                    <td style={{width: '6em'}}></td>
                     <td></td>
                     <td style={{width: '8em'}}></td>
-                    <td style={{width: '3em'}}></td>
+                    <td style={{width: '2em'}}></td>
                     <td></td>
                     <td style={{width: '8em'}}></td>
                     <td style={{width: '10em'}}></td>
+                    <td style={{width: '.1em'}}></td>
                 </tr>
             </thead>
             <tbody>
@@ -117,10 +85,10 @@ export function Imprints() {
                             <td><Icon size='tiny' src={ImageSrc.layout('imprints-'+node.replace(' ', '-'))} title={node}/></td>
                             <td style={{textAlign: 'left'}}>{node}</td>
                             <td></td>
-                            <td style={{textAlign: 'right'}}><BigNumber value={value} mode={numbers}/></td>
+                            <td style={{textAlign: 'right'}}><BigNumber value={value} /></td>
                             <td></td>
                             <td></td>
-                            <td style={{textAlign: 'right'}}>{i === selected+1 && <BigNumber value={nodesSelected[node].sum} mode={numbers}/>}</td>
+                            <td style={{textAlign: 'right'}}>{i === selected+1 && <BigNumber value={nodesSelected[node].sum} />}</td>
                             <td>{i === selected+1 && 
                                 
                                 <Dropdown key={'nodesSelected-'+node} autoClose={true}
@@ -141,16 +109,17 @@ export function Imprints() {
                                 </Dropdown>
                             }
                             </td>
+                            <td></td>
                         </tr>
                     )}
                     <tr key={'imprints-'+i} style={{fontSize: 'larger'}} className='highlighted'>
                         <td><Icon size='md' src={ImageSrc.layout('stars-'+lvl)} title={lvl}/></td>
                         <td style={{textAlign: 'left'}}>{_.get(ability, lvl)}</td>
                         <td></td>
-                        <td style={{textAlign: 'right'}}><span style={{paddingRight: '.5em'}}>&Sigma;</span><BigNumber value={_.get(imprintsTotal, lvl)} mode={numbers}/></td>
+                        <td style={{textAlign: 'right'}}><span style={{paddingRight: '.5em'}}>&Sigma;</span><BigNumber value={_.get(imprintsTotal, lvl)} /></td>
                         <td><Icon size='sm' src={ImageSrc.hero('shards/any-puppet', 10)} style={{marginRight: '0'}}/></td>
                         <td></td>
-                        <td style={{textAlign: 'right'}}><BigNumber value={sums[i]} mode={numbers}/></td>
+                        <td style={{textAlign: 'right'}}><BigNumber value={sums[i]} /></td>
                         <td>
                             {i === selected
                             ? <FontAwesomeIcon className='btn-role' icon={faCircleChevronLeft} style={{width: '1.5em'}} onClick={() => onSelected(-1)}/>
@@ -158,10 +127,12 @@ export function Imprints() {
                             }
                             
                         </td>
+                        <td></td>
                     </tr>
                     </React.Fragment>
                 )}
             </tbody>
         </table>
+        </>
     )
 }

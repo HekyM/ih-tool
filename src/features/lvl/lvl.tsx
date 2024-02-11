@@ -10,6 +10,7 @@ import { LevelUp } from './lvlup/page';
 import { Imprints } from './imprints/page';
 import { Tree } from './tree/page';
 import { Destiny } from './destiny/page';
+import { Regress } from './regress/page';
 
 
 export function Leveling(props: {open?: string}) {
@@ -20,6 +21,9 @@ export function Leveling(props: {open?: string}) {
     //destiny&tree&imprints&levelup
     return (
         <div className='ihContainer'>
+            <Collapsible open={isOpen('regress')} trigger={<CollapsibleHeader title="Regress & Rebuild" icon={ImageSrc.layout('heros')} link={<SectionLink onClick={() => setSearchParams('regress')}/>}/>} {...options}>
+                <Regress />
+            </Collapsible>
             <Collapsible open={isOpen('levelup')} trigger={<CollapsibleHeader title="Level Up" icon={ImageSrc.resources('spirit')} link={<SectionLink onClick={() => setSearchParams('levelup')}/>}/>} {...options}>
                 <LevelUp />
             </Collapsible>

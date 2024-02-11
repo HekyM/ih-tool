@@ -957,11 +957,12 @@ function WeeklyEventsTable() {
 function SpecialEventsTable() {
   const days: number[] = Object.entries(SpecialEvents).map(([name, data]) => data.days).filter(i => i !== undefined) as number[]
   const next = Math.min(...days, 999)
+  const sorted = Object.entries(SpecialEvents).sort(function([a, av],[b, bv]){return (av.month! - bv.month!)*100+av.day! - bv.day!})
   return (
     <>
     <table id='special-events' className='ihContainer ihDataTable no-footer w-max' cellPadding="0">
     <tbody>
-          {Object.entries(SpecialEvents).map(([name, data], i) =>
+          {sorted.map(([name, data], i) =>
             <tr key={'wes-' + i}>
               <td  style={{width: '2em'}}>
                 <span>{data.days === next && <FontAwesomeIcon icon={faCircleChevronRight} style={{width: '1.5em'}}/>}</span>

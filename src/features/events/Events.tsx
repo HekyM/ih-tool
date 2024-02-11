@@ -9,7 +9,8 @@ import { EventsGala } from './gala/page';
 import { EventsHS } from './hs/page';
 import { EventsPO } from './po/page';
 import { EventsWC } from './wc/page';
-import { EventsRNG } from './rng/page';
+import { EventsGotchaRNG } from './rng/page';
+import { EventsPityRNG } from './pity/page';
 import { Shelter } from './shelter/page';
 import { Imp } from './imp/page';
 
@@ -22,8 +23,11 @@ export function Events(props: {open?: string}) {
     //rng&ff&shelter&imp&gala&hs&po&wc
     return (
         <div className='ihContainer'>
-            <Collapsible open={isOpen('rng')} trigger={<CollapsibleHeader title="RNG" icon={ImageSrc.layout('rng')} link={<SectionLink onClick={() => setSearchParams('rng')}/>}/>} {...options}>
-                <EventsRNG />
+            <Collapsible open={isOpen('rng')} trigger={<CollapsibleHeader title="RNG Gotcha" icon={ImageSrc.layout('rng')} link={<SectionLink onClick={() => setSearchParams('rng')}/>}/>} {...options}>
+                <EventsGotchaRNG />
+            </Collapsible>
+            <Collapsible open={isOpen('pity')} trigger={<CollapsibleHeader title="RNG Pity timer" icon={ImageSrc.layout('pity')} link={<SectionLink onClick={() => setSearchParams('pity')}/>}/>} {...options}>
+                <EventsPityRNG />
             </Collapsible>
             <Collapsible open={isOpen('ff')} trigger={<CollapsibleHeader title="Fantasy Factory" icon={ImageSrc.resources('ff')} link={<SectionLink onClick={() => setSearchParams('ff')}/>}/>}  {...options}>
                 <EventsFF />

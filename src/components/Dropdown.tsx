@@ -49,10 +49,13 @@ function DropdownMenu(props: DropdownMenuProps) {
 export interface DropdownProps extends React.PropsWithChildren {
     trigger: ReactElement;
     autoClose: boolean;
+    display: string;
+    dropdownWidth?: number;
     
 }
 const defaultDropdownProps = {
     autoClose: false,
+    display: 'block',
 }
 
 export function Dropdown(props: DropdownProps) {
@@ -81,7 +84,7 @@ export function Dropdown(props: DropdownProps) {
       }, [ref, selfOffset]);
 
     return (
-      <div className="dropdown">
+      <div className="dropdown" style={{display: props.display}}>
         <div className='trigger' ref={ref}>
             {React.cloneElement(props.trigger, {
             onClick: handleToggle,
@@ -90,7 +93,7 @@ export function Dropdown(props: DropdownProps) {
             {open && selfOffset ? (
             <>
             <div hidden={!open} className='page-overlay' onClick={() => handleToggle()}></div>
-            <DropdownMenu visible={open} trigger={selfOffset} width={selfOffset?.offsetWidth + 10 || 0} onClick={() => props.autoClose && handleToggle()}>
+            <DropdownMenu visible={open} trigger={selfOffset} width={props.dropdownWidth || selfOffset?.offsetWidth + 10 || 0} onClick={() => props.autoClose && handleToggle()}>
                 {props.children}
             </DropdownMenu>
             </>

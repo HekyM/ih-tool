@@ -44,6 +44,7 @@ export class Hero implements HeroData  {
     readonly class_supplement?: "Warrior" | "Mage"  | "Ranger" | "Assassin" | "Priest";
     readonly tenants?: HeroTenants;
     readonly tenant?: boolean;
+    readonly short?: string;
 
     constructor(name: string, data: HeroData) {
         this.name = name;
@@ -55,6 +56,7 @@ export class Hero implements HeroData  {
         this.class_supplement = data.class_supplement;
         this.tenants = data.tenants;
         this.tenant = data.tenant;
+        this.short = data.short;
     }
 
     public icon(what: "hero" | number | 'class' | 'faction' | 'shard' | 'imprint' | 'tenant' | 'HO' = 'hero', props?: HeroIconProps): ReactElement {
@@ -70,7 +72,7 @@ export class Hero implements HeroData  {
 
     public _icon(level?: number, props?: HeroIconProps): ReactElement {
         if (!level) {
-            return <Icon {...props} src={ ImageSrc.hero(this.name, 5) } title={this.name + " | "+ this.faction + " | " + this.class} alt={this.name} />
+            return <Icon {...props} src={ ImageSrc.hero(this.name, 5) } title={(this.short ? '[' + this.short + '] ' : '') + this.name + " | "+ this.faction + " | " + this.class} alt={this.name} />
         } else if (this.stars.includes(level)) {
             return <Icon {...props} src={ ImageSrc.hero(this.name, level) } title={`${level}★ ${this.name}`} alt={`${level} star ${this.name}`} />
         } else {

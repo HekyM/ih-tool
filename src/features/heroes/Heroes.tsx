@@ -166,7 +166,7 @@ export function HeroesTable() {
 
     const isFiltered = (hero: Hero, heroesFilter: HeroesFilterState = filter) => {
         if (heroesFilter.faction && hero.faction !== heroesFilter.faction) return false
-        if (heroesFilter.name && !hero.name.toLowerCase().includes(heroesFilter.name.toLowerCase())) return false
+        if (heroesFilter.name && !(hero.name.toLowerCase().includes(heroesFilter.name.toLowerCase()) || hero.short?.toLowerCase().includes(heroesFilter.name.toLowerCase()))) return false
         if (heroesFilter.class && hero.class !== heroesFilter.class) return false
         if (heroesFilter.stars[4] !== null && hero.stars.includes(4) !== heroesFilter.stars[4]) return false
         if (heroesFilter.stars[5] !== null && hero.stars.includes(5) !== heroesFilter.stars[5]) return false

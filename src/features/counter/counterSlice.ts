@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import _ from 'lodash';
+import { array_move } from '../../components/functions';
 import {
   timers as defaultTimers,
   weeklies as defaultWeeklies,
@@ -175,13 +176,7 @@ function loadCustomWeeklies(): Weekly[] {
   return customWeeklies
 }
 
-function array_move(arr: any, old_index: number, new_index: number, min_index: number = 0) {
-  if (new_index >= arr.length || new_index < min_index) {
-      return arr
-  }
-  arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
-  return arr; // for testing
-};
+
 
 const initialState: CounterState = {
   timers: [

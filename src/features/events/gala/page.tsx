@@ -93,6 +93,7 @@ const galaChartConfig = {
         4: {lineWidth: 2, lineDashStyle: [10, 2]},
         5: {lineWidth: 2, lineDashStyle: [10, 2]},
     },
+    chartArea:{left:55,width:"90%"},
 };
 
 function GalaPointsChart(props: {points: number, data: any[][]}) {
