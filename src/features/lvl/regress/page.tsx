@@ -386,8 +386,8 @@ function TotalRow(props: {
         <tr>
             <td colSpan={2}><FontAwesomeIcon icon={faForward} /><FontAwesomeIcon icon={faForward} /></td>
             <td colSpan={3} style={{textAlign: 'left'}}>&Sigma; {props.text}</td>
-            <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.food9} style={{color: !props.colors ? 'inherit' : props.cost.stellar < 0 ? 'darkred' : 'darkgreen'}} /></td>
-            <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.food10} style={{color: !props.colors ? 'inherit' : props.cost.stellar < 0 ? 'darkred' : 'darkgreen'}} /></td>
+            <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.food9} style={{color: !props.colors ? 'inherit' : props.cost.food9 < 0 ? 'darkred' : 'darkgreen'}} /></td>
+            <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.food10} style={{color: !props.colors ? 'inherit' : props.cost.food10 < 0 ? 'darkred' : 'darkgreen'}} /></td>
             <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.stellar} style={{color: !props.colors ? 'inherit' : props.cost.stellar < 0 ? 'darkred' : 'darkgreen'}} /></td>
             <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.esence} style={{color: !props.colors ? 'inherit' : props.cost.esence < 0 ? 'darkred' : 'darkgreen'}}/></td>
             <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.aurora} style={{color: !props.colors ? 'inherit' : props.cost.aurora < 0 ? 'darkred' : 'darkgreen'}}/></td>
