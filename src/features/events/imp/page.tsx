@@ -129,7 +129,7 @@ function Map(props: {onStart: () => void}) {
     }
 
     return (
-        <div className='ihContainer'>
+        <div id='imp-map' className='ihContainer'>
             <div className="relative-container centered" style={{width: '700px'}}>
                 <ImageMapper src={ImageSrc.layout('imp-map')} map={{name:"impmap", areas:map}} onClick={setPos} width={700} height={500}/>
 

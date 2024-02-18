@@ -10,8 +10,15 @@ export interface HeroCost {
     spiritvein: number;
     stellar: number;
     esence: number;
+    food5: number;
+    food6: number;
+    food9: number;
+    food10: number;
 }
-const emptyHeroCost: HeroCost = { aurora: 0, cot: 0, spiritvein: 0, stellar: 0, esence: 0 }
+const emptyHeroCost: HeroCost = { 
+    aurora: 0, cot: 0, spiritvein: 0, stellar: 0, esence: 0,
+    food5: 13, food6: 3, food9: 0, food10: 0, 
+}
 
 export interface HeroRankCost {
     [details: string] : HeroCost;
@@ -24,6 +31,7 @@ export const rankCost: HeroRankCost = {
         spiritvein: 0,
         stellar: 0,
         esence: 0,
+        food5: 13, food6: 3, food9: 3, food10: 3, 
     },
     V1: {
         aurora: 0,
@@ -31,6 +39,7 @@ export const rankCost: HeroRankCost = {
         spiritvein: 0,
         stellar: 138630,
         esence: 0,
+        food5: 13, food6: 3, food9: 3, food10: 4,
     },
     V2: {
         aurora: 0,
@@ -38,6 +47,7 @@ export const rankCost: HeroRankCost = {
         spiritvein: 0,
         stellar: 726540,
         esence: 0,
+        food5: 13, food6: 3, food9: 3, food10: 5,
     },
     V3: {
         aurora: 0,
@@ -45,6 +55,7 @@ export const rankCost: HeroRankCost = {
         spiritvein: 0,
         stellar: 2184930,
         esence: 0,
+        food5: 13, food6: 3, food9: 3, food10: 6,
     },
     V4: {
         aurora: 0,
@@ -52,6 +63,7 @@ export const rankCost: HeroRankCost = {
         spiritvein: 0,
         stellar: 4935000,
         esence: 0,
+        food5: 13, food6: 3, food9: 3, food10: 7,
     },
     T0: {
         aurora: 0,
@@ -59,6 +71,7 @@ export const rankCost: HeroRankCost = {
         spiritvein: 0,
         stellar: 4945000,
         esence: 1000,
+        food5: 13, food6: 3, food9: 3, food10: 7,
     },
     T1: {
         aurora: 0,
@@ -66,6 +79,7 @@ export const rankCost: HeroRankCost = {
         spiritvein: 0,
         stellar: 5242350,
         esence: 31020,
+        food5: 13, food6: 3, food9: 3, food10: 8,
     },
     T2: {
         aurora: 0,
@@ -73,6 +87,7 @@ export const rankCost: HeroRankCost = {
         spiritvein: 0,
         stellar: 5879700,
         esence: 100840,
+        food5: 13, food6: 3, food9: 3, food10: 9,
     },
     T3: {
         aurora: 0,
@@ -80,6 +95,7 @@ export const rankCost: HeroRankCost = {
         spiritvein: 0,
         stellar: 7007050,
         esence: 233460,
+        food5: 13, food6: 3, food9: 3, food10: 10,
     },
     T4: {
         aurora: 0,
@@ -87,6 +103,7 @@ export const rankCost: HeroRankCost = {
         spiritvein: 0,
         stellar: 8784400,
         esence: 452880,
+        food5: 13, food6: 3, food9: 3, food10: 11,
     },
     T5: {
         aurora: 0,
@@ -94,6 +111,7 @@ export const rankCost: HeroRankCost = {
         spiritvein: 0,
         stellar: 11371750,
         esence: 783100,
+        food5: 13, food6: 3, food9: 3, food10: 12,
     },
     Tmax: {
         aurora: 0,
@@ -101,13 +119,15 @@ export const rankCost: HeroRankCost = {
         spiritvein: 0,
         stellar: 14929100,
         esence: 1248120,
+        food5: 13, food6: 3, food9: 3, food10: 12,
     },
     D1: {
         aurora: 5,
         cot: 420000,
         spiritvein: 0,
-        stellar: 0,
+        stellar: 14929100,
         esence: 1248120,
+        food5: 13, food6: 3, food9: 3, food10: 12,
     },
     D2: {
         aurora: 12,
@@ -115,6 +135,7 @@ export const rankCost: HeroRankCost = {
         spiritvein: 197236,
         stellar: 15750640,
         esence: 1248120,
+        food5: 13, food6: 3, food9: 3, food10: 12,
     },
     D3: {
         aurora: 21,
@@ -122,6 +143,7 @@ export const rankCost: HeroRankCost = {
         spiritvein: 474436,
         stellar: 16905640,
         esence: 1248120,
+        food5: 13, food6: 3, food9: 3, food10: 12,
     },
     D4: {
         aurora: 32,
@@ -129,6 +151,7 @@ export const rankCost: HeroRankCost = {
         spiritvein: 830836,
         stellar: 18390640,
         esence: 1248120,
+        food5: 13, food6: 3, food9: 3, food10: 12,
     },
     D5: {
         aurora: 45,
@@ -136,6 +159,7 @@ export const rankCost: HeroRankCost = {
         spiritvein: 1266436,
         stellar: 20205640,
         esence: 1248120,
+        food5: 13, food6: 3, food9: 3, food10: 12,
     },
     D6: {
         aurora: 60,
@@ -143,6 +167,7 @@ export const rankCost: HeroRankCost = {
         spiritvein: 1781236,
         stellar: 22350640,
         esence: 1248120,
+        food5: 13, food6: 3, food9: 3, food10: 12,
     },
     Dmax: {
         aurora: 60,
@@ -150,6 +175,7 @@ export const rankCost: HeroRankCost = {
         spiritvein: 2400536,
         stellar: 24929590,
         esence: 1248120,
+        food5: 13, food6: 3, food9: 3, food10: 12,
     },
 };
 
@@ -324,8 +350,15 @@ export const regressionSlice = createSlice({
         localStorage.setItem('ih-tool:regression', JSON.stringify(state));
       },
       loadRegress: (state) => {
-        let data = localStorage.getItem('ih-tool:regression');
-        return data ? JSON.parse(data) : initialState;
+        let localData = localStorage.getItem('ih-tool:regression');
+        let data: Resources = localData ? JSON.parse(localData) : initialState;
+        data.have.heroes = data.have.heroes.map((h, i) => {return {hero: h.hero, cost: heroCost(h.hero)}})
+        data.have.bag.cost = {...emptyHeroCost, ...data.have.bag.cost}
+        data.build.heroes = data.build.heroes.map((h, i) => {return {hero: h.hero, cost: heroCost(h.hero)}})
+        data.have.total = calcTotal(data.have.heroes, data.have.bag)
+        data.build.total = calcTotal(data.build.heroes, undefined)
+        data.total = calcBalance(data.have.total, data.build.total)
+        return data
       },
       resetRegress: () => initialState,
     },

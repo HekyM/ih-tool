@@ -152,13 +152,13 @@ const HeroUpsert = forwardRef((props: {
 
     return (
         
-        <div className='ihContainer' style={{padding: '0', margin: '3px 0px', backgroundColor: '#e8ce8c'}}>
+        <div className='ihContainer' style={{padding: '0', margin: '3px 2px', backgroundColor: '#e8ce8c'}}>
         <table className='w-max'><tbody><tr>
             <td >
                 {hero && herosList.includes(hero) ? heroesByName[hero].icon('hero', {'size': 'xsm'}) : <Icon size="xsm" src={ImageSrc.hero("shards/any-puppet", 10)} />}
             </td>
             <td style={{width: '13em'}}>
-                <input name="hero" list="heroes" value={hero || ''} onChange={e => setHero(e.target.value)} style={{width: '100%', marginBottom: ".4em"}}/>
+                <input name="hero" list="heroes" value={hero || ''} onChange={e => setHero(e.target.value)} style={{width: '97%', marginBottom: ".4em"}}/>
                 <datalist id="heroes">
                     {Object.values(heroesByName).map(hero => <option key={hero.name} value={hero.name}>{hero.short || hero.name}</option>)}
                 </datalist> 
@@ -306,11 +306,13 @@ function ResourceHeader(props: {
         <>
         <tr>
             <th colSpan={5} style={{textAlign: 'left', paddingLeft: '.35em'}}>{props.text}</th>
-            <th><div className='dataIconCell'><Icon size='xsm' src={ImageSrc.resources('stellar')} title={'Stellar Shards'}/></div></th>
-            <th><div className='dataIconCell'><Icon size='xsm' src={ImageSrc.resources('Spiritual Essence')}  title={'Spiritual Essence'}/></div></th>
-            <th><div className='dataIconCell'><Icon size='xsm' src={ImageSrc.resources('Aurora Gem')} title={'Aurora Gems'}/></div></th>
-            <th><div className='dataIconCell'><Icon size='xsm' src={ImageSrc.resources('Crystal of Transcendence')} title={'Crystals of Transcendence'}/></div></th>
-            <th><div className='dataIconCell'><Icon size='xsm' src={ImageSrc.resources('spiritvein shard')} title={'Spiritvein Shards'}/></div></th>
+            <th className='dataIconCell'><div><Icon size='xsm' src={ImageSrc.hero("shards/any-puppet", 9)} title={'9★ Puppet'}/></div></th>
+            <th className='dataIconCell'><div><Icon size='xsm' src={ImageSrc.hero("shards/any-puppet", 10)} title={'10★ Puppet'}/></div></th>
+            <th className='dataIconCell'><div><Icon size='xsm' src={ImageSrc.resources('stellar')} title={'Stellar Shards'}/></div></th>
+            <th className='dataIconCell'><div><Icon size='xsm' src={ImageSrc.resources('Spiritual Essence')}  title={'Spiritual Essence'}/></div></th>
+            <th className='dataIconCell'><div><Icon size='xsm' src={ImageSrc.resources('Aurora Gem')} title={'Aurora Gems'}/></div></th>
+            <th className='dataIconCell'><div><Icon size='xsm' src={ImageSrc.resources('Crystal of Transcendence')} title={'Crystals of Transcendence'}/></div></th>
+            <th className='dataIconCell'><div><Icon size='xsm' src={ImageSrc.resources('spiritvein shard')} title={'Spiritvein Shards'}/></div></th>
             <th></th>
         </tr>
         </>
@@ -352,13 +354,15 @@ function HeroRow(props: {
             </td>
             <td className='hero-picker' onClick={() => props.onSelect(props.index, !props.selected)}>
                 {props.hero.hero 
-                    ? heroesByName[props.hero.hero as keyof typeof heroesByName].icon('hero', {size: 'xsm', className: selectedClassName}) 
+                    ? heroesByName[props.hero.hero as keyof typeof heroesByName].rank(props.hero.rank, {size: 'xsm', className: selectedClassName}) 
                     : <Icon size="xsm" src={ImageSrc.hero("shards/any-puppet", 10)} className={selectedClassName} />
                 }
             </td>
-            <td>{props.hero.rank}</td>
+            <td><Icon size="tiny" src={ImageSrc.hero_star(props.hero.rank)} title={props.hero.rank} /></td>
             <td style={{fontSize: 'smaller'}}>{displayRankExtra(props.hero)}</td>
             <td></td>
+            <td style={{textAlign: 'right'}}><BigNumber value={props.cost.food9} /></td>
+            <td style={{textAlign: 'right'}}><BigNumber value={props.cost.food10} /></td>
             <td style={{textAlign: 'right'}}><BigNumber value={props.cost.stellar} /></td>
             <td style={{textAlign: 'right'}}><BigNumber value={props.cost.esence} /></td>
             <td style={{textAlign: 'right'}}><BigNumber value={props.cost.aurora} /></td>
@@ -380,9 +384,10 @@ function TotalRow(props: {
 }) {
     return (
         <tr>
-            <td></td>
-            <td><FontAwesomeIcon icon={faForward} /></td>
+            <td colSpan={2}><FontAwesomeIcon icon={faForward} /><FontAwesomeIcon icon={faForward} /></td>
             <td colSpan={3} style={{textAlign: 'left'}}>&Sigma; {props.text}</td>
+            <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.food9} style={{color: !props.colors ? 'inherit' : props.cost.stellar < 0 ? 'darkred' : 'darkgreen'}} /></td>
+            <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.food10} style={{color: !props.colors ? 'inherit' : props.cost.stellar < 0 ? 'darkred' : 'darkgreen'}} /></td>
             <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.stellar} style={{color: !props.colors ? 'inherit' : props.cost.stellar < 0 ? 'darkred' : 'darkgreen'}} /></td>
             <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.esence} style={{color: !props.colors ? 'inherit' : props.cost.esence < 0 ? 'darkred' : 'darkgreen'}}/></td>
             <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.aurora} style={{color: !props.colors ? 'inherit' : props.cost.aurora < 0 ? 'darkred' : 'darkgreen'}}/></td>
@@ -395,18 +400,17 @@ function TotalRow(props: {
 
 function InputItem(props: {
     value: number,
-    width: string,
     locked: boolean,
     onChange: (value: number) => void
 }) {
-    const inputStyle = {marginLeft: '0', marginRight: '0', backgroundColor: '#ecdfbf', borderColor: 'darkgray', float: 'right' as const, paddingRight: '.3em'}
+    const inputStyle = {marginLeft: '0', marginRight: '1px', width: 'calc(100% - 3px)', backgroundColor: '#ecdfbf', borderColor: 'darkgray', float: 'right' as const, paddingRight: '.1em'}
     if (props.locked) {
         return (
             <BigNumber value={props.value} />
         )
     } else {
         return (
-            <input className='ih-input in-text-input number' aria-label={`spiritvein`} type="number" style={{...inputStyle, width: props.width}} 
+            <input className='ih-input in-text-input number' aria-label={`spiritvein`} type="number" style={{...inputStyle}} 
                 value={props.value || ''} 
                 onChange={(e) => props.onChange(Number(e.target.value))}
             />
@@ -426,7 +430,7 @@ export function Regress() {
     const refHave = useRef<UpsertRefObject>(null)
     const refBuild = useRef<UpsertRefObject>(null)
 
-    const columnsCount = 11
+    const columnsCount = 13
 
     const dispatch_addHaveHero = (hero: HeroLevel) => dispatch(addHaveHero(hero))
     const dispatch_addBuildHero = (hero: HeroLevel) => dispatch(addBuildHero(hero))
@@ -483,6 +487,8 @@ export function Regress() {
                     <td style={{width: '1.5em'}}></td>
                     <td style={{width: '5em'}}></td>
                     <td style={{width: 'auto'}}></td>
+                    <td style={{width: '2.5em'}}></td>
+                    <td style={{width: '2.5em'}}></td>
                     <td style={{width: '8em'}}></td>
                     <td style={{width: '7em'}}></td>
                     <td style={{width: '3em'}}></td>
@@ -524,19 +530,25 @@ export function Regress() {
                     <td colSpan={2} style={{textAlign: 'left'}}>Bag</td>
                     <td></td>
                     <td style={{textAlign: 'right'}}>
-                        <InputItem value={resources.have.bag.cost.stellar} locked={locked} width='7em' onChange={(value) => dispatch(setBag({...resources.have.bag.cost, stellar: value} ))} />
+                        <InputItem value={resources.have.bag.cost.food9} locked={locked} onChange={(value) => dispatch(setBag({...resources.have.bag.cost, food9: value} ))} />
                     </td>
                     <td style={{textAlign: 'right'}}>
-                        <InputItem value={resources.have.bag.cost.esence} locked={locked} width='6em' onChange={(value) => dispatch(setBag({...resources.have.bag.cost, esence: value} ))} />
+                        <InputItem value={resources.have.bag.cost.food10} locked={locked} onChange={(value) => dispatch(setBag({...resources.have.bag.cost, food10: value} ))} />
                     </td>
                     <td style={{textAlign: 'right'}}>
-                        <InputItem value={resources.have.bag.cost.aurora} locked={locked} width='2.5em' onChange={(value) => dispatch(setBag({...resources.have.bag.cost, aurora: value} ))} />
+                        <InputItem value={resources.have.bag.cost.stellar} locked={locked} onChange={(value) => dispatch(setBag({...resources.have.bag.cost, stellar: value} ))} />
                     </td>
                     <td style={{textAlign: 'right'}}>
-                        <InputItem value={resources.have.bag.cost.cot} locked={locked} width='6em' onChange={(value) => dispatch(setBag({...resources.have.bag.cost, cot: value} ))} />
+                        <InputItem value={resources.have.bag.cost.esence} locked={locked} onChange={(value) => dispatch(setBag({...resources.have.bag.cost, esence: value} ))} />
                     </td>
                     <td style={{textAlign: 'right'}}>
-                        <InputItem value={resources.have.bag.cost.spiritvein} locked={locked} width='6em' onChange={(value) => dispatch(setBag({...resources.have.bag.cost, spiritvein: value} ))} />
+                        <InputItem value={resources.have.bag.cost.aurora} locked={locked} onChange={(value) => dispatch(setBag({...resources.have.bag.cost, aurora: value} ))} />
+                    </td>
+                    <td style={{textAlign: 'right'}}>
+                        <InputItem value={resources.have.bag.cost.cot} locked={locked} onChange={(value) => dispatch(setBag({...resources.have.bag.cost, cot: value} ))} />
+                    </td>
+                    <td style={{textAlign: 'right'}}>
+                        <InputItem value={resources.have.bag.cost.spiritvein} locked={locked} onChange={(value) => dispatch(setBag({...resources.have.bag.cost, spiritvein: value} ))} />
                     </td>
                     <td>
                         <FontAwesomeIcon icon={faXmark} style={{width: '1em', display: locked ? 'none' : 'initial'}} className='btn-role' title='edit hero' 
@@ -544,7 +556,7 @@ export function Regress() {
                         />
                     </td>
                 </tr>
-                <TotalRow text='Regressed' cost={resources.have.total} colors={false}/>
+                <TotalRow text='Get' cost={resources.have.total} colors={false}/>
             </tbody>
 
             <thead className={headerClass}>
@@ -567,14 +579,14 @@ export function Regress() {
                         onEnable={dispatch_enabledBuildHero}
                         onSelect={(index, selected) => _selectedBuild(selected ? index : null)} />
                 )}
-                <TotalRow text='Built' cost={resources.build.total} colors={false}/>
+                <TotalRow text='Use' cost={resources.build.total} colors={false}/>
             </tbody>
 
             <thead>
                 <ResourceHeader text="Balance"/>
             </thead>
             <tbody>
-                <TotalRow text='Balance' cost={resources.total} colors={true}/>
+                <TotalRow text='Diff' cost={resources.total} colors={true}/>
             </tbody>
         </table>
         </>

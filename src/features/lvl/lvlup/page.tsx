@@ -56,10 +56,10 @@ export function LevelUp() {
                 <tr>
                     <th></th>
                     <th></th>
-                    <th><div className='dataIconCell'><Icon size='sm' src={ImageSrc.resources('x-stone')}  title={'X-Stone'}/></div></th>
-                    <th><div className='dataIconCell'><Icon size='sm' src={ImageSrc.resources('stone')} title={'Hero Promotion Stone'}/></div></th>
-                    <th><div className='dataIconCell'><Icon size='sm' src={ImageSrc.resources('gold')}  title={'Gold'}/></div></th>
-                    <th><div className='dataIconCell'><Icon size='sm' src={ImageSrc.resources('spirit')}  title={'Spirit'}/></div></th>
+                    <th className='dataIconCell'><div><Icon size='sm' src={ImageSrc.resources('x-stone')}  title={'X-Stone'}/></div></th>
+                    <th className='dataIconCell'><div><Icon size='sm' src={ImageSrc.resources('stone')} title={'Hero Promotion Stone'}/></div></th>
+                    <th className='dataIconCell'><div><Icon size='sm' src={ImageSrc.resources('gold')}  title={'Gold'}/></div></th>
+                    <th className='dataIconCell'><div><Icon size='sm' src={ImageSrc.resources('spirit')}  title={'Spirit'}/></div></th>
                     <th></th>
                 </tr>
             </thead>

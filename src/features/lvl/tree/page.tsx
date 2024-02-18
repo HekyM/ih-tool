@@ -51,8 +51,8 @@ export function Tree() {
                     <th></th>
                     <th></th>
                     <th></th>
-                    <th><div className='dataIconCell'><Icon size='sm' src={ImageSrc.resources('Spiritual Essence')}  title={'Spiritual Essence'}/></div></th>
-                    <th><div className='dataIconCell'><Icon size='sm' src={ImageSrc.resources('stellar')} title={'Stellar Shards'}/></div></th>
+                    <th className='dataIconCell'><div><Icon size='sm' src={ImageSrc.resources('Spiritual Essence')}  title={'Spiritual Essence'}/></div></th>
+                    <th className='dataIconCell'><div><Icon size='sm' src={ImageSrc.resources('stellar')} title={'Stellar Shards'}/></div></th>
 
                     <th>
                         {-1 === selected

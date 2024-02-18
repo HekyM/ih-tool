@@ -17,6 +17,9 @@ export function Icon({ size, ...common }: IconProps) {
     else
         common.className = `icon icon-${size}`
 
+    if (common.style?.backgroundImage) 
+        common.className += ' bg-img'
+
     if (!common.alt && common.title) 
         common.alt = `${common.title}`
 
@@ -49,6 +52,10 @@ export class ImageSrc {
 
     static hero = (name: string, level = 5) => 
         `${imagesRoot}/heroes/${name.replaceAll(' ', '-').toLowerCase()}-${level}${imagesExt}`
+    static hero_rank = (rank: string): string => 
+        `${imagesRoot}/heroes/rank/${rank.toLowerCase()}${imagesExt}`
+    static hero_star = (rank: string): string => 
+        `${imagesRoot}/heroes/star/${rank.toLowerCase()}${imagesExt}`
     static class = (name: string) => 
         `${imagesRoot}/layout/${name.toLowerCase()}${imagesExt}`
     static faction = (name: string) => 

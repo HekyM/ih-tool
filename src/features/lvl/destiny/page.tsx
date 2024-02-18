@@ -52,10 +52,10 @@ export function Destiny() {
                     <th></th>
                     <th></th>
                     <th></th>
-                    <th colSpan={2}><div className='dataIconCell'><Icon size='sm' src={ImageSrc.resources('Aurora Gem Shard')} title={'Aurora Gem Shards'}/></div></th>
-                    <th><div className='dataIconCell'><Icon size='sm' src={ImageSrc.resources('Crystal of Transcendence')} title={'Crystals of Transcendence'}/></div></th>
-                    <th><div className='dataIconCell'><Icon size='sm' src={ImageSrc.resources('spiritvein shard')} title={'Spiritvein Shards'}/></div></th>
-                    <th><div className='dataIconCell'><Icon size='sm' src={ImageSrc.resources('stellar')} title={'Stellar Shards'}/></div></th>
+                    <th className='dataIconCell' colSpan={2}><div><Icon size='sm' src={ImageSrc.resources('Aurora Gem Shard')} title={'Aurora Gem Shards'}/></div></th>
+                    <th className='dataIconCell'><div><Icon size='sm' src={ImageSrc.resources('Crystal of Transcendence')} title={'Crystals of Transcendence'}/></div></th>
+                    <th className='dataIconCell'><div><Icon size='sm' src={ImageSrc.resources('spiritvein shard')} title={'Spiritvein Shards'}/></div></th>
+                    <th className='dataIconCell'><div><Icon size='sm' src={ImageSrc.resources('stellar')} title={'Stellar Shards'}/></div></th>
 
                     <th>
                         {-1 === selected

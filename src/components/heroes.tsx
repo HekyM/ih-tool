@@ -70,11 +70,22 @@ export class Hero implements HeroData  {
         else return this._icon(what, props)
     }
 
+    public rank(rank: string, props?: HeroIconProps): ReactElement {
+        let _desc = (this.short ? '[' + this.short + '] ' : '') + this.name + " | "+ this.faction + " | " + this.class
+        return (
+            <div className="overlay-container" title={`${rank} ${_desc}`} >
+                <Icon {...props} src={ ImageSrc.hero(this.name, 10) } alt={`${rank} star ${this.name}`} />
+                <Icon {...props} className='img-overlay' src={ ImageSrc.hero_rank(rank) } alt={`${rank} star ${this.name}`} />
+            </div>
+        )
+    }
+
     public _icon(level?: number, props?: HeroIconProps): ReactElement {
+        let _desc = (this.short ? '[' + this.short + '] ' : '') + this.name + " | "+ this.faction + " | " + this.class
         if (!level) {
-            return <Icon {...props} src={ ImageSrc.hero(this.name, 5) } title={(this.short ? '[' + this.short + '] ' : '') + this.name + " | "+ this.faction + " | " + this.class} alt={this.name} />
+            return <Icon {...props} src={ ImageSrc.hero(this.name, 5) } title={_desc} alt={this.name} />
         } else if (this.stars.includes(level)) {
-            return <Icon {...props} src={ ImageSrc.hero(this.name, level) } title={`${level}★ ${this.name}`} alt={`${level} star ${this.name}`} />
+            return <Icon {...props} src={ ImageSrc.hero(this.name, level) } title={`${level}★ ${_desc}`} alt={`${level} star ${this.name}`} />
         } else {
             return <></>
         }
