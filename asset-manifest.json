@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/ih-tool/static/css/main.a7f7e0cd.css",
-    "main.js": "/ih-tool/static/js/main.d9fb6335.js",
+    "main.css": "/ih-tool/static/css/main.bc32f3c4.css",
+    "main.js": "/ih-tool/static/js/main.d7f841e1.js",
     "static/js/651.058990fd.chunk.js": "/ih-tool/static/js/651.058990fd.chunk.js",
     "index.html": "/ih-tool/index.html",
-    "main.a7f7e0cd.css.map": "/ih-tool/static/css/main.a7f7e0cd.css.map",
-    "main.d9fb6335.js.map": "/ih-tool/static/js/main.d9fb6335.js.map",
+    "main.bc32f3c4.css.map": "/ih-tool/static/css/main.bc32f3c4.css.map",
+    "main.d7f841e1.js.map": "/ih-tool/static/js/main.d7f841e1.js.map",
     "651.058990fd.chunk.js.map": "/ih-tool/static/js/651.058990fd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a7f7e0cd.css",
-    "static/js/main.d9fb6335.js"
+    "static/css/main.bc32f3c4.css",
+    "static/js/main.d7f841e1.js"
   ]
 }
