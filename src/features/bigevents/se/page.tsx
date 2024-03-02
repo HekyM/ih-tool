@@ -53,6 +53,8 @@ export function EventsSE()  {
         </div>
         <div className='ihContainer'>
             <ImgModal src={ImageSrc.events('se', 'boss')} alt='Abyss Catastrophe' style={imgStyle}/>
+            <div className='line-delimiter'/>
+            <ImgModal src={ImageSrc.events('se', 'boss2')} alt='Abyss Catastrophe (difficult)' style={imgStyle}/>
             <ImgModalLink src={ImageSrc.events('se', 'blessing-tldr')} alt='Star Blessing (TLDR)' text='Star Blessing (TLDR)'/>
         </div>
       </>

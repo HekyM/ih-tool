@@ -269,6 +269,10 @@ img {
   width: 100%;
 }
 
+.line-delimiter {
+  height: .5em;
+}
+
 .left-line {
   border-left: 1px solid #534030;
 }
