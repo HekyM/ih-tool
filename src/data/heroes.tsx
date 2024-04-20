@@ -27,7 +27,7 @@ export interface  HeroesData {
 // hero: 140x140 (25)
 // shard: 158x158 (25)
 
-// last update: Interstellar Hunteress - Patricia
+// last update: Cosmic Enforcer - Luna
 /* 
 */
 
@@ -40,7 +40,7 @@ let _heroesData: HeroesData = {
         "elite": true,
         "imprint": true,
         "tenants": {
-             "1": ['Annabelle', 'Holmes Young'],
+             "1": ['Annabelle', 'Holmes Young', 'Luna'],
              "2": ['Azrael', 'Patricia'],
              "3": ['Onkirimaru'],
              "4": ['Eos'],
@@ -284,6 +284,19 @@ let _heroesData: HeroesData = {
         "imprint": false,
     },  
     /* === Fortress ============================================================================================= */
+    "Luna": {
+        "faction": "Fortress",
+        "class": "Assassin",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+            "1": ['Yorhm Tum', 'Natasha'],
+            "2": ['Patricia', 'Saja'],
+            "3": ['Holmes Young'],
+            "4": ['Tussilago'],
+       },
+    },
     "Aylamak": {
         "faction": "Fortress",
         "class": "Warrior",
@@ -292,7 +305,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
             "1": ['Holmes Young', 'Vulkan', 'Gaggie'],
-            "2": ['Saja', 'Mockman'],
+            "2": ['Saja', 'Mockman', 'Luna'],
             "3": ['Fiona', 'Onkirimaru'],
             "4": ['Sherlock', 'Xiahou'],
        },
@@ -797,7 +810,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Rogan', 'Saja', 'Yorhm Tum'],
-             "2": ['Aylamak', 'Patricia'],
+             "2": ['Aylamak', 'Patricia', 'Luna'],
              "3": ['Azrael', 'Natalie'],
              "4": ['Natasha'],
         },
@@ -1059,7 +1072,7 @@ let _heroesData: HeroesData = {
         "tenants": {
              "1": ['Aranea', 'Carrie', 'Betty'],
              "2": ['Drake', 'Gloria'],
-             "3": ['Mockman', 'Fiona'],
+             "3": ['Mockman', 'Fiona', 'Luna'],
              "4": ['Phorcys', 'Amen-Ra', 'Yorhm Tum'],
         },
     },
@@ -1227,7 +1240,7 @@ let _heroesData: HeroesData = {
             "1": ['Eos', 'Geester', 'Patricia'],
             "2": ['Vulkan', 'Yorhm Tum'],
             "3": ['Elena', 'Betty'],
-            "4": ['Freya'],
+            "4": ['Freya', 'Luna'],
        },
     },
     "Vulkan": {
@@ -1390,6 +1403,20 @@ let _heroesData: HeroesData = {
         "imprint": false,
     }, 
     /* === Transcendence ============================================================================================= */
+    "Cosmic Enforcer - Luna": {
+        "faction": "Transcendence",
+        "class": "Assassin",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+             "1": ['Luna', 'Natalie'],
+             "2": ['Lord of Sparkless - Yorhm Tum', 'Gaggie'],
+             "3": ['Yorhm Tum'],
+             "4": ['Therapist of Blood - Betty'],
+        },
+        "short": "CEL",
+    },
     "Interstellar Hunteress - Patricia": {
         "faction": "Transcendence",
         "class": "Ranger",
@@ -1454,7 +1481,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Natalie', 'Mockman'],
-             "2": ['Mutated Fungus - Geester', 'Betty'],
+             "2": ['Mutated Fungus - Geester', 'Betty', 'Cosmic Enforcer - Luna'],
              "3": ['Eos', 'Aylamak'],
              "4": ['Doom Terminator - Vulkan', 'Chaosbound Spirit - Gaggie'],
         },
@@ -1484,7 +1511,7 @@ let _heroesData: HeroesData = {
              "1": ['Aylamak', 'Saja'],
              "2": ['Star Alchemist - Holmes Young', 'Vulkan', 'Lord of Sparkless - Yorhm Tum'],
              "3": ['Fiona', 'Geester'],
-             "4": ['Sword Flash - Xia', 'Elena'],
+             "4": ['Sword Flash - Xia', 'Elena', 'Cosmic Enforcer - Luna'],
         },
         "short": "HHA",
     },
