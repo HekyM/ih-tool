@@ -6,6 +6,7 @@ import { useSearchParams } from 'react-router-dom'
 
 import { EventsSE } from './se/page';
 import { EventsStarland } from './starland/page';
+import { EventsFW } from './fw/page';
 
 
 export function BigEvents(props: {open?: string}) {
@@ -21,6 +22,9 @@ export function BigEvents(props: {open?: string}) {
             </Collapsible>
             <Collapsible open={isOpen('starland')} trigger={<CollapsibleHeader title="Starland" icon={ImageSrc.event('starland')} link={<SectionLink onClick={() => setSearchParams('starland')}/>}/>} {...options}>
                 <EventsStarland />
+            </Collapsible>
+            <Collapsible open={isOpen('fw')} trigger={<CollapsibleHeader title="Force War" icon={ImageSrc.event('fw')} link={<SectionLink onClick={() => setSearchParams('fw')}/>}/>} {...options}>
+                <EventsFW />
             </Collapsible>
         </div>
     );
