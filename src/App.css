@@ -82,6 +82,14 @@ input, select {
 .btn-danger {
   background-color: rgb(112, 8, 8);
 }
+.btn-toggle {
+  color: #3c434a;
+  background-color: #ecdfbf;
+  border-color: #bd916e;
+}
+.btn-toggle.active {
+  background-color: #bd916e;
+}
 .btn-primary:hover {
   background-color: #035bb9;
 }

@@ -5,7 +5,7 @@ import { faUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
 import { Icon, ImageSrc } from '../../../components/Images';
 import { sum } from 'lodash';
 
-import { galaGoogleData } from '../../../data/gala';
+import { galaGoogleData, gataCartViewWindow } from '../../../data/gala';
 
 const awakensTiers = ['E-', 'E', 'E+', 'D-', 'D', 'D+', 'C-', 'C', 'C+', 'B-', 'B', 'B+', 'A-', 'A', 'A+', 'S'];
 const awakensPercent = {
@@ -13,7 +13,7 @@ const awakensPercent = {
     //'..': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     'B-': [0, 0, 0, 0, 0, 0, 0, 0, 0, 90.10575, 8, 1.5, 0.3, 0.065, 0.025, 0.00425],
     'B' : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 92.0295, 7, 0.7, 0.15, 0.1, 0.0205],
-    'B+': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 95.485, 3.5, 0.45, 0.5, 0.065],
+    'B+': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 95.485, 3.5, 0.75, 0.2, 0.065],
     'A-': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 97.053, 2.5, 0.3, 0.147],
     'A' : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 98.005, 1.5, 0.495],
     'A+': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 99.01, 0.99],
@@ -40,7 +40,7 @@ export function Awakens() {
                     {awakensTiers.slice(9).map((tier, i) => 
                         <th colSpan={2} key={'tier-'+tier}><Icon size='sm' src={ImageSrc.events('awakens', 'tier-'+tier)}  title={tier+' Awakening'}/></th>
                     )}
-                    <th>A- ++</th>
+                    <th title='Total change for Giant Killer (A|S-tier)'>GK</th>
                 </tr>
             </thead>
             <tbody>
@@ -82,7 +82,7 @@ const galaChartConfig = {
         gridlineColor: 'gray',
     },
     hAxis: {
-        title: "CSG",
+        title: "CSG [#] (retire up to ...)",
         gridlineColor: 'gray',
     },
     series: {
@@ -96,7 +96,10 @@ const galaChartConfig = {
     chartArea:{left:55,width:"90%"},
 };
 
-function GalaPointsChart(props: {points: number, data: any[][]}) {
+function GalaPointsChart(props: {points: number, data: any[][], with_b_stone: boolean}) {
+    let title = props.points.toString()
+    if (props.with_b_stone) 
+        title = `${props.points} / ${props.points - 13} +  B-stone`
 
     return (
         <div className="fixed-height-chart">
@@ -105,7 +108,7 @@ function GalaPointsChart(props: {points: number, data: any[][]}) {
             width="100%"
             height="100%"
             data={props.data}
-            options={{...galaChartConfig, title: `${props.points} / ${props.points - 13} +  B-stone`}}
+            options={{...galaChartConfig, title: title}}
         />
         </div>  
     )
@@ -121,13 +124,17 @@ export function EventsGala() {
     return (
         <div>
         <div className='ihContainer'>
-            <label htmlFor="gala-points-select">Points:</label>
-            <select id='gala-points-select' name='Points' value={showPoints} onChange={(e) => setShowPoints(Number(e.target.value))}>
-                <option value={150}>150</option>
-                <option value={200}>200</option>
-                <option value={300}>300</option>
-            </select>
-            <GalaPointsChart points={showPoints} data={galaGoogleData[showPoints]} />
+            <div>
+                <span>Target Points:</span>
+                {Object.keys(gataCartViewWindow).map((points) => 
+                    <button className={'btn btn-toggle'+(Number(points)===showPoints? " active" : "")} key={'gala-'+points}
+                    style={{margin: ".2em", width: "2.5em"}} 
+                    onClick={()=>setShowPoints(Number(points))}>
+                        {points}
+                    </button>
+                )}
+            </div>
+            <GalaPointsChart points={showPoints} data={galaGoogleData[showPoints]} with_b_stone={showPoints != 60 && showPoints != 600}/>
         </div>
         <div className='ihContainer'>
             <Awakens/>
