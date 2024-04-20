@@ -134,7 +134,7 @@ export function EventsGala() {
                     </button>
                 )}
             </div>
-            <GalaPointsChart points={showPoints} data={galaGoogleData[showPoints]} with_b_stone={showPoints != 60 && showPoints != 600}/>
+            <GalaPointsChart points={showPoints} data={galaGoogleData[showPoints]} with_b_stone={showPoints !== 60 && showPoints !== 600}/>
         </div>
         <div className='ihContainer'>
             <Awakens/>

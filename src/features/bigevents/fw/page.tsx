@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 
 import { Icon, ImageSrc } from '../../../components/Images';
-import { ImgGalery, ImgModal, ImgModalLink } from '../../../components/ImgGalery';
+import { ImgGalery } from '../../../components/ImgGalery';
 
 const maps: ImagesListType = [];
 const bosses = ['Warrior', 'Mage', 'Assassin', 'Ranger', 'Priest']
