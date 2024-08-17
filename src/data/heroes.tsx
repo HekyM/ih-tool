@@ -27,9 +27,12 @@ export interface  HeroesData {
 // hero: 140x140 (25)
 // shard: 158x158 (25)
 
-// last update: Cosmic Enforcer - Luna
 /* 
-*/
+ * [x] Mellisa
+ * [x] Infinite Era - Alikita // infinite-era---alikita
+ * [x] Alikita
+ * [x] Cosmic Enforcer - Luna
+ */
 
 let _heroesData: HeroesData = {
     /* === Shadow ============================================================================================= */
@@ -41,7 +44,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Annabelle', 'Holmes Young', 'Luna'],
-             "2": ['Azrael', 'Patricia'],
+             "2": ['Azrael', 'Patricia', 'Alikita'],
              "3": ['Onkirimaru'],
              "4": ['Eos'],
         },
@@ -557,7 +560,7 @@ let _heroesData: HeroesData = {
         "elite": true,
         "imprint": true,
         "tenants": {
-             "1": ['Vulkan', 'Mockman'],
+             "1": ['Vulkan', 'Mockman', 'Alikita'],
              "2": ['Aylamak', 'Waldeck'],
              "3": ['Aranea'],
              "4": ['Natasha'],
@@ -572,7 +575,7 @@ let _heroesData: HeroesData = {
         "tenants": {
              "1": ['Ignis', 'Natasha', 'Elena'],
              "2": ['Morax', 'Delacium', 'Natalie'],
-             "3": ['Annabelle', 'Fiona'],
+             "3": ['Annabelle', 'Fiona', 'Alikita'],
              "4": ['Waldeck', 'Amen-Ra'],
         },
     },
@@ -802,6 +805,19 @@ let _heroesData: HeroesData = {
         "imprint": false,
     },
     /* === Forest ============================================================================================= */
+    "Mellisa": {
+        "faction": "Forest",
+        "class": "Priest",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+             "1": ['Elena', 'Aranea'],
+             "2": ['Gaggie', 'Xiahou'],
+             "3": ['Azrael'],
+             "4": ['Andrea'],
+        },
+    },
     "Geester": {
         "faction": "Forest",
         "class": "Assassin",
@@ -812,7 +828,7 @@ let _heroesData: HeroesData = {
              "1": ['Rogan', 'Saja', 'Yorhm Tum'],
              "2": ['Aylamak', 'Patricia', 'Luna'],
              "3": ['Azrael', 'Natalie'],
-             "4": ['Natasha'],
+             "4": ['Natasha', 'Alikita'],
         },
     },
     "Freya": {
@@ -1050,6 +1066,19 @@ let _heroesData: HeroesData = {
         "imprint": false,
     },
     /* === Dark ============================================================================================= */
+    "Alikita": {
+        "faction": "Dark",
+        "class": "Mage",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+             "1": ['Betty', 'Holmes Young'],
+             "2": ['Mockman', 'Annabelle'],
+             "3": ['Aranea'],
+             "4": ['Eos'],
+        },
+    },
     "Patricia": {
         "faction": "Dark",
         "class": "Ranger",
@@ -1071,7 +1100,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Aranea', 'Carrie', 'Betty'],
-             "2": ['Drake', 'Gloria'],
+             "2": ['Drake', 'Gloria', 'Alikita'],
              "3": ['Mockman', 'Fiona', 'Luna'],
              "4": ['Phorcys', 'Amen-Ra', 'Yorhm Tum'],
         },
@@ -1403,6 +1432,20 @@ let _heroesData: HeroesData = {
         "imprint": false,
     }, 
     /* === Transcendence ============================================================================================= */
+    "Infinite Era - Alikita": {
+        "faction": "Transcendence",
+        "class": "Mage",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+             "1": ['Alikita', 'Freya'],
+             "2": ['Therapist of Blood - Betty', 'Azrael'],
+             "3": ['Betty'],
+             "4": ['Bloodtide Queen - Aranea'],
+        },
+        "short": "IEA",
+    },
     "Cosmic Enforcer - Luna": {
         "faction": "Transcendence",
         "class": "Assassin",
@@ -1441,7 +1484,7 @@ let _heroesData: HeroesData = {
              "1": ['Yorhm Tum', 'Freya'],
              "2": ['Mutated Fungus - Geester', 'Aylamak'],
              "3": ['Geester'],
-             "4": ['Doppelganger - Natalia'],
+             "4": ['Doppelganger - Natalia', 'Infinite Era - Alikita'],
         },
         "short": "LSYT",
     },
@@ -1453,7 +1496,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Gaggie', 'Betty'],
-             "2": ['Star Wing - Jahra', 'Freya'],
+             "2": ['Star Wing - Jahra', 'Freya', 'Infinite Era - Alikita'],
              "3": ['Aylamak'],
              "4": ['Hypperspace Hunter - Aylamak', 'Vulkan'],
         },
