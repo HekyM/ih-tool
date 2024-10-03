@@ -28,6 +28,8 @@ export interface  HeroesData {
 // shard: 158x158 (25)
 
 /* 
+ * [x] Williams
+ * [x] Lady of Blosom Realm - Mellisa // lady-of-blosom-realm---mellisa
  * [x] Mellisa
  * [x] Infinite Era - Alikita // infinite-era---alikita
  * [x] Alikita
@@ -46,7 +48,7 @@ let _heroesData: HeroesData = {
              "1": ['Annabelle', 'Holmes Young', 'Luna'],
              "2": ['Azrael', 'Patricia', 'Alikita'],
              "3": ['Onkirimaru'],
-             "4": ['Eos'],
+             "4": ['Eos', 'Williams'],
         },
     },
     "Azrael": {
@@ -295,7 +297,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
             "1": ['Yorhm Tum', 'Natasha'],
-            "2": ['Patricia', 'Saja'],
+            "2": ['Patricia', 'Saja', 'Williams'],
             "3": ['Holmes Young'],
             "4": ['Tussilago'],
        },
@@ -553,6 +555,19 @@ let _heroesData: HeroesData = {
         "imprint": false,
     },
     /* === Abyss ============================================================================================= */
+    "Williams": {
+        "faction": "Abyss",
+        "class": "Ranger",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+             "1": ['Eloise', 'Carrie'],
+             "2": ['Alikita', 'Morax'],
+             "3": ['Fiona'],
+             "4": ['Freya'],
+        },
+    },
     "Gaggie": {
         "faction": "Abyss",
         "class": "Warrior",
@@ -562,7 +577,7 @@ let _heroesData: HeroesData = {
         "tenants": {
              "1": ['Vulkan', 'Mockman', 'Alikita'],
              "2": ['Aylamak', 'Waldeck'],
-             "3": ['Aranea'],
+             "3": ['Aranea', 'Williams'],
              "4": ['Natasha'],
         },
     },
@@ -1086,7 +1101,7 @@ let _heroesData: HeroesData = {
         "elite": true,
         "imprint": true,
         "tenants": {
-             "1": ['Natalie', 'Freya'],
+             "1": ['Natalie', 'Freya', 'Williams'],
              "2": ['Yorhm Tum', 'Waldeck'],
              "3": ['Flora'],
              "4": ['Aranea'],
@@ -1254,7 +1269,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
             "1": ['Geester', 'Azrael'],
-            "2": ['Freya', 'Tussilago'],
+            "2": ['Freya', 'Tussilago', 'Williams'],
             "3": ['Betty'],
             "4": ['Drake'],
        },
@@ -1432,6 +1447,20 @@ let _heroesData: HeroesData = {
         "imprint": false,
     }, 
     /* === Transcendence ============================================================================================= */
+    "Lady of Blosom Realm - Mellisa": {
+        "faction": "Transcendence",
+        "class": "Ranger",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+             "1": ['Mellisa', 'Annabelle'],
+             "2": ['Phantom Defier - Elena', 'Waldeck'],
+             "3": ['Elena'],
+             "4": ['Fairy Queen - Vesa'],
+        },
+        "short": "LBRM",
+    },
     "Infinite Era - Alikita": {
         "faction": "Transcendence",
         "class": "Mage",
@@ -1482,7 +1511,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Yorhm Tum', 'Freya'],
-             "2": ['Mutated Fungus - Geester', 'Aylamak'],
+             "2": ['Mutated Fungus - Geester', 'Aylamak', 'Lady of Blosom Realm - Mellisa'],
              "3": ['Geester'],
              "4": ['Doppelganger - Natalia', 'Infinite Era - Alikita'],
         },
@@ -1526,7 +1555,7 @@ let _heroesData: HeroesData = {
              "1": ['Natalie', 'Mockman'],
              "2": ['Mutated Fungus - Geester', 'Betty', 'Cosmic Enforcer - Luna'],
              "3": ['Eos', 'Aylamak'],
-             "4": ['Doom Terminator - Vulkan', 'Chaosbound Spirit - Gaggie'],
+             "4": ['Doom Terminator - Vulkan', 'Lady of Blosom Realm - Mellisa', 'Chaosbound Spirit - Gaggie'],
         },
         "short": "DGN",
     },
