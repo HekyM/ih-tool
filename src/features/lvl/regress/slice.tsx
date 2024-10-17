@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../../app/store';
 import { array_move } from '../../../components/functions';
 import _ from 'lodash';
-import { imprintsCost, treeCost, destinyCost } from '../../../data/lvl';
+import { nodesCost, treeCost, destinyCost } from '../../../data/lvl';
 
 export interface HeroCost {
     aurora: number;
@@ -191,7 +191,7 @@ export interface HeroLevel {
 export const heroCost = (hero: HeroLevel): HeroCost => {
     let cost = {..._.get(rankCost, hero.rank)}
     if (hero.nodes !== undefined) {
-        cost.stellar = cost.stellar + imprintsCost(hero.rank, hero.nodes)
+        cost.stellar = cost.stellar + nodesCost(hero.rank, hero.nodes)
     }
     if (hero.lvl !== undefined) {
         if (hero.rank[0] === 'T') {

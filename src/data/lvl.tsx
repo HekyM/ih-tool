@@ -337,9 +337,24 @@ export const imprintsTotal = {
 }
 const imprintRankMap  = {'E5': 'V1', 'V1': 'V2', 'V2': 'V3', 'V3': 'V4'};
 
-export const imprintsCost = (rank: string /*'E5'|'V1'|'V2'|'V3'*/, nodes: number[]): number => {
+export const nodesCost = (rank: string /*'E5'|'V1'|'V2'|'V3'*/, nodes: number[]): number => {
     if (rank === 'V4'){
         return 0
+    }
+        
+    let imprintRank = get(imprintRankMap, rank) as keyof typeof imprintsTotal;
+    return 0
+           + sum(get(imprintsFull[imprintRank], 'HP').slice(0, nodes[0]))
+           + sum(get(imprintsFull[imprintRank], 'Attack').slice(0, nodes[1]))
+           + (imprintRank === 'V4'
+                ? sum(get(imprintsFull[imprintRank], 'Speed').slice(0, nodes[2])) 
+                : sum(get(imprintsFull[imprintRank], 'Attack HP').slice(0, nodes[2]))
+           )
+}
+
+export const imprintsCost = (rank: string /*'E5'|'V1'|'V2'|'V3'*/, nodes: number[]): number => {
+    if (rank === 'V4'){
+        return imprintsTotal.V4
     }
         
     let imprintRank = get(imprintRankMap, rank) as keyof typeof imprintsTotal;
