@@ -215,47 +215,6 @@ const calcBalance = (have: HeroCost, build: HeroCost): HeroCost => {
     return total
 }
 
-const destinyMap  = ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'Dmax'];
-const templeHeros = (require: number[]): HeroItem[] => {
-    let heroes: HeroItem[] = [];
-    require.forEach( (count, d_lvl) => {
-        for (var i = 0; i < count; i++) {
-            heroes.push({
-                hero: {
-                    hero: undefined,
-                    enabled: true,
-                    trans: true,
-                    rank: destinyMap[d_lvl],
-                    lvl: 100,
-                },
-                cost: {..._.get(rankCost, destinyMap[d_lvl])}
-            })
-        }
-    });
-    heroes = heroes.map(h => { h.cost.cot += 5000000; return h})
-
-    return heroes;
-}
-
-export interface TempleCost {
-    level: number;
-    heroes: HeroItem[];
-    total: HeroCost;
-}
-
-export interface TempleHeroes {
-    [level: number] : TempleCost;
-}
-export const templeHeroRequires: TempleCost[] = 
-    temple.map(t => {
-        let heroes = templeHeros(t.require);
-        return {
-            level: t.lvl, heroes: 
-            heroes, 
-            total: calcTotal(heroes, undefined)
-        }
-    });
-
 export interface HeroLevel {
     hero: string | undefined;
     enabled: boolean;
@@ -288,6 +247,48 @@ export const heroCost = (hero: HeroLevel): HeroCost => {
 
     return cost
 }
+
+const destinyMap  = ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'Dmax'];
+const templeHeros = (require: number[]): HeroItem[] => {
+    let heroes: HeroItem[] = [];
+    require.forEach( (count, d_lvl) => {
+        for (var i = 0; i < count; i++) {
+            let hero: HeroLevel = {
+                hero: undefined,
+                enabled: true,
+                trans: true,
+                rank: destinyMap[d_lvl],
+                lvl: 100,
+            }
+            heroes.push({
+                hero: hero,
+                cost: heroCost(hero)
+            })
+        }
+    });
+    heroes = heroes.map(h => { h.cost.cot += 5000000; return h})
+
+    return heroes;
+}
+
+export interface TempleCost {
+    level: number;
+    heroes: HeroItem[];
+    total: HeroCost;
+}
+
+export interface TempleHeroes {
+    [level: number] : TempleCost;
+}
+export const templeHeroRequires: TempleCost[] = 
+    temple.map(t => {
+        let heroes = templeHeros(t.require);
+        return {
+            level: t.lvl, heroes: 
+            heroes, 
+            total: calcTotal(heroes, undefined)
+        }
+    });
 
 export interface HeroItem {
     hero: HeroLevel;
