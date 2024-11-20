@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/ih-tool/static/css/main.3157e7cb.css",
-    "main.js": "/ih-tool/static/js/main.853aa8eb.js",
+    "main.js": "/ih-tool/static/js/main.dfd72088.js",
     "static/js/651.058990fd.chunk.js": "/ih-tool/static/js/651.058990fd.chunk.js",
     "index.html": "/ih-tool/index.html",
     "main.3157e7cb.css.map": "/ih-tool/static/css/main.3157e7cb.css.map",
-    "main.853aa8eb.js.map": "/ih-tool/static/js/main.853aa8eb.js.map",
+    "main.dfd72088.js.map": "/ih-tool/static/js/main.dfd72088.js.map",
     "651.058990fd.chunk.js.map": "/ih-tool/static/js/651.058990fd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3157e7cb.css",
-    "static/js/main.853aa8eb.js"
+    "static/js/main.dfd72088.js"
   ]
 }
