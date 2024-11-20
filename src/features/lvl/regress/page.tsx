@@ -13,7 +13,7 @@ import {
 import { Icon, ImageSrc } from '../../../components/Images';
 import { BigNumber } from '../../../components/BigNumber'
 import { Dropdown } from '../../../components/Dropdown';
-import { heroesByName } from '../../../components/heroes';
+import { heroesByName, heroRank } from '../../../components/heroes';
 
 import { 
     regressionResources,
@@ -23,7 +23,9 @@ import {
     rmHaveHero, rmBuildHero, 
     enabledHaveHero, enabledBuildHero,
     setBag, resetBag, enabledBag,
+    setHaveTemple, setBuildTemple,
     saveRegress, loadRegress, resetRegress,
+    templeHeroRequires,
 } from './slice';
 
 import { HeroLevel, HeroCost } from './slice';
@@ -301,11 +303,38 @@ const HeroUpsert = forwardRef((props: {
 
 function ResourceHeader(props: {
     text: string,
+    temple_id?: number|undefined,
+    onChange?: (index: number|undefined) => void
 }) {
     return (
         <>
         <tr>
-            <th colSpan={5} style={{textAlign: 'left', paddingLeft: '.35em'}}>{props.text}</th>
+            <th colSpan={5} style={{textAlign: 'left', paddingLeft: '.35em'}}>
+                {props.onChange !== undefined
+                ? <Dropdown autoClose={true} display='inline-block' dropdownWidth={160}
+                        trigger={
+                            <span>{props.temple_id === undefined ? props.text : "Temple " + (props.temple_id+1) } 
+                                <FontAwesomeIcon icon={faChevronDown} style={{width: '1em'}} className='btn-role' title='select hero level'/>
+                            </span>
+                        }>
+                        <div style={{padding: '.5em', paddingTop: '.25em'}}>
+                            <div key={'numpad-'+0} className='btn btn-primary' 
+                                    style={{display: 'inline-block', padding: '0', width: '95%', fontSize: 'smaller'}} 
+                                    onClick={() => props.onChange!(undefined)}>
+                                    {props.text}
+                            </div>
+                            {Object.keys(templeHeroRequires).map((val) => 
+                                <div key={'numpad-'+val} className='btn btn-primary' 
+                                    style={{display: 'inline-block', padding: '0', width: '95%', fontSize: 'smaller'}} 
+                                    onClick={() => props.onChange!(Number(val))}>
+                                    Temple {Number(val)+1}
+                                </div>
+                            )}
+                        </div>
+                    </Dropdown>
+                : props.text
+                }
+            </th>
             <th className='dataIconCell'><div><Icon size='xsm' src={ImageSrc.hero("shards/any-puppet", 9)} title={'9★ Puppet'}/></div></th>
             <th className='dataIconCell'><div><Icon size='xsm' src={ImageSrc.hero("shards/any-puppet", 10)} title={'10★ Puppet'}/></div></th>
             <th className='dataIconCell'><div><Icon size='xsm' src={ImageSrc.resources('stellar')} title={'Stellar Shards'}/></div></th>
@@ -325,6 +354,7 @@ function HeroRow(props: {
     cost: HeroCost,
     selected: boolean,
     locked: boolean,
+    temple: boolean,
     onSelect: (index: number, selected: boolean) => void
     onRemove: (index: number) => void
     onEnable: (index: number, enabled: boolean) => void
@@ -339,23 +369,27 @@ function HeroRow(props: {
         return ""
     }
 
-    const lockedVisibility = props.locked ? 'hidden' : 'visible'
+    const lockedVisibility = (props.locked || props.temple) ? 'hidden' : 'visible'
     const selectedClassName = !props.locked && props.selected ? 'selected' : ''
 
     return (
         <tr className={props.hero.enabled ? '' : 'disabled'}>
             <td>
+                {!props.temple &&
                 <input
                     type="checkbox"
                     name="All"
                     checked={props.hero.enabled} 
                     onChange={() => props.onEnable(props.index, !props.hero.enabled)}
                 />
+                }
             </td>
-            <td className='hero-picker' onClick={() => props.onSelect(props.index, !props.selected)}>
+            <td className='hero-picker' onClick={() => !props.locked && props.onSelect(props.index, !props.selected)}>
                 {props.hero.hero 
                     ? heroesByName[props.hero.hero as keyof typeof heroesByName].rank(props.hero.rank, {size: 'xsm', className: selectedClassName}) 
-                    : <Icon size="xsm" src={ImageSrc.hero("shards/any-puppet", 10)} className={selectedClassName} />
+                    : props.hero.trans
+                    ? heroRank('puppet', ImageSrc.hero("shards/transcendence-puppet", 10), props.hero.rank, {size: 'xsm', className: selectedClassName}, 'Transcendence Hero')
+                    : heroRank('puppet', ImageSrc.hero("shards/any-puppet", 10), props.hero.rank, {size: 'xsm', className: selectedClassName}, 'Hero')
                 }
             </td>
             <td><Icon size="tiny" src={ImageSrc.hero_star(props.hero.rank)} title={props.hero.rank} /></td>
@@ -402,6 +436,7 @@ function InputItem(props: {
     value: number,
     locked: boolean,
     onChange: (value: number) => void
+    id: string
 }) {
     const inputStyle = {marginLeft: '0', marginRight: '1px', width: 'calc(100% - 3px)', backgroundColor: '#ecdfbf', borderColor: 'darkgray', float: 'right' as const, paddingRight: '.1em'}
     if (props.locked) {
@@ -410,7 +445,7 @@ function InputItem(props: {
         )
     } else {
         return (
-            <input className='ih-input in-text-input number' aria-label={`spiritvein`} type="number" style={{...inputStyle}} 
+            <input id={props.id} className='ih-input in-text-input number' aria-label={`spiritvein`} type="number" style={{...inputStyle}} 
                 value={props.value || ''} 
                 onChange={(e) => props.onChange(Number(e.target.value))}
             />
@@ -446,6 +481,9 @@ export function Regress() {
 
     const dispatch_enabledHaveHero = (index: number, enabled: boolean) => dispatch(enabledHaveHero({index: index, enabled: enabled}))
     const dispatch_enabledBuildHero = (index: number, enabled: boolean) => dispatch(enabledBuildHero({index: index, enabled: enabled}))
+
+    const dispatch_setHaveTemple = (id: number|undefined) => dispatch(setHaveTemple(id))
+    const dispatch_setBuildTemple = (id: number|undefined) => dispatch(setBuildTemple(id))
 
     const _setLocked = (state: boolean) => {
         setLocked(state)
@@ -503,20 +541,22 @@ export function Regress() {
                     <HeroUpsert ref={refHave} onAdd={dispatch_addHaveHero} onUpdate={dispatch_updateHaveHero} onMove={dispatch_moveHaveHero} />
                 </th></tr>
                 }
-                <ResourceHeader text="Regress Heroes"/>
+                <ResourceHeader text="Regress Heroes" temple_id={resources.have.temple_id} onChange={dispatch_setHaveTemple}/>
             </thead>
             <tbody>
-                {resources.have.heroes.map((x, i) => 
+                {(resources.have.temple_id === undefined ? resources.have.heroes : templeHeroRequires[resources.have.temple_id].heroes).map((x, i) => 
                     <HeroRow key={'have-'+i+locked} 
                         index={i} 
                         hero={x.hero} 
                         cost={x.cost}
                         selected={selectedHave === i }
-                        locked={locked} 
+                        locked={locked || resources.have.temple_id !== undefined}
+                        temple={resources.have.temple_id !== undefined}
                         onRemove={dispatch_rmHaveHero} 
                         onEnable={dispatch_enabledHaveHero}
                         onSelect={(index, selected) => _selectedHave(selected ? index : null)} />
                 )}
+                {resources.have.temple_id === undefined &&
                 <tr className={resources.have.bag.enabled ? '' : 'disabled'}>
                         <td>
                         <input
@@ -530,25 +570,25 @@ export function Regress() {
                     <td colSpan={2} style={{textAlign: 'left'}}>Bag</td>
                     <td></td>
                     <td style={{textAlign: 'right'}}>
-                        <InputItem value={resources.have.bag.cost.food9} locked={locked} onChange={(value) => dispatch(setBag({...resources.have.bag.cost, food9: value} ))} />
+                        <InputItem id={'food9'} value={resources.have.bag.cost.food9} locked={locked} onChange={(value) => dispatch(setBag({...resources.have.bag.cost, food9: value} ))} />
                     </td>
                     <td style={{textAlign: 'right'}}>
-                        <InputItem value={resources.have.bag.cost.food10} locked={locked} onChange={(value) => dispatch(setBag({...resources.have.bag.cost, food10: value} ))} />
+                        <InputItem id={'food10'} value={resources.have.bag.cost.food10} locked={locked} onChange={(value) => dispatch(setBag({...resources.have.bag.cost, food10: value} ))} />
                     </td>
                     <td style={{textAlign: 'right'}}>
-                        <InputItem value={resources.have.bag.cost.stellar} locked={locked} onChange={(value) => dispatch(setBag({...resources.have.bag.cost, stellar: value} ))} />
+                        <InputItem id={'stellar'} value={resources.have.bag.cost.stellar} locked={locked} onChange={(value) => dispatch(setBag({...resources.have.bag.cost, stellar: value} ))} />
                     </td>
                     <td style={{textAlign: 'right'}}>
-                        <InputItem value={resources.have.bag.cost.esence} locked={locked} onChange={(value) => dispatch(setBag({...resources.have.bag.cost, esence: value} ))} />
+                        <InputItem id={'esence'} value={resources.have.bag.cost.esence} locked={locked} onChange={(value) => dispatch(setBag({...resources.have.bag.cost, esence: value} ))} />
                     </td>
                     <td style={{textAlign: 'right'}}>
-                        <InputItem value={resources.have.bag.cost.aurora} locked={locked} onChange={(value) => dispatch(setBag({...resources.have.bag.cost, aurora: value} ))} />
+                        <InputItem id={'aurora'} value={resources.have.bag.cost.aurora} locked={locked} onChange={(value) => dispatch(setBag({...resources.have.bag.cost, aurora: value} ))} />
                     </td>
                     <td style={{textAlign: 'right'}}>
-                        <InputItem value={resources.have.bag.cost.cot} locked={locked} onChange={(value) => dispatch(setBag({...resources.have.bag.cost, cot: value} ))} />
+                        <InputItem id={'cot'} value={resources.have.bag.cost.cot} locked={locked} onChange={(value) => dispatch(setBag({...resources.have.bag.cost, cot: value} ))} />
                     </td>
                     <td style={{textAlign: 'right'}}>
-                        <InputItem value={resources.have.bag.cost.spiritvein} locked={locked} onChange={(value) => dispatch(setBag({...resources.have.bag.cost, spiritvein: value} ))} />
+                        <InputItem id={'spiritvein'} value={resources.have.bag.cost.spiritvein} locked={locked} onChange={(value) => dispatch(setBag({...resources.have.bag.cost, spiritvein: value} ))} />
                     </td>
                     <td>
                         <FontAwesomeIcon icon={faXmark} style={{width: '1em', display: locked ? 'none' : 'initial'}} className='btn-role' title='edit hero' 
@@ -556,7 +596,8 @@ export function Regress() {
                         />
                     </td>
                 </tr>
-                <TotalRow text='Get' cost={resources.have.total} colors={false}/>
+                }
+                <TotalRow text='Get' cost={resources.have.temple_id === undefined ? resources.have.total : templeHeroRequires[resources.have.temple_id].total} colors={false}/>
             </tbody>
 
             <thead className={headerClass}>
@@ -565,21 +606,22 @@ export function Regress() {
                     <HeroUpsert ref={refBuild} onAdd={dispatch_addBuildHero} onUpdate={dispatch_updateBuildHero} onMove={dispatch_moveBuildHero} />
                 </th></tr>
                 }
-                <ResourceHeader text="Build Heroes"/>
+                <ResourceHeader text="Build Heroes" temple_id={resources.build.temple_id} onChange={dispatch_setBuildTemple}/>
             </thead>
             <tbody>
-                {resources.build.heroes.map((x, i) => 
+                {(resources.build.temple_id === undefined ? resources.build.heroes : templeHeroRequires[resources.build.temple_id].heroes).map((x, i) => 
                     <HeroRow key={'build-'+i+locked} 
                         index={i} 
                         hero={x.hero} 
                         cost={x.cost} 
                         selected={selectedBuild === i}
-                        locked={locked} 
+                        locked={locked || resources.build.temple_id !== undefined}
+                        temple={resources.build.temple_id !== undefined} 
                         onRemove={dispatch_rmBuildHero} 
                         onEnable={dispatch_enabledBuildHero}
                         onSelect={(index, selected) => _selectedBuild(selected ? index : null)} />
                 )}
-                <TotalRow text='Use' cost={resources.build.total} colors={false}/>
+                <TotalRow text='Use' cost={resources.build.temple_id === undefined ? resources.build.total : templeHeroRequires[resources.build.temple_id].total} colors={false}/>
             </tbody>
 
             <thead>

@@ -28,6 +28,7 @@ export interface  HeroesData {
 // shard: 158x158 (25)
 
 /* 
+ * [x] Roseheart Fanatic - Williams // roseheart-fanatic---williams
  * [x] Williams
  * [x] Lady of Blosom Realm - Mellisa // lady-of-blosom-realm---mellisa
  * [x] Mellisa
@@ -1447,6 +1448,20 @@ let _heroesData: HeroesData = {
         "imprint": false,
     }, 
     /* === Transcendence ============================================================================================= */
+    "Roseheart Fanatic - Williams": {
+        "faction": "Transcendence",
+        "class": "Ranger",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+             "1": ['Williams', 'Geester'],
+             "2": ['Interstellar Hunteress - Patricia', 'Aranea'],
+             "3": ['Patricia'],
+             "4": ['Asmodel the Dauntless'],
+        },
+        "short": "RFW",
+    },
     "Lady of Blosom Realm - Mellisa": {
         "faction": "Transcendence",
         "class": "Ranger",
@@ -1483,7 +1498,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Luna', 'Natalie'],
-             "2": ['Lord of Sparkless - Yorhm Tum', 'Gaggie'],
+             "2": ['Lord of Sparkless - Yorhm Tum', 'Gaggie', 'Roseheart Fanatic - Williams'],
              "3": ['Yorhm Tum'],
              "4": ['Therapist of Blood - Betty'],
         },
@@ -1541,7 +1556,7 @@ let _heroesData: HeroesData = {
              "1": ['Betty', 'Geester'],
              "2": ['Lord of Death - Azrael', 'Elena', 'Interstellar Hunteress - Patricia'],
              "3": ['Azrael', 'Yorhm Tum'],
-             "4": ['Bloodtide Queen - Aranea', 'Natalie'],
+             "4": ['Bloodtide Queen - Aranea', 'Natalie', 'Roseheart Fanatic - Williams'],
         },
         "short": "TBB",
     }, 

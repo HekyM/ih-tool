@@ -34,6 +34,16 @@ export class HeroTenants {
     '4': string[];
 }
 
+export const  heroRank = (name: string, src: string, rank: string, props?: HeroIconProps, dsc?: string): ReactElement => {
+    let _desc = dsc ? dsc : ''
+    return (
+        <div className="overlay-container" title={`${rank} ${_desc}`} >
+            <Icon {...props} src={ src } alt={`${rank} star ${name}`} />
+            <Icon {...props} className='img-overlay' src={ ImageSrc.hero_rank(rank) } alt={`${rank} star ${name}`} />
+        </div>
+    )
+}
+
 export class Hero implements HeroData  {
     readonly name: string;
     readonly faction: "Shadow" | "Fortress" | "Abyss" | "Forest" | "Dark" | "Light" | "Transcendence";
@@ -72,12 +82,7 @@ export class Hero implements HeroData  {
 
     public rank(rank: string, props?: HeroIconProps): ReactElement {
         let _desc = (this.short ? '[' + this.short + '] ' : '') + this.name + " | "+ this.faction + " | " + this.class
-        return (
-            <div className="overlay-container" title={`${rank} ${_desc}`} >
-                <Icon {...props} src={ ImageSrc.hero(this.name, 10) } alt={`${rank} star ${this.name}`} />
-                <Icon {...props} className='img-overlay' src={ ImageSrc.hero_rank(rank) } alt={`${rank} star ${this.name}`} />
-            </div>
-        )
+        return heroRank(this.name, ImageSrc.hero(this.name, 10), rank, props, _desc)
     }
 
     public _icon(level?: number, props?: HeroIconProps): ReactElement {
