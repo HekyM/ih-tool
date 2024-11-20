@@ -427,7 +427,7 @@ export const regressionSlice = createSlice({
         state.build.heroes = data.build.heroes.map((h, i) => {return {hero: h.hero, cost: heroCost(h.hero)}})
         state.have.total = calcTotal(data.have.heroes, data.have.bag)
         state.build.total = calcTotal(data.build.heroes, undefined)
-        state.total = state.total = recalcBalance(data)
+        state.total = state.total = calcBalance(state.have.total, state.build.total) // ignore temple
       },
       resetRegress: () => initialState,
     },
