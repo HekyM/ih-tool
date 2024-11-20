@@ -228,7 +228,7 @@ const templeHeros = (require: number[]): HeroItem[] => {
                     rank: destinyMap[d_lvl],
                     lvl: 100,
                 },
-                cost: _.get(rankCost, destinyMap[d_lvl])
+                cost: {..._.get(rankCost, destinyMap[d_lvl])}
             })
         }
     });
