@@ -266,7 +266,6 @@ const templeHeros = (require: number[]): HeroItem[] => {
             })
         }
     });
-    heroes = heroes.map(h => { h.cost.cot += 5000000; return h})
 
     return heroes;
 }
