@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ImagesListType } from 'react-spring-lightbox';
 import _ from 'lodash';
-import { se_boss_1_hp } from '../../../data/se';
+import { se_boss_hp } from '../../../data/se';
 import { BigNumber } from '../../../components/BigNumber'
 import { Dropdown } from '../../../components/Dropdown';
 import { Icon, ImageSrc } from '../../../components/Images';
@@ -40,14 +40,14 @@ export function SEBossHP()  {
         event.target.select();
     }
 
-    const maxHP = se_boss_1_hp(bossLevel);
+    const maxHP = se_boss_hp(bossLevel);
     const currentHP = maxHP*bossHP/100;
 
     return (
         <table className='w-max'>
             <thead>
                 <tr>
-                    <th colSpan={2}>SE Boss HP (X200-X101)</th>
+                    <th colSpan={2}>SE Boss HP</th>
                 </tr>
                 <tr className='spacer'>
                     <td style={{width: '50%'}}></td>
@@ -68,12 +68,21 @@ export function SEBossHP()  {
                         %
                     </td>
                     <td>
+                        X:
+                        <input className='ih-input in-text-input number' step={1} aria-label={`boss HP %`}
+                            type="number" 
+                            value={bossLevel} 
+                            onChange={(e) => setBossLevel(minmax(1, Number(e.target.value), 200))}
+                            onFocusCapture={handleFocus}
+                            style={{width: '3em'}}
+                        />
+                        &nbsp;
                         <Dropdown autoClose={true} display='inline-block' dropdownWidth={440}
                             trigger={
-                                <span>X{bossLevel} <FontAwesomeIcon icon={faChevronDown} style={{width: '1em'}} className='btn-role' title='select hero level'/></span>
+                                <span><FontAwesomeIcon icon={faChevronDown} style={{width: '1em'}} className='btn-role' title='select hero level'/></span>
                             }>
                             <div style={{padding: '.5em', paddingTop: '.25em'}}>
-                                {_.range(200, 100, -1).map((val) => 
+                                {_.range(200, 0, -1).map((val) => 
                                     <div key={'numpad-'+val} className='btn btn-primary' 
                                         style={{visibility: val === 0 ? 'hidden' : undefined,  display: 'inline-block', padding: '0', width: '9.5%', fontSize: 'smaller'}} 
                                         onClick={() => setBossLevel(val)}>
