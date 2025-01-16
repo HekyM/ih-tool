@@ -619,31 +619,31 @@ export const temple = [
     {
         lvl: 18,
         bonus: 9,
-        require: [],
+        require: [0, 0, 0, 10, 6, 5],
         capacity: [16, 16, 12, 12, 12, 8],
     },
     {
         lvl: 19,
         bonus: 10,
-        require: [],
+        require: [0, 0, 0, 12, 8, 5],
         capacity: [16, 16, 16, 12, 12, 10],
     },
     {
         lvl: 20,
         bonus: 10,
-        require: [],
+        require: [0, 0, 0, 12, 8, 6],
         capacity: [16, 16, 16, 16, 12, 10],
     },
     {
         lvl: 21,
         bonus: 10,
-        require: [],
+        require: [0, 0, 0, 14, 10, 6],
         capacity: [16, 16, 16, 16, 14, 12],
     },
     {
         lvl: 22,
         bonus: 10,
-        require: [],
+        require: [0, 0, 0, 16, 12, 8],
         capacity: [16, 16, 16, 16, 16, 12],
     },
 ]
