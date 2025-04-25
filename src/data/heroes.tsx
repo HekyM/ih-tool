@@ -30,8 +30,8 @@ export interface  HeroesData {
 /* 
  * [x] Roseheart Fanatic - Williams // roseheart-fanatic---williams
  * [x] Williams
- * [x] Lady of Blosom Realm - Mellisa // lady-of-blosom-realm---mellisa
- * [x] Mellisa
+ * [x] Lady of Blossom Realm - Melissa // lady-of-Blossom-realm---Melissa
+ * [x] Melissa
  * [x] Infinite Era - Alikita // infinite-era---alikita
  * [x] Alikita
  * [x] Cosmic Enforcer - Luna
@@ -39,6 +39,19 @@ export interface  HeroesData {
 
 let _heroesData: HeroesData = {
     /* === Shadow ============================================================================================= */
+    "Norton Haig": {
+        "faction": "Shadow",
+        "class": "Warrior",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+             "1": ['Unimax-3000', 'Xiahou'],
+             "2": ['Luna', 'Annabelle', 'Finn'],
+             "3": ['Gloria'],
+             "4": ['Amen-Ra'],
+        },
+    },
     "Betty": {
         "faction": "Shadow",
         "class": "Mage",
@@ -48,7 +61,7 @@ let _heroesData: HeroesData = {
         "tenants": {
              "1": ['Annabelle', 'Holmes Young', 'Luna'],
              "2": ['Azrael', 'Patricia', 'Alikita'],
-             "3": ['Onkirimaru'],
+             "3": ['Onkirimaru','Melissa'],
              "4": ['Eos', 'Williams'],
         },
     },
@@ -290,6 +303,19 @@ let _heroesData: HeroesData = {
         "imprint": false,
     },  
     /* === Fortress ============================================================================================= */
+    "Finn": {
+        "faction": "Fortress",
+        "class": "Assassin",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+             "1": ['Onkirimaru', 'Drake'],
+             "2": ['Williams', 'Saja', 'Sylvie'],
+             "3": ['Aranea'],
+             "4": ['Geester'],
+        },
+    },
     "Luna": {
         "faction": "Fortress",
         "class": "Assassin",
@@ -299,8 +325,8 @@ let _heroesData: HeroesData = {
         "tenants": {
             "1": ['Yorhm Tum', 'Natasha'],
             "2": ['Patricia', 'Saja', 'Williams'],
-            "3": ['Holmes Young'],
-            "4": ['Tussilago'],
+            "3": ['Holmes Young', 'Finn'],
+            "4": ['Tussilago', 'Sylvie'],
        },
     },
     "Aylamak": {
@@ -563,8 +589,8 @@ let _heroesData: HeroesData = {
         "elite": true,
         "imprint": true,
         "tenants": {
-             "1": ['Eloise', 'Carrie'],
-             "2": ['Alikita', 'Morax'],
+             "1": ['Eloise', 'Carrie', 'Sylvie'],
+             "2": ['Alikita', 'Morax', 'Monkey King - Sun Wukong'],
              "3": ['Fiona'],
              "4": ['Freya'],
         },
@@ -577,9 +603,9 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Vulkan', 'Mockman', 'Alikita'],
-             "2": ['Aylamak', 'Waldeck'],
+             "2": ['Aylamak', 'Waldeck', 'Melissa'],
              "3": ['Aranea', 'Williams'],
-             "4": ['Natasha'],
+             "4": ['Natasha','Norton Haig'],
         },
     },
     "Aranea": {
@@ -592,7 +618,7 @@ let _heroesData: HeroesData = {
              "1": ['Ignis', 'Natasha', 'Elena'],
              "2": ['Morax', 'Delacium', 'Natalie'],
              "3": ['Annabelle', 'Fiona', 'Alikita'],
-             "4": ['Waldeck', 'Amen-Ra'],
+             "4": ['Waldeck', 'Amen-Ra', 'Melissa'],
         },
     },
     "Natasha": {
@@ -821,15 +847,28 @@ let _heroesData: HeroesData = {
         "imprint": false,
     },
     /* === Forest ============================================================================================= */
-    "Mellisa": {
+    "Sylvie": {
+        "faction": "Forest",
+        "class": "Warrior",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+             "1": ['Norton Haig', 'Gaggie'],
+             "2": ['Finn', 'Geester'],
+             "3": ['Patricia'],
+             "4": ['Yorhm Tum'],
+        },
+    },
+    "Melissa": {
         "faction": "Forest",
         "class": "Priest",
         "stars": [5, 6, 9, 10],
         "elite": true,
         "imprint": true,
         "tenants": {
-             "1": ['Elena', 'Aranea'],
-             "2": ['Gaggie', 'Xiahou'],
+             "1": ['Elena', 'Aranea', 'Finn'],
+             "2": ['Gaggie', 'Xiahou', 'Norton Haig'],
              "3": ['Azrael'],
              "4": ['Andrea'],
         },
@@ -1089,9 +1128,9 @@ let _heroesData: HeroesData = {
         "elite": true,
         "imprint": true,
         "tenants": {
-             "1": ['Betty', 'Holmes Young'],
-             "2": ['Mockman', 'Annabelle'],
-             "3": ['Aranea'],
+             "1": ['Betty', 'Holmes Young', 'Norton Haig'],
+             "2": ['Mockman', 'Annabelle', 'Monkey King - Sun Wukong'],
+             "3": ['Aranea', 'Sylvie'],
              "4": ['Eos'],
         },
     },
@@ -1104,8 +1143,8 @@ let _heroesData: HeroesData = {
         "tenants": {
              "1": ['Natalie', 'Freya', 'Williams'],
              "2": ['Yorhm Tum', 'Waldeck'],
-             "3": ['Flora'],
-             "4": ['Aranea'],
+             "3": ['Flora', 'Monkey King - Sun Wukong'],
+             "4": ['Aranea', 'Finn'],
         },
     },
     "Elena": {
@@ -1262,6 +1301,19 @@ let _heroesData: HeroesData = {
         "imprint": false,
     },
     /* === Light heroes ============================================================================================= */
+    "Monkey King - Sun Wukong": {
+        "faction": "Light",
+        "class": "Warrior",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+             "1": ['Gaggie', 'Onkirimaru'],
+             "2": ['Melissa', 'Natasha', 'Finn'],
+             "3": ['Sherlock'],
+             "4": ['Saja'],
+        },
+    },
     "Yorhm Tum": {
         "faction": "Light",
         "class": "Assassin",
@@ -1448,6 +1500,48 @@ let _heroesData: HeroesData = {
         "imprint": false,
     }, 
     /* === Transcendence ============================================================================================= */
+    "Count of Nightmare - Finn": {
+        "faction": "Transcendence",
+        "class": "Assassin",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+             "1": ['Finn', 'Williams'],
+             "2": ['Mutated Fungus - Geester', 'Natalie'],
+             "3": ['Geester'],
+             "4": ['Cosmic Enforcer - Luna'],
+        },
+        "short": "CNF",
+    },
+    "Great Sage - Sun Wukong": {
+        "faction": "Transcendence",
+        "class": "Warrior",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+             "1": ['Monkey King - Sun Wukong', 'Luna'],
+             "2": ['Lord of Death - Azrael', 'Alikita'],
+             "3": ['Azrael'],
+             "4": ['Lord of Sparkless - Yorhm Tum'],
+        },
+        "short": "GSSW",
+    },
+    "King of Abysmal Sea - Norton Haig": {
+        "faction": "Transcendence",
+        "class": "Warrior",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+             "1": ['Norton Haig', 'Yorhm Tum'],
+             "2": ['Asmodel the Dauntless', 'Melissa'],
+             "3": ['Asmodel'],
+             "4": ['Star Wing - Jahra'],
+        },
+        "short": "KANH",
+    },
     "Roseheart Fanatic - Williams": {
         "faction": "Transcendence",
         "class": "Ranger",
@@ -1462,14 +1556,14 @@ let _heroesData: HeroesData = {
         },
         "short": "RFW",
     },
-    "Lady of Blosom Realm - Mellisa": {
+    "Lady of Blossom Realm - Melissa": {
         "faction": "Transcendence",
         "class": "Ranger",
         "stars": [5, 6, 9, 10],
         "elite": true,
         "imprint": true,
         "tenants": {
-             "1": ['Mellisa', 'Annabelle'],
+             "1": ['Melissa', 'Annabelle'],
              "2": ['Phantom Defier - Elena', 'Waldeck'],
              "3": ['Elena'],
              "4": ['Fairy Queen - Vesa'],
@@ -1526,7 +1620,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Yorhm Tum', 'Freya'],
-             "2": ['Mutated Fungus - Geester', 'Aylamak', 'Lady of Blosom Realm - Mellisa'],
+             "2": ['Mutated Fungus - Geester', 'Aylamak', 'Lady of Blossom Realm - Melissa'],
              "3": ['Geester'],
              "4": ['Doppelganger - Natalia', 'Infinite Era - Alikita'],
         },
@@ -1570,7 +1664,7 @@ let _heroesData: HeroesData = {
              "1": ['Natalie', 'Mockman'],
              "2": ['Mutated Fungus - Geester', 'Betty', 'Cosmic Enforcer - Luna'],
              "3": ['Eos', 'Aylamak'],
-             "4": ['Doom Terminator - Vulkan', 'Lady of Blosom Realm - Mellisa', 'Chaosbound Spirit - Gaggie'],
+             "4": ['Doom Terminator - Vulkan', 'Lady of Blossom Realm - Melissa', 'Chaosbound Spirit - Gaggie'],
         },
         "short": "DGN",
     },
