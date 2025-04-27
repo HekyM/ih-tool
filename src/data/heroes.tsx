@@ -46,7 +46,7 @@ let _heroesData: HeroesData = {
         "elite": true,
         "imprint": true,
         "tenants": {
-             "1": ['Unimax-3000', 'Xiahou'],
+             "1": ['UniMax-3000', 'Xiahou'],
              "2": ['Luna', 'Annabelle', 'Finn'],
              "3": ['Gloria'],
              "4": ['Amen-Ra'],
