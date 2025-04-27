@@ -3,7 +3,7 @@ from PIL import Image
 
 
 def convert_to_webp(source):
-    """Convert image to webp.
+    """Convert image to webp if it doesn't already exist.
 
     Args:
         source (pathlib.Path): Path to source image
@@ -12,6 +12,10 @@ def convert_to_webp(source):
         pathlib.Path: path to new image
     """
     destination = Path('public/assets') / source.with_suffix(".webp")
+
+    if destination.exists():
+        print(f"WebP already exists for {source}")
+        return destination
 
     image = Image.open(source)  # Open image
     image.save(destination, format="webp")  # Convert image to webp
