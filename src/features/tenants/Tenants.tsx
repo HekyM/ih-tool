@@ -88,46 +88,51 @@ export function TenantsRow(props: {
     const filter = useAppSelector(tenantsFilter);
 
     const getClass = (hero: Hero, ho: boolean) => {
-        let className = ''
+        let className = '';
         if (filter.heroes.includes(hero.name))
-            className += ' checked'
+            className += ' checked';
         else
-            className += ' unchecked'
+            className += ' unchecked';
 
         if (!ho && (filter.applyOnTranscendence || hero.faction !== 'Transcendence') && (filter.class.includes(hero.class) || (filter.imprintable && !hero.imprint)))
-            className += ' disabled'
+            className += ' disabled';
 
-        return className
-    }
+        return className;
+    };
 
     const isFiltered = (hero: Hero) => {
-
-        if (filter.faction && hero.faction !== filter.faction) return false
+        if (filter.faction && hero.faction !== filter.faction) return false;
         if (filter.ho && filter.tenant) {
-            return filter.heroes.includes(hero.name) || filter.heroes.filter(x => hero.is_tenant(x)).length !== 0
+            return filter.heroes.includes(hero.name) || filter.heroes.filter(x => hero.is_tenant(x)).length !== 0;
         } else if (filter.ho) {
-            return filter.heroes.includes(hero.name)
+            return filter.heroes.includes(hero.name);
         } else if (filter.tenant) {
-            return filter.heroes.filter(x => hero.is_tenant(x)).length !== 0
+            return filter.heroes.filter(x => hero.is_tenant(x)).length !== 0;
         }
-        return true
+        return true;
     };
 
     return (
         <tr className='ihRow' hidden={!isFiltered(props.hero)}>
-            <td>{props.hero.icon('hero', {className: getClass(props.hero, true)})}</td>
-            {props.hero.tenants && Object.entries(props.hero.tenants).map(([slot, tenants]) => {
-                return (
-                <td key={props.hero.name + slot} >
+            <td>{props.hero.icon('hero', { className: getClass(props.hero, true) })}</td>
+            {props.hero.tenants && Object.entries(props.hero.tenants).map(([slot, tenants]) => (
+                <td key={props.hero.name + slot}>
                     <div className='icons-list horizontal left-line centered'>
-                    {Object.values(tenants).map(name => {
-                        let tenant = heroesByName[name as keyof typeof heroesByName];
-                        return (tenant.icon('hero', {key: tenant.name, className: getClass(tenant, false)}))
-                    })}
+                        {Object.values(tenants).map(name => {
+                            const tenant = heroesByName[name as keyof typeof heroesByName];
+                            if (!tenant) {
+                                console.warn(`Missing tenant hero data for '${name}'`);
+                                return null; // skip rendering
+                            }
+                            return (
+                                <div key={tenant.name}>
+                                    {tenant.icon('hero', { className: getClass(tenant, false) })}
+                                </div>
+                            );
+                        })}
                     </div>
                 </td>
-                )
-            })}
+            ))}
         </tr>
     );
 }
