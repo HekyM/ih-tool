@@ -2,7 +2,7 @@ from pathlib import Path
 from PIL import Image
 
 
-def convert_to_webp(source):
+def convert_to_webp(source: Path):
     """Convert image to webp.
 
     Args:
@@ -13,17 +13,20 @@ def convert_to_webp(source):
     """
     destination = Path('public/assets') / source.with_suffix(".webp")
 
+    if destination.exists() and destination.stat().st_mtime > source.stat().st_mtime:
+        return destination
+
     image = Image.open(source)  # Open image
     image.save(destination, format="webp")  # Convert image to webp
 
+    print(destination)
     return destination
 
 
 def main():
     paths = Path("images").glob("**/*.png")
     for path in paths:
-        webp_path = convert_to_webp(path)
-        print(webp_path)
+        convert_to_webp(path)
 
 
 if __name__ == "__main__":

@@ -80,6 +80,10 @@ export class Hero implements HeroData  {
         else return this._icon(what, props)
     }
 
+    static missing(name: string, props?: HeroIconProps): ReactElement {
+        return <Icon {...props} src={ ImageSrc.raw("heroes/undefined") } title={name} alt={name} />
+    }
+
     public rank(rank: string, props?: HeroIconProps): ReactElement {
         let _desc = (this.short ? '[' + this.short + '] ' : '') + this.name + " | "+ this.faction + " | " + this.class
         return heroRank(this.name, ImageSrc.hero(this.name, 10), rank, props, _desc)
@@ -88,9 +92,15 @@ export class Hero implements HeroData  {
     public _icon(level?: number, props?: HeroIconProps): ReactElement {
         let _desc = (this.short ? '[' + this.short + '] ' : '') + this.name + " | "+ this.faction + " | " + this.class
         if (!level) {
-            return <Icon {...props} src={ ImageSrc.hero(this.name, 5) } title={_desc} alt={this.name} />
+            return <Icon {...props} src={ ImageSrc.hero(this.name, 5) } title={_desc} alt={this.name} onError={e => {
+                console.log('Missing hero img', ImageSrc.hero_filename(this.name, 5))
+                e.currentTarget.src = ImageSrc.raw("heroes/undefined")
+              }}/>
         } else if (this.stars.includes(level)) {
-            return <Icon {...props} src={ ImageSrc.hero(this.name, level) } title={`${level}★ ${_desc}`} alt={`${level} star ${this.name}`} />
+            return <Icon {...props} src={ ImageSrc.hero(this.name, level) } title={`${level}★ ${_desc}`} alt={`${level} star ${this.name}`} onError={e => {
+                console.log('Missing hero img', ImageSrc.hero_filename(this.name, level))
+                e.currentTarget.src = ImageSrc.raw("heroes/undefined")
+              }}/>
         } else {
             return <></>
         }

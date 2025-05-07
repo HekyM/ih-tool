@@ -30,6 +30,7 @@ export function Icon({ size, ...common }: IconProps) {
         console.log(common)
 
     return (
+        // eslint-disable-next-line
         <img {...common}/>
     );
 };
@@ -51,7 +52,9 @@ export class ImageSrc {
         `${imagesRoot}/layout/i${imagesExt}`
 
     static hero = (name: string, level = 5) => 
-        `${imagesRoot}/heroes/${name.replaceAll(' ', '-').toLowerCase()}-${level}${imagesExt}`
+        `${imagesRoot}/heroes/${this.hero_filename(name, level)}${imagesExt}`
+    static hero_filename = (name: string, level = 5) => 
+        `${name.replaceAll(' ', '-').toLowerCase()}-${level}`
     static hero_rank = (rank: string): string => 
         `${imagesRoot}/heroes/rank/${rank.toLowerCase()}${imagesExt}`
     static hero_star = (rank: string): string => 

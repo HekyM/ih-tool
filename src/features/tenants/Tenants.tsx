@@ -120,8 +120,12 @@ export function TenantsRow(props: {
                 return (
                 <td key={props.hero.name + slot} >
                     <div className='icons-list horizontal left-line centered'>
-                    {Object.values(tenants).map(name => {
-                        let tenant = heroesByName[name as keyof typeof heroesByName];
+                    {Object.values<string>(tenants).map(name => {
+                        const tenant = heroesByName[name];
+                        if (!tenant) {
+                            console.log('Missing tenant', name);
+                            return Hero.missing(name, {key: name});
+                        }
                         return (tenant.icon('hero', {key: tenant.name, className: getClass(tenant, false)}))
                     })}
                     </div>
