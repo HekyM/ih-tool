@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { ImagesListType } from 'react-spring-lightbox';
-import _ from 'lodash';
 
 
 import { Icon, ImageSrc } from '../../../components/Images';

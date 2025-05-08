@@ -1,4 +1,4 @@
-import { sum, sumBy, get } from 'lodash';
+import { sum, get } from 'lodash';
 
 export const leveling = {
     "5": {

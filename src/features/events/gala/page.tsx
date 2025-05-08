@@ -20,7 +20,7 @@ const awakensPercent = {
     'A+': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 99.01, 0.99],
     //S: 99.61, 0.3, 0.09
 };
-const awakensRetire = [10, 15, 20, 30, 50, 70, 100, 150, 200, 300, 600, 1800, 8000, 15000, 25000, 50000, 100000, 200000];
+// const awakensRetire = [10, 15, 20, 30, 50, 70, 100, 150, 200, 300, 600, 1800, 8000, 15000, 25000, 50000, 100000, 200000];
 
 const floadNumner = (key: string, value: number) => {
     if (value === 0) return <React.Fragment key={key}><td></td><td></td></React.Fragment>

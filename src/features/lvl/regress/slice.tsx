@@ -4,7 +4,6 @@ import { array_move } from '../../../components/functions';
 import _ from 'lodash';
 import { nodesCost, treeCost, destinyCost } from '../../../data/lvl';
 import { temple } from '../../../data/lvl';
-import { heroes } from '../../../components/heroes';
 
 export interface HeroCost {
     aurora: number;

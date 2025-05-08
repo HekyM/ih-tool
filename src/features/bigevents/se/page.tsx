@@ -26,11 +26,11 @@ const imgStyle = {
     heigth: 'auto',
     borderRadius: '15px',
 }
-const imgStyleHalf = {
+/*const imgStyleHalf = {
     ...imgStyle,
     width: '400px',
     display: 'inline-block'
-}
+}*/
 
 export function SEBossHP()  {
     const [bossLevel, setBossLevel] = useState(200);

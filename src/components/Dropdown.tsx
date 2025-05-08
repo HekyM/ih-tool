@@ -47,7 +47,7 @@ function DropdownMenu(props: DropdownMenuProps) {
 };
 
 export interface DropdownProps extends React.PropsWithChildren {
-    trigger: ReactElement;
+    trigger: ReactElement<{ onClick?: () => void }>;
     autoClose: boolean;
     display: string;
     dropdownWidth?: number;

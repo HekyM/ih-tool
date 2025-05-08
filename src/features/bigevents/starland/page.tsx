@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 
 import { Icon, ImageSrc } from '../../../components/Images';
-import { ImgGalery, ImgModal, ImgModalLink } from '../../../components/ImgGalery';
+import { ImgGalery } from '../../../components/ImgGalery';
 
 const maps: ImagesListType = [];
 for (const index of _.range(1, 5, 1)) {
@@ -15,11 +15,11 @@ for (const index of _.range(1, 5, 1)) {
     })
 }
 
-const imgStyle = {
+/*const imgStyle = {
     width: '840px',
     heigth: 'auto',
     borderRadius: '15px',
-}
+}*/
 
 export function EventsStarland()  {
     const [galeryIsOpen, setGaleryIsOpen] = useState(false);
