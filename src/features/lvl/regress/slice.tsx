@@ -334,6 +334,27 @@ const recalcBalance = (state: Resources): HeroCost => {
     )
 }
 
+const version = '2'
+const patch = (data: Resources): Resources => {
+    let v = localStorage.getItem('ih-tool:regression:v') || '1'
+    if (v === version) return data;
+
+    if (v === '1') {
+        data.have.heroes.forEach(h => {
+            if (h.hero.hero === 'Mellisa') { h.hero.hero = 'Melissa'}
+            if (h.hero.hero === 'Lady of Blosom Realm - Mellisa') { h.hero.hero = 'Lady of Blossom Realm - Melissa'}
+        });
+        data.build.heroes.forEach(h => {
+            if (h.hero.hero === 'Mellisa') { h.hero.hero = 'Melissa'}
+            if (h.hero.hero === 'Lady of Blosom Realm - Mellisa') { h.hero.hero = 'Lady of Blossom Realm - Melissa'}
+        });
+    }
+
+    localStorage.setItem('ih-tool:regression', JSON.stringify(data));
+    localStorage.setItem('ih-tool:regression:v', version);
+    return data;
+}
+
 export const regressionSlice = createSlice({
     name: 'regressionResources',
     initialState,
@@ -417,10 +438,11 @@ export const regressionSlice = createSlice({
       },
       saveRegress: (state) => {
         localStorage.setItem('ih-tool:regression', JSON.stringify(state));
+        localStorage.setItem('ih-tool:regression:v', version);
       },
       loadRegress: (state) => {
         let localData = localStorage.getItem('ih-tool:regression');
-        let data: Resources = localData ? JSON.parse(localData) : initialState;
+        let data: Resources = localData ? patch(JSON.parse(localData)) : initialState;
         state.have.heroes = data.have.heroes.map((h, i) => {return {hero: h.hero, cost: heroCost(h.hero)}})
         state.have.bag.cost = {...emptyHeroCost, ...data.have.bag.cost}
         state.build.heroes = data.build.heroes.map((h, i) => {return {hero: h.hero, cost: heroCost(h.hero)}})
