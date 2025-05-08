@@ -73,7 +73,7 @@ export function TenantFilters() {
                                     herosSize='sm'
                                     faction={HeroFaction.Transcendence}
                                     selected={filterState.heroes} 
-                                    style={{height: '6em'}}
+                                    style={{height: '9.5em'}}
                                     onSelected={(hero) => dispatch(ci_select_hero(hero.name))}/>
                     </td>
                 </tr>
