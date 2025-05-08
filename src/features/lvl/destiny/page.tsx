@@ -6,6 +6,7 @@ import {
 import { Icon, ImageSrc } from '../../../components/Images';
 import { BigNumber } from '../../../components/BigNumber'
 import { destiny, temple } from '../../../data/lvl';
+import { sum } from 'lodash';
 
 const accumulate = (arr: number[]) => arr.map((sum => value => sum += value)(0));
 
@@ -94,7 +95,7 @@ export function Destiny() {
                     <th></th>
                     <th colSpan={6} style={{borderBottom: '3px solid #bd916e'}}>Capacity</th>
                     <th></th>
-                    <th colSpan={6} style={{borderBottom: '3px solid #bd916e'}}>Requirements</th>
+                    <th colSpan={7} style={{borderBottom: '3px solid #bd916e'}}>Requirements</th>
                     <th></th>
                 </tr>
                 <tr className='spacer'>
@@ -116,6 +117,7 @@ export function Destiny() {
                     <td style={{width: '2.5em'}}></td>
                     <td style={{width: '2.5em'}}></td>
                     <td style={{width: '2.5em'}}></td>
+                    <td style={{width: '3.5em'}}></td>
                     <td></td>
                 </tr>
                 <tr style={{textAlign: 'right'}}>
@@ -137,6 +139,7 @@ export function Destiny() {
                     <th>D4</th>
                     <th>D5</th>
                     <th>D6</th>
+                    <th title='Count of heroes'>&nbsp;#&nbsp;</th>
                     <th></th>
                 </tr>
             </thead>
@@ -153,6 +156,7 @@ export function Destiny() {
                         {data.require.map((destiny_lvl, j) =>
                             <td key={'temple-cap-'+i+'-'+j}>{destiny_lvl !== 0 && destiny_lvl}</td> 
                         )}
+                        <td>({sum(data.require)})</td>
                         <td></td>
                     </tr>
                 )}
