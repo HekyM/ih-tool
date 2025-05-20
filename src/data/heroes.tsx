@@ -28,12 +28,13 @@ export interface  HeroesData {
 // shard: 158x158 (25)
 
 /*
+ * [x] Cosmic Speedster - Sylvie
  * [x] Sylvie
- * [ ] Great Sage - Sun Wukong
- * [ ] Monkey King - Sun Wukong
- * [ ] Count of Nightmare - Finn
+ * [x] Count of Nightmare - Finn
  * [x] Finn
- * [ ] King of Abysmal Sea - Norton Haig
+ * [x] Great Sage - Sun Wukong
+ * [x] Monkey King - Sun Wukong
+ * [x] King of Abysmal Sea - Norton Haig
  * [x] Norton Haig
  * [x] Roseheart Fanatic - Williams
  * [x] Williams
@@ -330,7 +331,7 @@ let _heroesData: HeroesData = {
         "elite": true,
         "imprint": true,
         "tenants": {
-            "1": ['Yorhm Tum', 'Natasha'],
+            "1": ['Yorhm Tum', 'Natasha', 'Monkey King - Sun Wukong'],
             "2": ['Patricia', 'Saja', 'Williams'],
             "3": ['Holmes Young', 'Finn'],
             "4": ['Tussilago', 'Sylvie'],
@@ -1149,7 +1150,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Natalie', 'Freya', 'Williams'],
-             "2": ['Yorhm Tum', 'Waldeck'],
+             "2": ['Yorhm Tum', 'Waldeck', 'Norton Haig'],
              "3": ['Flora', 'Monkey King - Sun Wukong'],
              "4": ['Aranea', 'Finn'],
         },
@@ -1330,8 +1331,8 @@ let _heroesData: HeroesData = {
         "tenants": {
             "1": ['Geester', 'Azrael'],
             "2": ['Freya', 'Tussilago', 'Williams'],
-            "3": ['Betty'],
-            "4": ['Drake'],
+            "3": ['Betty', 'Norton Haig'],
+            "4": ['Drake', 'Monkey King - Sun Wukong'],
        },
     }, 
     "Natalie": {
@@ -1507,6 +1508,20 @@ let _heroesData: HeroesData = {
         "imprint": false,
     }, 
     /* === Transcendence ============================================================================================= */
+    "Cosmic Speedster - Sylvie": {
+        "faction": "Transcendence",
+        "class": "Warrior",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+             "1": ['Sylvie', 'Alikita'],
+             "2": ['Lady of Blossom Realm - Melissa', 'Luna'],
+             "3": ['Melissa'],
+             "4": ['King of Abysmal Sea - Norton Haig'],
+        },
+        "short": "CSS",
+    },
     "Count of Nightmare - Finn": {
         "faction": "Transcendence",
         "class": "Assassin",
@@ -1557,7 +1572,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Williams', 'Geester'],
-             "2": ['Interstellar Hunteress - Patricia', 'Aranea'],
+             "2": ['Interstellar Hunteress - Patricia', 'Aranea', 'Cosmic Speedster - Sylvie'],
              "3": ['Patricia'],
              "4": ['Asmodel the Dauntless'],
         },
@@ -1571,7 +1586,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Melissa', 'Annabelle'],
-             "2": ['Phantom Defier - Elena', 'Waldeck'],
+             "2": ['Phantom Defier - Elena', 'Waldeck', 'Count of Nightmare - Finn'],
              "3": ['Elena'],
              "4": ['Fairy Queen - Vesa'],
         },
@@ -1585,7 +1600,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Alikita', 'Freya'],
-             "2": ['Therapist of Blood - Betty', 'Azrael'],
+             "2": ['Therapist of Blood - Betty', 'Azrael', 'Great Sage - Sun Wukong'],
              "3": ['Betty'],
              "4": ['Bloodtide Queen - Aranea'],
         },
@@ -1613,9 +1628,9 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Patricia', 'Gaggie'],
-             "2": ['Doppelganger - Natalia', 'Yorhm Tum'],
+             "2": ['Doppelganger - Natalia', 'Yorhm Tum', 'King of Abysmal Sea - Norton Haig'],
              "3": ['Natalie'],
-             "4": ['Hypperspace Hunter - Aylamak'],
+             "4": ['Hypperspace Hunter - Aylamak', 'Cosmic Speedster - Sylvie'],
         },
         "short": "IHP",
     },
@@ -1629,7 +1644,7 @@ let _heroesData: HeroesData = {
              "1": ['Yorhm Tum', 'Freya'],
              "2": ['Mutated Fungus - Geester', 'Aylamak', 'Lady of Blossom Realm - Melissa'],
              "3": ['Geester'],
-             "4": ['Doppelganger - Natalia', 'Infinite Era - Alikita'],
+             "4": ['Doppelganger - Natalia', 'Infinite Era - Alikita', 'Count of Nightmare - Finn'],
         },
         "short": "LSYT",
     },
@@ -1643,7 +1658,7 @@ let _heroesData: HeroesData = {
              "1": ['Gaggie', 'Betty'],
              "2": ['Star Wing - Jahra', 'Freya', 'Infinite Era - Alikita'],
              "3": ['Aylamak'],
-             "4": ['Hypperspace Hunter - Aylamak', 'Vulkan'],
+             "4": ['Hypperspace Hunter - Aylamak', 'Vulkan', 'Great Sage - Sun Wukong'],
         },
         "short": "CSG",
     },
@@ -1685,7 +1700,7 @@ let _heroesData: HeroesData = {
              "1": ['Geester', 'Natalie'],
              "2": ['Lord of Death - Azrael', 'Vulkan', 'Chaosbound Spirit - Gaggie'],
              "3": ['Azrael', 'Gaggie'],
-             "4": ['Phantom Defier - Elena', 'Lord of Sparkless - Yorhm Tum'],
+             "4": ['Phantom Defier - Elena', 'Lord of Sparkless - Yorhm Tum', 'King of Abysmal Sea - Norton Haig'],
         },
         "short": "MFG",
     },
