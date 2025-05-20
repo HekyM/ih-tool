@@ -1571,7 +1571,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Williams', 'Geester'],
-             "2": ['Interstellar Hunteress - Patricia', 'Aranea'],
+             "2": ['Interstellar Hunteress - Patricia', 'Aranea', 'Cosmic Speedster - Sylvie'],
              "3": ['Patricia'],
              "4": ['Asmodel the Dauntless'],
         },
@@ -1629,7 +1629,7 @@ let _heroesData: HeroesData = {
              "1": ['Patricia', 'Gaggie'],
              "2": ['Doppelganger - Natalia', 'Yorhm Tum','King of Abysmal Sea - Norton Haig'],
              "3": ['Natalie'],
-             "4": ['Hypperspace Hunter - Aylamak'],
+             "4": ['Hypperspace Hunter - Aylamak', 'Cosmic Speedster - Sylvie'],
         },
         "short": "IHP",
     },
