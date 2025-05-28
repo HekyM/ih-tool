@@ -28,12 +28,13 @@ export interface  HeroesData {
 // shard: 158x158 (25)
 
 /*
+ * [x] Cosmic Speedster - Sylvie
  * [x] Sylvie
- * [ ] Great Sage - Sun Wukong
- * [ ] Monkey King - Sun Wukong
- * [ ] Count of Nightmare - Finn
+ * [x] Count of Nightmare - Finn
  * [x] Finn
- * [ ] King of Abysmal Sea - Norton Haig
+ * [x] Great Sage - Sun Wukong
+ * [x] Monkey King - Sun Wukong
+ * [x] King of Abysmal Sea - Norton Haig
  * [x] Norton Haig
  * [x] Roseheart Fanatic - Williams
  * [x] Williams
@@ -330,7 +331,7 @@ let _heroesData: HeroesData = {
         "elite": true,
         "imprint": true,
         "tenants": {
-            "1": ['Yorhm Tum', 'Natasha'],
+            "1": ['Yorhm Tum', 'Natasha', 'Monkey King - Sun Wukong'],
             "2": ['Patricia', 'Saja', 'Williams'],
             "3": ['Holmes Young', 'Finn'],
             "4": ['Tussilago', 'Sylvie'],
@@ -1149,7 +1150,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Natalie', 'Freya', 'Williams'],
-             "2": ['Yorhm Tum', 'Waldeck'],
+             "2": ['Yorhm Tum', 'Waldeck', 'Norton Haig'],
              "3": ['Flora', 'Monkey King - Sun Wukong'],
              "4": ['Aranea', 'Finn'],
         },
@@ -1330,8 +1331,8 @@ let _heroesData: HeroesData = {
         "tenants": {
             "1": ['Geester', 'Azrael'],
             "2": ['Freya', 'Tussilago', 'Williams'],
-            "3": ['Betty'],
-            "4": ['Drake'],
+            "3": ['Betty', 'Norton Haig'],
+            "4": ['Drake', 'Monkey King - Sun Wukong'],
        },
     }, 
     "Natalie": {
@@ -1514,8 +1515,13 @@ let _heroesData: HeroesData = {
         "elite": true,
         "imprint": true,
         "tenants": {
+<<<<<<< HEAD
              "1": ['Sylvie','Alikita'],
              "2": ['Lady of Blossom Realm - Melissa'],
+=======
+             "1": ['Sylvie', 'Alikita'],
+             "2": ['Lady of Blossom Realm - Melissa', 'Luna'],
+>>>>>>> dac06624179a32289188963dfbb77593a1e4112e
              "3": ['Melissa'],
              "4": ['King of Abysmal Sea - Norton Haig'],
         },
@@ -1627,7 +1633,11 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Patricia', 'Gaggie'],
+<<<<<<< HEAD
              "2": ['Doppelganger - Natalia', 'Yorhm Tum','King of Abysmal Sea - Norton Haig'],
+=======
+             "2": ['Doppelganger - Natalia', 'Yorhm Tum', 'King of Abysmal Sea - Norton Haig'],
+>>>>>>> dac06624179a32289188963dfbb77593a1e4112e
              "3": ['Natalie'],
              "4": ['Hypperspace Hunter - Aylamak', 'Cosmic Speedster - Sylvie'],
         },
