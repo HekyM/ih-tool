@@ -54,7 +54,7 @@ let _heroesData: HeroesData = {
         "elite": true,
         "imprint": true,
         "tenants": {
-             "1": ['UniMax-3000', 'Xiahou'],
+             "1": ['UniMax-3000', 'Xiahou', 'Ignacia'],
              "2": ['Luna', 'Annabelle', 'Finn'],
              "3": ['Gloria'],
              "4": ['Amen-Ra'],
@@ -318,7 +318,7 @@ let _heroesData: HeroesData = {
         "elite": true,
         "imprint": true,
         "tenants": {
-             "1": ['Onkirimaru', 'Drake'],
+             "1": ['Onkirimaru', 'Drake', 'Vespera'],
              "2": ['Williams', 'Saja', 'Sylvie'],
              "3": ['Aranea'],
              "4": ['Geester'],
@@ -590,6 +590,19 @@ let _heroesData: HeroesData = {
         "imprint": false,
     },
     /* === Abyss ============================================================================================= */
+    "Ignacia": {
+        "faction": "Abyss",
+        "class": "Mage",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+             "1": ['Alikita', 'Eos'],
+             "2": ['Yorhm Tum', 'Gaggie'],
+             "3": ['Luna'],
+             "4": ['Drake'],
+        },
+    },
     "Williams": {
         "faction": "Abyss",
         "class": "Ranger",
@@ -599,8 +612,8 @@ let _heroesData: HeroesData = {
         "tenants": {
              "1": ['Eloise', 'Carrie', 'Sylvie'],
              "2": ['Alikita', 'Morax', 'Monkey King - Sun Wukong'],
-             "3": ['Fiona'],
-             "4": ['Freya'],
+             "3": ['Fiona', 'Vespera'],
+             "4": ['Freya', 'Ignacia'],
         },
     },
     "Gaggie": {
@@ -863,7 +876,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Norton Haig', 'Gaggie'],
-             "2": ['Finn', 'Geester'],
+             "2": ['Finn', 'Geester','Vespera'],
              "3": ['Patricia'],
              "4": ['Yorhm Tum'],
         },
@@ -877,7 +890,7 @@ let _heroesData: HeroesData = {
         "tenants": {
              "1": ['Elena', 'Aranea', 'Finn'],
              "2": ['Gaggie', 'Xiahou', 'Norton Haig'],
-             "3": ['Azrael'],
+             "3": ['Azrael', 'Ignacia'],
              "4": ['Andrea'],
         },
     },
@@ -1129,6 +1142,19 @@ let _heroesData: HeroesData = {
         "imprint": false,
     },
     /* === Dark ============================================================================================= */
+    "Vespera": {
+        "faction": "Dark",
+        "class": "Priest",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+            "1": ['Melissa', 'Aranea'],
+            "2": ['Norton Haig', 'Patricia', 'Ignacia'],
+            "3": ['Monkey King - Sun Wukong'],
+            "4": ['Gaggie']
+        },
+    },
     "Alikita": {
         "faction": "Dark",
         "class": "Mage",
@@ -1139,7 +1165,7 @@ let _heroesData: HeroesData = {
              "1": ['Betty', 'Holmes Young', 'Norton Haig'],
              "2": ['Mockman', 'Annabelle', 'Monkey King - Sun Wukong'],
              "3": ['Aranea', 'Sylvie'],
-             "4": ['Eos'],
+             "4": ['Eos', 'Vespera'],
         },
     },
     "Patricia": {
@@ -1508,6 +1534,20 @@ let _heroesData: HeroesData = {
         "imprint": false,
     }, 
     /* === Transcendence ============================================================================================= */
+    "Stygian Twilight - Vespera": {
+        "faction": "Transcendence",
+        "class": "Priest",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+             "1": ['Vespera', 'Norton Haig'],
+             "2": ['Therapist of Blood - Betty', 'Freya'],
+             "3": ['Betty'],
+             "4": ['Roseheart Fanatic - Williams'],
+        },
+        "short": "STV",
+    },
     "Cosmic Speedster - Sylvie": {
         "faction": "Transcendence",
         "class": "Warrior",
@@ -1558,7 +1598,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Norton Haig', 'Yorhm Tum'],
-             "2": ['Asmodel the Dauntless', 'Melissa'],
+             "2": ['Asmodel the Dauntless', 'Melissa', 'Stygian Twilight - Vespera'],
              "3": ['Asmodel'],
              "4": ['Star Wing - Jahra'],
         },
@@ -1616,7 +1656,7 @@ let _heroesData: HeroesData = {
              "1": ['Luna', 'Natalie'],
              "2": ['Lord of Sparkless - Yorhm Tum', 'Gaggie', 'Roseheart Fanatic - Williams'],
              "3": ['Yorhm Tum'],
-             "4": ['Therapist of Blood - Betty'],
+             "4": ['Therapist of Blood - Betty', 'Stygian Twilight - Vespera'],
         },
         "short": "CEL",
     },
