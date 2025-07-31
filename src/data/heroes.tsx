@@ -1586,7 +1586,7 @@ let _heroesData: HeroesData = {
              "1": ['Monkey King - Sun Wukong', 'Luna'],
              "2": ['Lord of Death - Azrael', 'Alikita'],
              "3": ['Azrael'],
-             "4": ['Lord of Sparkless - Yorhm Tum'],
+             "4": ['Lord of Sparkles - Yorhm Tum'],
         },
         "short": "GSSW",
     },
@@ -1654,7 +1654,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Luna', 'Natalie'],
-             "2": ['Lord of Sparkless - Yorhm Tum', 'Gaggie', 'Roseheart Fanatic - Williams'],
+             "2": ['Lord of Sparkles - Yorhm Tum', 'Gaggie', 'Roseheart Fanatic - Williams'],
              "3": ['Yorhm Tum'],
              "4": ['Therapist of Blood - Betty', 'Stygian Twilight - Vespera'],
         },
@@ -1674,7 +1674,7 @@ let _heroesData: HeroesData = {
         },
         "short": "IHP",
     },
-    "Lord of Sparkless - Yorhm Tum": {
+    "Lord of Sparkles - Yorhm Tum": {
         "faction": "Transcendence",
         "class": "Assassin",
         "stars": [5, 6, 9, 10],
@@ -1740,7 +1740,7 @@ let _heroesData: HeroesData = {
              "1": ['Geester', 'Natalie'],
              "2": ['Lord of Death - Azrael', 'Vulkan', 'Chaosbound Spirit - Gaggie'],
              "3": ['Azrael', 'Gaggie'],
-             "4": ['Phantom Defier - Elena', 'Lord of Sparkless - Yorhm Tum', 'King of Abysmal Sea - Norton Haig'],
+             "4": ['Phantom Defier - Elena', 'Lord of Sparkles - Yorhm Tum', 'King of Abysmal Sea - Norton Haig'],
         },
         "short": "MFG",
     },
@@ -1752,7 +1752,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Aylamak', 'Saja'],
-             "2": ['Star Alchemist - Holmes Young', 'Vulkan', 'Lord of Sparkless - Yorhm Tum'],
+             "2": ['Star Alchemist - Holmes Young', 'Vulkan', 'Lord of Sparkles - Yorhm Tum'],
              "3": ['Fiona', 'Geester'],
              "4": ['Sword Flash - Xia', 'Elena', 'Cosmic Enforcer - Luna'],
         },
