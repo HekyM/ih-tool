@@ -47,7 +47,6 @@ A comprehensive web-based toolkit for Idle Heroes players, providing essential c
 - **Visual Analytics**: See your progression and RNG luck over time
 
 ### ⚙️ Data Management
-- **Cookie Storage**: Automatic saving of your progress
 - **Privacy Controls**: Manage or clear stored data anytime
 - **Cross-Session Persistence**: Your data persists between visits
 
