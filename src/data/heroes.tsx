@@ -1534,6 +1534,20 @@ let _heroesData: HeroesData = {
         "imprint": false,
     }, 
     /* === Transcendence ============================================================================================= */
+    "Weaver of Life - Ignacia": {
+        "faction": "Transcendence",
+        "class": "Mage",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+            "1": ['Ignacia', 'Melissa'],
+            "2": ['Roseheart Fanatic - Williams', 'Natalie',],
+            "3": ['Williams',],
+            "4": ['Count of Nightmare - Finn',],
+        },
+        "short": "WIFE",
+    },
     "Stygian Twilight - Vespera": {
         "faction": "Transcendence",
         "class": "Priest",
