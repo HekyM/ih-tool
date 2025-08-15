@@ -1598,7 +1598,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Monkey King - Sun Wukong', 'Luna'],
-             "2": ['Lord of Death - Azrael', 'Alikita'],
+             "2": ['Lord of Death - Azrael', 'Alikita', 'Weaver of Life - Ignacia'],
              "3": ['Azrael'],
              "4": ['Lord of Sparkles - Yorhm Tum'],
         },
@@ -1684,7 +1684,7 @@ let _heroesData: HeroesData = {
              "1": ['Patricia', 'Gaggie'],
              "2": ['Doppelganger - Natalia', 'Yorhm Tum', 'King of Abysmal Sea - Norton Haig'],
              "3": ['Natalie'],
-             "4": ['Hypperspace Hunter - Aylamak', 'Cosmic Speedster - Sylvie'],
+             "4": ['Hypperspace Hunter - Aylamak', 'Cosmic Speedster - Sylvie', 'Weaver of Life - Ignacia'],
         },
         "short": "IHP",
     },
