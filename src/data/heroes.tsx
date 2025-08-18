@@ -28,6 +28,10 @@ export interface  HeroesData {
 // shard: 158x158 (25)
 
 /*
+ * [x] Weaver of Life - Ignacia
+ * [x] Ignacia
+ * [x] Stygian Twilight - Vespera
+ * [x] Vespera
  * [x] Cosmic Speedster - Sylvie
  * [x] Sylvie
  * [x] Count of Nightmare - Finn
