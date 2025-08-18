@@ -21,7 +21,7 @@ const now = new Date();
 const nowTime = now.getTime()
 const utcToday = (now.getUTCDay() + 6) % 7
 
-function get_event_time() {
+export function get_event_date() {
   var reset = new Date();
   var today = reset.getUTCDate()
   reset.setUTCDate(today + (7-reset.getUTCDay()+5) % 7);
@@ -34,7 +34,11 @@ function get_event_time() {
     reset.setUTCDate(today + 7);
   }
 
-  return reset.getTime()
+  return reset
+}
+
+function get_event_time() {
+  return get_event_date().getTime()
 }
 
 function get_reset_time() {
@@ -120,7 +124,7 @@ function settings2Weekly(nowTime: number, utcToday: number, settings: WeeklyDays
   if (_.has(settings, 'd')) {
     var weeklyDays = settings as WeeklyDays
     return {
-      d: weeklyDays.d,
+      d: [...weeklyDays.d,...weeklyDays.d],
       prev: weeklyDays.d[6],
       next: weeklyDays.d[0],
       settings: weeklyDays,
@@ -131,7 +135,8 @@ function settings2Weekly(nowTime: number, utcToday: number, settings: WeeklyDays
     const resetDays = weeklyOnOff.on + weeklyOnOff.off
     const reset = resetDays*86400000
     
-    var d = [0,0,0,0,0,0,0]
+    var d = [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    var days = d.length
     var p = 0
     var n = 0
     var activeAfter = undefined
@@ -147,11 +152,11 @@ function settings2Weekly(nowTime: number, utcToday: number, settings: WeeklyDays
 
       //console.log(weeklyOnOff.dsc, ed, utcToday, activeAfter, nowTime, weeklyOnOff.t, weeklyOnOff.t - nowTime, (weeklyOnOff.t - nowTime)/86400000)
       p = ed[(-1 - (utcToday + activeAfter) + 10*resetDays) % resetDays]
-      for (const index of _.range(0, 7, 1)) {
+      for (const index of _.range(0, days, 1)) {
         //console.log(ed, index, utcToday, activeAfter, (index - (utcToday + activeAfter) + 10*resetDays) % resetDays)
         d[index] = ed[(index - (utcToday + activeAfter) + 10*resetDays) % resetDays]
       }
-      n = ed[(7 - (utcToday + activeAfter) + 10*resetDays) % resetDays]
+      n = ed[(days - (utcToday + activeAfter) + 10*resetDays) % resetDays]
     }
 
     return {

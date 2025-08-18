@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ReactModal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { 
-  faXmark, faPlus, faGear, faCircle, faArrowRight, faCircleExclamation, faRotate,
+  faXmark, faPlus, faGear, faCircle, faCircleXmark, faArrowRight, faCircleExclamation, faRotate,
   faArrowUp, faArrowDown, faCircleChevronRight, faCircleChevronUp,
   faCopy, faPaste, faChevronUp, faChevronDown,
 } from '@fortawesome/free-solid-svg-icons'
@@ -20,6 +20,7 @@ import {
   copyWeekliesStorage,
   pasteWeekliesStorage,
   Weekly,
+  get_event_date,
 } from './counterSlice';
 import { SpecialEvents } from './events';
 import { Icon, ImageSrc } from '../../components/Images';
@@ -70,6 +71,13 @@ const tinyImgStyle = {
   marginRight: '.3em',
   marginBottom: '-.35em',
 }
+const tinyInImgStyle = {
+  display: 'inline-block',
+  marginLeft: '.1em',
+  marginRight: '.1em',
+  marginBottom: '-.2em',
+}
+
 
 /*const timeOptions = {
   //weekday: "short" as const,
@@ -441,9 +449,10 @@ function WeaklyEvents() {
 
   const _now = new Date()
   const offset = -_now.getTimezoneOffset()// *-1
+  //const offset = _now.getTimezoneOffset()// *-1
   const [now, setNow] = useState(_now);
 
-  const colWidth = 80
+  const colWidth = 55
   const colSpacing = 1
   const colHeight = 30
 
@@ -456,26 +465,28 @@ function WeaklyEvents() {
   const bgStyle = {width: colWidth +'px', height: colHeight + 'px'}
   const bgAStyle = {...bgStyle}
   const bgBStyle = {...bgStyle}
+  const bgNoOverflowStyle = {...bgStyle, overflow: 'hidden'}
+  //const bgFirstStyle = offset < 0 ? bgNoOverflowStyle : bgStyle
+  const bgLastStyle = offset > 0 ? bgNoOverflowStyle : bgStyle
   const barBaseStyle = {
     cursor: 'default',
     width: colWidth +1 +'px', height: colHeight/1.5 -5 + 'px',
-    borderBottom: '5px solid #41a2d2', //#8823b3
+    borderBottom: '2px solid #41a2d2', //#8823b3
     backgroundColor: '#41a2d2',
     position: 'relative' as const, zIndex: 5,
+    display: 'flex',
   }
   const barStyle = {
     ...barBaseStyle,
     marginLeft: (shift).toFixed(2) + 'px', marginRight: (-shift).toFixed(2) + 'px', 
   }
-
-  const eventsCount = counters.weeklies.length
-  const posWidth = 20
-  const posStyle = {
-    width: posWidth + 'px', position: 'relative' as const, zIndex: 10,
-    height: eventsCount * colHeight +'px', marginTop: -eventsCount * colHeight + 'px',
-    marginBottom: colHeight + 'px',
+  const txtStyle: React.CSSProperties = {
+    whiteSpace: 'nowrap',
+    fontSize: '0.5em',
+    marginTop: '0.3em',
+    zIndex: '40',
   }
-
+  
   const nowPos = (now: Date) => {
     var today = getToday(now)
     var nowMinutes = now.getHours() * 60 + now.getMinutes()
@@ -486,6 +497,24 @@ function WeaklyEvents() {
     //console.log('>', pos - posWidth/2)
     return pos
   }
+
+  const eventsCount = counters.weeklies.length
+  const posWidth = 20
+  const posStyle = {
+    width: posWidth + 'px', position: 'relative' as const, zIndex: 10,
+    height: eventsCount * colHeight +'px', 
+    marginTop: -eventsCount * colHeight + 'px',
+    marginBottom: colHeight + 'px',
+  }
+  const eventResetWidth = 10
+  const eventResetStyle = {
+    width: posWidth + 'px', position: 'relative' as const, zIndex: 11,
+    height: (eventsCount +1) * colHeight +'px', 
+    marginTop: -(eventsCount +1) * colHeight + 'px',
+    marginBottom: colHeight + 'px',
+    marginLeft: (nowPos(get_event_date()) - posWidth/2) + 'px',
+  }
+  
   const eventColor = (now: Date, data: number[], next: number) => {
     var today = getUTCToday(now)
     if (data[today] === 0) return 'gray'
@@ -508,20 +537,19 @@ function WeaklyEvents() {
   }
 
   const eventDaysTitle = (event: Weekly): string|undefined => {
-    if(event.d[getUTCToday(now)] === 0 && event.on !== undefined) return 'Start: ' + event.on + ' days'
-    if(event.d[getUTCToday(now)] !== 0 && event.off !== undefined) return 'End: ' + event.off + ' days'
+    if(event.d[getUTCToday(now)] === 0 && event.on !== undefined) return event.settings.dsc + ': Start in ' + event.on + ' days'
+    if(event.d[getUTCToday(now)] !== 0 && event.off !== undefined) return event.settings.dsc + ': End in ' + event.off + ' days'
     return undefined
   }
   
-
-  //console.log(weeklies)
+  //console.log('offset', offset)
  
   return (
     <>
     <table id='weakly-events' className='ihContainer ihTable spaced-table w-max' cellPadding="0">
         <thead>
           <tr className='ihRow'>
-            <th>Event</th>
+            <th></th>
             <th style={{width: 0}}></th>
             <th style={bgAStyle}>Mon</th>
             <th style={bgBStyle}>Tue</th>
@@ -530,43 +558,85 @@ function WeaklyEvents() {
             <th style={bgAStyle}>Fri</th>
             <th style={bgBStyle}>Sat</th>
             <th style={bgAStyle}>Sun</th>
+            <th style={{...bgAStyle, color: 'gray'}}>Mon</th>
+            <th style={{...bgBStyle, color: 'gray'}}>Tue</th>
+            <th style={{...bgAStyle, color: 'gray'}}>Wed</th>
+            <th style={{...bgBStyle, color: 'gray'}}>Thu</th>
+            <th style={{...bgAStyle, color: 'gray'}}>Fri</th>
+            <th style={{...bgBStyle, color: 'gray'}}>Sat</th>
+            <th style={{...bgAStyle, color: 'gray'}}>Sun</th>
             <th style={{width: 0}}></th>
             <th style={{width: "1.6em"}}><FontAwesomeIcon icon={faPlus} style={{width: '1em'}} className='btn-role' title='add event' onClick={() => setModalUpdateIndex(null)}/></th>
           </tr>
         </thead>
         <tbody>
           {counters.weeklies.map((event, i) => 
-            <tr key={'we-' + i} className={counters.weekliesIndex === i? 'selected' : ''}>
+            <tr key={'we-' + i} className={counters.weekliesIndex === i? 'selected' : ''} style={{textAlign: 'left'}}>
               <td style={{textAlign: 'left'}}>
+                <div style={{position: 'relative', marginRight: '-2px', zIndex: 41, backgroundColor: '#ecdfbf'}}>
                 {(_.has(event.settings, 't') && (event.settings as WeeklyOnOff).t === 0 )
                   ? <FontAwesomeIcon icon={faCircleExclamation} title="missing configuration" style={{marginLeft: '.3em', marginRight: '.3em'}}/>
                   : <FontAwesomeIcon icon={faCircle} style={{color: eventColor(now, event.d, event.next), marginLeft: '.3em', marginRight: '.3em'}} title={eventDaysTitle(event)}/>
                 }
-                <Icon size="tiny" style={tinyImgStyle} src={ImageSrc.event(event.settings.i || 'none')}/>
-                <span>{event.settings.dsc}</span>
                 
+                <Icon size="tiny" style={tinyImgStyle} title={event.settings.dsc} src={ImageSrc.event(event.settings.i || 'none')}/>
+                {/*
+                <span>{event.settings.dsc}</span>
+                */}
+                </div>
               </td>
               <td style={{width: 0}}>{(event.prev !== 0 && shift > 0) && <div className='ev-bar' title={event.settings.dsc} style={{...barStyle, borderColor: event.prev === 1 ? '#41a2d2':'#8823b3', width: shift + 'px', marginLeft: colSpacing +'px', marginRight: -shift +'px'}}>&nbsp;</div>}</td>
-              <td style={bgStyle}>{event.d[0] !== 0 && <div className='ev-bar' title={event.settings.dsc} style={{...barStyle, borderColor: event.d[0] === 1 ? '#41a2d2':'#8823b3', marginLeft: (Math.max(shift, 0)).toFixed(2) + 'px'}}>&nbsp;</div>}</td>
+              {event.d.map((id, i) => 
+                <td key={i} style={i === 13 ? bgLastStyle : bgStyle}>{
+                  event.d[i] !== 0 && 
+                    <div className='ev-bar' title={event.settings.dsc} style={{...barStyle, zIndex: 40-i, borderColor: event.d[i] === 1 ? '#41a2d2':'#8823b3'}}>
+                      {(event.d[i-1] === 0 || i === 0) &&
+                        <>
+                        <Icon size="xt" style={tinyInImgStyle} src={ImageSrc.event(event.settings.i || 'none')}/>
+                        <span style={{...txtStyle}}>{event.settings.dsc}</span>
+                        </>
+                      }</div>
+                  }
+                </td>
+              )}
+              {/*
+              <td style={bgStyle}>{event.d[0] !== 0 && <div className='ev-bar' title={event.settings.dsc} style={{...barStyle, borderColor: event.d[0] === 1 ? '#41a2d2':'#8823b3'}}><Icon size="xt" style={tinyInImgStyle} src={ImageSrc.event(event.settings.i || 'none')}/><span style={{...txtStyle}}>{event.settings.dsc}</span></div>}</td>
               <td style={bgStyle}>{event.d[1] !== 0 && <div className='ev-bar' title={event.settings.dsc} style={{...barStyle, borderColor: event.d[1] === 1 ? '#41a2d2':'#8823b3'}}>&nbsp;</div>}</td>
               <td style={bgStyle}>{event.d[2] !== 0 && <div className='ev-bar' title={event.settings.dsc} style={{...barStyle, borderColor: event.d[2] === 1 ? '#41a2d2':'#8823b3'}}>&nbsp;</div>}</td>
               <td style={bgStyle}>{event.d[3] !== 0 && <div className='ev-bar' title={event.settings.dsc} style={{...barStyle, borderColor: event.d[3] === 1 ? '#41a2d2':'#8823b3'}}>&nbsp;</div>}</td>
               <td style={bgStyle}>{event.d[4] !== 0 && <div className='ev-bar' title={event.settings.dsc} style={{...barStyle, borderColor: event.d[4] === 1 ? '#41a2d2':'#8823b3'}}>&nbsp;</div>}</td>
               <td style={bgStyle}>{event.d[5] !== 0 && <div className='ev-bar' title={event.settings.dsc} style={{...barStyle, borderColor: event.d[5] === 1 ? '#41a2d2':'#8823b3'}}>&nbsp;</div>}</td>
-              <td style={bgStyle}>{event.d[6] !== 0 && <div className='ev-bar' title={event.settings.dsc} style={{...barStyle, borderColor: event.d[6] === 1 ? '#41a2d2':'#8823b3', width: Math.min(colWidth, colWidth -shift) +'px', marginRight: (Math.max(-shift, 0)).toFixed(2) + 'px'}}>&nbsp;</div>}</td>
+              <td style={bgStyle}>{event.d[6] !== 0 && <div className='ev-bar' title={event.settings.dsc} style={{...barStyle, borderColor: event.d[6] === 1 ? '#41a2d2':'#8823b3'}}>&nbsp;</div>}</td>
               <td style={{width: 0}}>{(event.next !== 0 && shift < 0) && <div className='ev-bar' title={event.settings.dsc} style={{...barStyle, borderColor: event.next === 1 ? '#41a2d2':'#8823b3', width: -shift + 'px', marginLeft: shift - colSpacing +'px', marginRight: colSpacing +'px'}}>&nbsp;</div>}</td>
-              <td><FontAwesomeIcon icon={faGear} className='btn-role' style={{marginLeft: '.3em', marginRight: '.3em'}} onClick={() => setModalUpdateIndex(i)}/></td>
+              */}
+              <td>
+                <div style={{position: 'relative', marginLeft: '-1px', marginRight: '-1px', zIndex: 41, backgroundColor: '#ecdfbf', width: 'fit-content'}}>
+                <FontAwesomeIcon icon={faGear} className='btn-role' style={{marginLeft: '.3em', marginRight: '.3em'}} onClick={() => setModalUpdateIndex(i)}/>
+                </div>
+              </td>
             </tr>
           )}
         </tbody>
         <tfoot>
-          <tr>
+            <tr>
               <td style={{height: '1px'}}>&nbsp;</td>
               <td style={{width: 0}}></td>
               <td style={{height: '1px'}} colSpan={7}>
                 <div style={{marginLeft: (nowPos(now) - posWidth/2) + 'px', ...posStyle}}>
                   <div style={{width: '4px', backgroundColor: 'currentColor', height: eventsCount * colHeight + 5 + 'px', marginLeft: 'auto', marginRight: 'auto', marginTop: '-10px', marginBottom: '-10px'}}>&nbsp;</div>
                   <FontAwesomeIcon icon={faCircleChevronUp} style={{width: posWidth + 'px'}} />
+                </div>
+              </td>
+              <td style={{width: 0}}></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td style={{height: '1px'}}>&nbsp;</td>
+              <td style={{width: 0}}></td>
+              <td style={{height: '1px'}} colSpan={7}>
+                <div style={eventResetStyle}>
+                  <div style={{color: 'DarkRed', width: '3px', backgroundColor: 'currentColor', height: eventsCount * colHeight + 5 + 'px', marginLeft: 'auto', marginRight: 'auto', marginTop: '-10px', marginBottom: '-10px'}}>&nbsp;</div>
+                  <FontAwesomeIcon icon={faCircleXmark} style={{width: eventResetWidth + 'px', color: 'DarkRed'}} />
                 </div>
               </td>
               <td style={{width: 0}}></td>

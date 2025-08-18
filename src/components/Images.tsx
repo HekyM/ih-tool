@@ -4,7 +4,7 @@ const imagesRoot = process.env.PUBLIC_URL + "/assets/images"
 const imagesExt = ".webp"
 
 export interface IconProps extends React.ImgHTMLAttributes<HTMLImageElement> {
-    size: "tiny" | "xsm" | "sm" | "md" | "lg" | "text" | "btn" | "preview" | "preview-l" | "preview-full";
+    size: "xt" | "tiny" | "xsm" | "sm" | "md" | "lg" | "text" | "btn" | "preview" | "preview-l" | "preview-full";
 }
 
 const defaultIconProps: IconProps = {
