@@ -334,7 +334,7 @@ const recalcBalance = (state: Resources): HeroCost => {
     )
 }
 
-const version = '2'
+const version = '3'
 const patch = (data: Resources): Resources => {
     let v = localStorage.getItem('ih-tool:regression:v') || '1'
     if (v === version) return data;
@@ -347,6 +347,15 @@ const patch = (data: Resources): Resources => {
         data.build.heroes.forEach(h => {
             if (h.hero.hero === 'Mellisa') { h.hero.hero = 'Melissa'}
             if (h.hero.hero === 'Lady of Blosom Realm - Mellisa') { h.hero.hero = 'Lady of Blossom Realm - Melissa'}
+        });
+    }
+
+    if (v === '1' || v === '2') {
+        data.have.heroes.forEach(h => {
+            if (h.hero.hero === 'Lord of Sparkless - Yorhm Tum') { h.hero.hero = 'Lord of Sparkles - Yorhm Tum'}
+        });
+        data.build.heroes.forEach(h => {
+            if (h.hero.hero === 'Lord of Sparkless - Yorhm Tum') { h.hero.hero = 'Lord of Sparkles - Yorhm Tum'}
         });
     }
 
