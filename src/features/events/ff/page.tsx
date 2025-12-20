@@ -24,10 +24,10 @@ export function EventsFF() {
 
     const imgW = 600;
     const imgH = 708;
-    const tableMarginL = imgW*0.105;
-    const tableMarginR = imgW*0.1;
-    const tableMarginT = imgH*0.16;
-    const tableMarginB = imgH*0.11;
+    const tableMarginL = imgW*0.12;
+    const tableMarginR = imgW*0.095;
+    const tableMarginT = imgH*0.142;
+    const tableMarginB = imgH*0.073;
 
     const containerSize = {
         height: `${imgH}px`,
@@ -66,22 +66,23 @@ export function EventsFF() {
     const infoStyle = {
         border: '2px solid gray',
         width: `${imgW*0.6}px`,
-        height: `1.1em`,
+        height: `1em`,
         left: `${imgW*0.18}px`,
-        top: `${imgH*0.085}px`,
+        top: `${imgH*0.08}px`,
     };
 
-    const itemsX = Array(7).fill(0);
+    const itemsX = Array(8).fill(0);
     const itemsY = Array(3).fill(0);
 
     const costs = {
-        '0-0': 10, '0-1': 10, '0-2': 10,
-        '1-0': 40, '1-1': 30, '1-2': 40,
-        '2-0': 55, '2-1': 45, '2-2': 60,
-        '3-0': 260, '3-1': 245, '3-2': 100,
-        '4-0': 600, '4-1': 800, '4-2': 200,
-        '5-0': 400, '5-1': 400, '5-2': 400,
-        '6-0': 360, '6-1': 360, '6-2': 4,
+        '0-0': 10, '0-1': 15, '0-2': 10,
+        '1-0': 30, '1-1': 40, '1-2': 40,
+        '2-0': 50, '2-1': 75, '2-2': 60,
+        '3-0': 100, '3-1': 150, '3-2': 100,
+        '4-0': 230, '4-1': 230, '4-2': 200,
+        '5-0': 400, '5-1': 550, '5-2': 300,
+        '6-0': 500, '6-1': 600, '6-2': 400,
+        '7-0': 500, '7-1': 500, '7-2': 4,
     }
 
     var stars = 0;
