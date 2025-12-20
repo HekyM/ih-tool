@@ -5,7 +5,7 @@ import { faUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
 import { Icon, ImageSrc } from '../../../components/Images';
 import { sum } from 'lodash';
 
-import { galaGoogleData, gataCartViewWindow } from '../../../data/gala';
+import { galaGoogleData, gataCartViewWindow, averagePoints, averageCSG } from '../../../data/gala';
 
 const awakensTiers = ['E-', 'E', 'E+', 'D-', 'D', 'D+', 'C-', 'C', 'C+', 'B-', 'B', 'B+', 'A-', 'A', 'A+', 'S'];
 const awakensPercent = {
@@ -101,7 +101,9 @@ const galaChartConfig = {
 function GalaPointsChart(props: {points: number, data: any[][], with_b_stone: boolean}) {
     let title = props.points.toString()
     if (props.with_b_stone) 
-        title = `${props.points} / ${props.points - 13} +  B-stone`
+        title = `[ ${props.points} / ${props.points - 13} +  B-stone ] ~${Math.ceil(props.points/averagePoints)} awakens`
+    else
+        title = `[ ${props.points} ] ~${Math.ceil(props.points/averagePoints)} awakens`
 
     return (
         <div className="fixed-height-chart">
@@ -137,6 +139,14 @@ export function EventsGala() {
                 )}
             </div>
             <GalaPointsChart points={showPoints} data={galaGoogleData[showPoints]} with_b_stone={showPoints !== 60 && showPoints !== 600}/>
+            <div className='ihContainer' style={{fontSize: 'smaller', color: 'Gray', display: 'inline-flex', gap: '1em' }}>
+                <span style={{color: '#3c434a' }}>Points/Awaken:</span>
+                <span>{averagePoints}</span>
+                <span style={{color: '#3c434a' }}>CSG/Awaken:</span>
+                {Object.entries(averageCSG).map(([retire, csg]) =>
+                    <span>{retire}: {csg}</span>
+                )}
+            </div>
         </div>
         <div className='ihContainer'>
             <Awakens/>
