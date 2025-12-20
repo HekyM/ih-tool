@@ -28,6 +28,10 @@ export interface  HeroesData {
 // shard: 158x158 (25)
 
 /*
+ * [x] Star-devouring Bloom - Madeleine
+ * [x] Madeleine
+ * [x] Ironcore Mecha - Basilisk
+ * [x] Basilisk
  * [x] Weaver of Life - Ignacia
  * [x] Ignacia
  * [x] Stygian Twilight - Vespera
@@ -51,6 +55,19 @@ export interface  HeroesData {
 
 let _heroesData: HeroesData = {
     /* === Shadow ============================================================================================= */
+    "Basilisk": {
+        "faction": "Shadow",
+        "class": "Ranger",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+             "1": ['Williams', 'Patricia'],
+             "2": ['Finn', 'Betty', 'Madeleine'],
+             "3": ['Melissa'],
+             "4": ['Ignacia'],
+        },
+    },
     "Norton Haig": {
         "faction": "Shadow",
         "class": "Warrior",
@@ -60,7 +77,7 @@ let _heroesData: HeroesData = {
         "tenants": {
              "1": ['UniMax-3000', 'Xiahou', 'Ignacia'],
              "2": ['Luna', 'Annabelle', 'Finn'],
-             "3": ['Gloria'],
+             "3": ['Gloria', 'Madeleine'],
              "4": ['Amen-Ra'],
         },
     },
@@ -315,6 +332,19 @@ let _heroesData: HeroesData = {
         "imprint": false,
     },  
     /* === Fortress ============================================================================================= */
+    "Madeleine": {
+        "faction": "Fortress",
+        "class": "Priest",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+             "1": ['Vespera', 'Melissa'],
+             "2": ['Monkey King - Sun Wukong', 'Luna'],
+             "3": ['Yorhm Tum'],
+             "4": ['Freya'],
+        },
+    },
     "Finn": {
         "faction": "Fortress",
         "class": "Assassin",
@@ -350,8 +380,8 @@ let _heroesData: HeroesData = {
         "tenants": {
             "1": ['Holmes Young', 'Vulkan', 'Gaggie'],
             "2": ['Saja', 'Mockman', 'Luna'],
-            "3": ['Fiona', 'Onkirimaru'],
-            "4": ['Sherlock', 'Xiahou'],
+            "3": ['Fiona', 'Onkirimaru', 'Basilisk'],
+            "4": ['Sherlock', 'Xiahou', 'Madeleine'],
        },
     },
     "Holmes Young": {
@@ -602,7 +632,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Alikita', 'Eos'],
-             "2": ['Yorhm Tum', 'Gaggie'],
+             "2": ['Yorhm Tum', 'Gaggie', 'Basilisk'],
              "3": ['Luna'],
              "4": ['Drake'],
         },
@@ -879,7 +909,7 @@ let _heroesData: HeroesData = {
         "elite": true,
         "imprint": true,
         "tenants": {
-             "1": ['Norton Haig', 'Gaggie'],
+             "1": ['Norton Haig', 'Gaggie', 'Madeleine'],
              "2": ['Finn', 'Geester','Vespera'],
              "3": ['Patricia'],
              "4": ['Yorhm Tum'],
@@ -895,7 +925,7 @@ let _heroesData: HeroesData = {
              "1": ['Elena', 'Aranea', 'Finn'],
              "2": ['Gaggie', 'Xiahou', 'Norton Haig'],
              "3": ['Azrael', 'Ignacia'],
-             "4": ['Andrea'],
+             "4": ['Andrea', 'Basilisk'],
         },
     },
     "Geester": {
@@ -1346,7 +1376,7 @@ let _heroesData: HeroesData = {
         "elite": true,
         "imprint": true,
         "tenants": {
-             "1": ['Gaggie', 'Onkirimaru'],
+             "1": ['Gaggie', 'Onkirimaru', 'Basilisk'],
              "2": ['Melissa', 'Natasha', 'Finn'],
              "3": ['Sherlock'],
              "4": ['Saja'],
@@ -1538,6 +1568,34 @@ let _heroesData: HeroesData = {
         "imprint": false,
     }, 
     /* === Transcendence ============================================================================================= */
+    "Star-devouring Bloom - Madeleine": {
+        "faction": "Transcendence",
+        "class": "Priest",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+            "1": ['Madeleine', 'Ignacia'],
+            "2": ['Count of Nightmare - Finn', 'Sylvie',],
+            "3": ['Finn',],
+            "4": ['Ironcore Mecha - Basilisk',],
+        },
+        "short": "BDSM",
+    },
+    "Ironcore Mecha - Basilisk": {
+        "faction": "Transcendence",
+        "class": "Ranger",
+        "stars": [5, 6, 9, 10],
+        "elite": true,
+        "imprint": true,
+        "tenants": {
+            "1": ['Basilisk', 'Monkey King - Sun Wukong'],
+            "2": ['Great Sage - Sun Wukong', 'Williams',],
+            "3": ['Finn',],
+            "4": ['Cosmic Enforcer - Luna',],
+        },
+        "short": "IMB",
+    },
     "Weaver of Life - Ignacia": {
         "faction": "Transcendence",
         "class": "Mage",
@@ -1560,7 +1618,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Vespera', 'Norton Haig'],
-             "2": ['Therapist of Blood - Betty', 'Freya'],
+             "2": ['Therapist of Blood - Betty', 'Freya', 'Star-devouring Bloom - Madeleine'],
              "3": ['Betty'],
              "4": ['Roseheart Fanatic - Williams'],
         },
@@ -1588,7 +1646,7 @@ let _heroesData: HeroesData = {
         "imprint": true,
         "tenants": {
              "1": ['Finn', 'Williams'],
-             "2": ['Mutated Fungus - Geester', 'Natalie'],
+             "2": ['Mutated Fungus - Geester', 'Natalie', 'Ironcore Mecha - Basilisk'],
              "3": ['Geester'],
              "4": ['Cosmic Enforcer - Luna'],
         },
@@ -1632,7 +1690,7 @@ let _heroesData: HeroesData = {
              "1": ['Williams', 'Geester'],
              "2": ['Interstellar Hunteress - Patricia', 'Aranea', 'Cosmic Speedster - Sylvie'],
              "3": ['Patricia'],
-             "4": ['Asmodel the Dauntless'],
+             "4": ['Asmodel the Dauntless', 'Star-devouring Bloom - Madeleine'],
         },
         "short": "RFW",
     },
@@ -1660,7 +1718,7 @@ let _heroesData: HeroesData = {
              "1": ['Alikita', 'Freya'],
              "2": ['Therapist of Blood - Betty', 'Azrael', 'Great Sage - Sun Wukong'],
              "3": ['Betty'],
-             "4": ['Bloodtide Queen - Aranea'],
+             "4": ['Bloodtide Queen - Aranea', 'Ironcore Mecha - Basilisk'],
         },
         "short": "IEA",
     },

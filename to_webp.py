@@ -1,5 +1,5 @@
 from pathlib import Path
-from PIL import Image
+from PIL import Image # pip install Pillow
 
 
 def convert_to_webp(source: Path):
