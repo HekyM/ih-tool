@@ -466,6 +466,11 @@ tr.spacer > th, tr.spacer > td {
   background-color: #f0e9c4 !important;
 }
 
+.spacerRow > td {
+  height: 1px;
+  background-color: #e1caaa;
+}
+
 .ihGrigDataTable > tbody > tr > td {
   border: 1px solid rgb(187, 186, 186);
 }

@@ -647,3 +647,156 @@ export const temple = [
         capacity: [16, 16, 16, 16, 16, 12],
     },
 ]
+
+export const star_soul = 
+[
+  { "lvl":  1, "stars": 1, "soul":  1,     "essence": null,  "speed":   0, "atk":  0, "hp":  0, "skill": "A1", "skill_lvl": 1 },
+  { "lvl":  2, "stars": 1, "soul": null,   "essence": 11100, "speed":  10, "atk":  4, "hp":  0, "skill": null, "skill_lvl": 0 },
+  { "lvl":  3, "stars": 1, "soul": null,   "essence": 13300, "speed":  20, "atk":  4, "hp":  5, "skill": null, "skill_lvl": 0 },
+  { "lvl":  4, "stars": 1, "soul": null,   "essence": 15600, "speed":  20, "atk":  4, "hp":  5, "skill": "A1", "skill_lvl": 2 },
+
+  { "lvl":  5, "stars": 2, "soul":  1,     "essence": null,  "speed":  20, "atk":  4, "hp":  5, "skill": "P1", "skill_lvl": 1 },
+  { "lvl":  6, "stars": 2, "soul": null,   "essence": 21300, "speed":  30, "atk":  8, "hp":  5, "skill": null, "skill_lvl": 0 },
+  { "lvl":  7, "stars": 2, "soul": null,   "essence": 24000, "speed":  40, "atk":  8, "hp": 10, "skill": null, "skill_lvl": 0 },
+  { "lvl":  8, "stars": 2, "soul": null,   "essence": 26700, "speed":  40, "atk":  8, "hp": 10, "skill": "P1", "skill_lvl": 2 },
+
+  { "lvl":  9, "stars": 3, "soul":  2,     "essence": null,  "speed":  40, "atk":  8, "hp": 10, "skill": "P2", "skill_lvl": 1, "assist_skill": "1" },
+  { "lvl": 10, "stars": 3, "soul": null,   "essence": 28100, "speed":  50, "atk": 12, "hp": 10, "skill": null, "skill_lvl": 0 },
+  { "lvl": 11, "stars": 3, "soul": null,   "essence": 30700, "speed":  60, "atk": 12, "hp": 15, "skill": null, "skill_lvl": 0 },
+  { "lvl": 12, "stars": 3, "soul": null,   "essence": 33200, "speed":  60, "atk": 12, "hp": 15, "skill": "P2", "skill_lvl": 2 },
+
+  { "lvl": 13, "stars": 4, "soul": 2,      "essence": null,  "speed":  60, "atk": 12, "hp": 15, "skill": "A2", "skill_lvl": 1, "lock": 18 },
+  { "lvl": 14, "stars": 4, "soul": null,   "essence": 34800, "speed":  70, "atk": 16, "hp": 15, "skill": null, "skill_lvl": 0 },
+  { "lvl": 15, "stars": 4, "soul": null,   "essence": 37300, "speed":  80, "atk": 16, "hp": 20, "skill": null, "skill_lvl": 0 },
+  { "lvl": 16, "stars": 4, "soul": null,   "essence": 39800, "speed":  80, "atk": 16, "hp": 20, "skill": "A2", "skill_lvl": 2 },
+
+  { "lvl": 17, "stars": 5, "soul": 3,      "essence": null,  "speed":  80, "atk": 16, "hp": 20, "skill": "P3", "skill_lvl": 1, "lock": 24, "assist_skill": "2" },
+  { "lvl": 18, "stars": 5, "soul": null,   "essence": 41600, "speed":  90, "atk": 20, "hp": 20, "skill": null, "skill_lvl": 0 },
+  { "lvl": 19, "stars": 5, "soul": null,   "essence": 44000, "speed": 100, "atk": 20, "hp": 25, "skill": null, "skill_lvl": 0 },
+  { "lvl": 20, "stars": 5, "soul": null,   "essence": 46400, "speed": 100, "atk": 20, "hp": 25, "skill": "P3", "skill_lvl": 2 },
+
+  { "lvl": 21, "stars": 6, "soul": 3,      "essence": null,  "speed": 100, "atk": 20, "hp": 25, "skill": "P4", "skill_lvl": 1, "lock": 30 },
+  { "lvl": 22, "stars": 6, "soul": null,   "essence": 48300, "speed": 110, "atk": 24, "hp": 25, "skill": null, "skill_lvl": 0 },
+  { "lvl": 23, "stars": 6, "soul": null,   "essence": 50700, "speed": 120, "atk": 24, "hp": 30, "skill": null, "skill_lvl": 0 },
+  { "lvl": 24, "stars": 6, "soul": null,   "essence": 53100, "speed": 120, "atk": 24, "hp": 30, "skill": "P4", "skill_lvl": 2 },
+
+  { "lvl": 25, "stars": 7, "soul": 1,      "essence": null,  "speed": 120, "atk": 24, "hp": 30, "skill": "P5", "skill_lvl": 1, "soul2": 1,      "essence2": null, "lock": 36 },
+  { "lvl": 26, "stars": 7, "soul": null,   "essence": 24800, "speed": 130, "atk": 27, "hp": 30, "skill": null, "skill_lvl": 0, "soul2": null,   "essence2": 24800 },
+  { "lvl": 27, "stars": 7, "soul": null,   "essence": 25800, "speed": 140, "atk": 27, "hp": 34, "skill": null, "skill_lvl": 0, "soul2": null,   "essence2": 25800 },
+  { "lvl": 28, "stars": 7, "soul": null,   "essence": 26900, "speed": 140, "atk": 27, "hp": 34, "skill": "P5", "skill_lvl": 2, "soul2": null,   "essence2": 26900 },
+
+  { "lvl": 29, "stars": 8, "soul": 1,      "essence": null,  "speed": 140, "atk": 27, "hp": 34, "skill": "P6", "skill_lvl": 1, "soul2": 1,      "essence2": null, "lock": 42 },
+  { "lvl": 30, "stars": 8, "soul": null,   "essence": 27800, "speed": 150, "atk": 30, "hp": 34, "skill": null, "skill_lvl": 0, "soul2": null,   "essence2": 27800 },
+  { "lvl": 31, "stars": 8, "soul": null,   "essence": 28800, "speed": 160, "atk": 30, "hp": 38, "skill": null, "skill_lvl": 0, "soul2": null,   "essence2": 28800 },
+  { "lvl": 32, "stars": 8, "soul": null,   "essence": 29900, "speed": 160, "atk": 30, "hp": 38, "skill": "P6", "skill_lvl": 2, "soul2": null,   "essence2": 29900 },
+]
+
+export const destiny_trail = 
+[
+  { "stars": 1, "sub_lvl":  1, "lvl":  1, "material":       0 },
+  { "stars": 1, "sub_lvl":  2, "lvl":  2, "material": 1624600 },
+  { "stars": 1, "sub_lvl":  3, "lvl":  3, "material": 1772300 },
+  { "stars": 1, "sub_lvl":  4, "lvl":  4, "material": 1920000 },
+  { "stars": 1, "sub_lvl":  5, "lvl":  5, "material": 2067700 },
+  { "stars": 1, "sub_lvl":  6, "lvl":  6, "material": 2215400 },
+
+  { "stars": 2, "sub_lvl":  1, "lvl":  7, "material": 2490800, "lock": 5 },
+  { "stars": 2, "sub_lvl":  2, "lvl":  8, "material": 2646500 },
+  { "stars": 2, "sub_lvl":  3, "lvl":  9, "material": 2802200 },
+  { "stars": 2, "sub_lvl":  4, "lvl": 10, "material": 2957800 },
+  { "stars": 2, "sub_lvl":  5, "lvl": 11, "material": 3113500 },
+  { "stars": 2, "sub_lvl":  6, "lvl": 12, "material": 3269200 },
+
+  { "stars": 3, "sub_lvl":  1, "lvl": 13, "material": 3304500, "lock": 9 },
+  { "stars": 3, "sub_lvl":  2, "lvl": 14, "material": 3454700 },
+  { "stars": 3, "sub_lvl":  3, "lvl": 15, "material": 3604900 },
+  { "stars": 3, "sub_lvl":  4, "lvl": 16, "material": 3755100 },
+  { "stars": 3, "sub_lvl":  5, "lvl": 17, "material": 3905300 },
+  { "stars": 3, "sub_lvl":  6, "lvl": 18, "material": 4055500 },
+
+  { "stars": 4, "sub_lvl":  1, "lvl": 19, "material": 4868800, "lock": 13 },
+  { "stars": 4, "sub_lvl":  2, "lvl": 20, "material": 5093800 },
+  { "stars": 4, "sub_lvl":  3, "lvl": 21, "material": 5318800 },
+  { "stars": 4, "sub_lvl":  4, "lvl": 22, "material": 5543800 },
+  { "stars": 4, "sub_lvl":  5, "lvl": 23, "material": 5768800 },
+  { "stars": 4, "sub_lvl":  6, "lvl": 24, "material": 5993800 },
+
+  { "stars": 5, "sub_lvl":  1, "lvl": 25, "material": 6143100, "lock": 17 },
+  { "stars": 5, "sub_lvl":  2, "lvl": 26, "material": 6365900 },
+  { "stars": 5, "sub_lvl":  3, "lvl": 27, "material": 6588600 },
+  { "stars": 5, "sub_lvl":  4, "lvl": 28, "material": 6811400 },
+  { "stars": 5, "sub_lvl":  5, "lvl": 29, "material": 7034200 },
+  { "stars": 5, "sub_lvl":  6, "lvl": 30, "material": 7257000 },
+
+  { "stars": 6, "sub_lvl":  1, "lvl": 31, "material": 7415800, "lock": 21 },
+  { "stars": 6, "sub_lvl":  2, "lvl": 32, "material": 7637000 },
+  { "stars": 6, "sub_lvl":  3, "lvl": 33, "material": 7858200 },
+  { "stars": 6, "sub_lvl":  4, "lvl": 34, "material": 8079300 },
+  { "stars": 6, "sub_lvl":  5, "lvl": 35, "material": 8300500 },
+  { "stars": 6, "sub_lvl":  6, "lvl": 36, "material": 8521700 },
+
+  { "stars": 7, "sub_lvl":  1, "lvl": 37, "material": 3696200, "material2": 3696200 },
+  { "stars": 7, "sub_lvl":  2, "lvl": 38, "material": 3760100, "material2": 3760100 },
+  { "stars": 7, "sub_lvl":  3, "lvl": 39, "material": 3824000, "material2": 3824000 },
+  { "stars": 7, "sub_lvl":  4, "lvl": 40, "material": 3888000, "material2": 3888000 },
+  { "stars": 7, "sub_lvl":  5, "lvl": 41, "material": 3951900, "material2": 3951900 },
+  { "stars": 7, "sub_lvl":  6, "lvl": 42, "material": 4015800, "material2": 4015800 },
+
+  { "stars": 8, "sub_lvl":  1, "lvl": 43, "material": 4057300, "material2": 4057300 },
+  { "stars": 8, "sub_lvl":  2, "lvl": 44, "material": 4120800, "material2": 4120800 },
+  { "stars": 8, "sub_lvl":  3, "lvl": 45, "material": 4184300, "material2": 4184300 },
+  { "stars": 8, "sub_lvl":  4, "lvl": 46, "material": 4247700, "material2": 4247700 },
+  { "stars": 8, "sub_lvl":  5, "lvl": 47, "material": 4311200, "material2": 4311200 },
+  { "stars": 8, "sub_lvl":  6, "lvl": 48, "material": 4374700, "material2": 4374700 },
+]
+
+export const star_souls = {
+    Nova : {
+        name: "Sacred Flame",
+        other: null,
+        atk: 24000000,
+        hp: 5184000000,
+        atk2: 0,
+        hp2: 0,
+    },
+    Pupil : {
+        name: "Ethernal Darkness",
+        other: "Specter",
+        atk: 30000000,
+        hp: 4320000000,
+        atk2: 42000000,
+        hp2: 6048000000,
+    },
+    Specter : {
+        name: "Inquiring Mind",
+        other: "Bloom",
+        atk: 27000000,
+        hp: 4752000000,
+        atk2: 37800000,
+        hp2: 6652800000,
+    },
+    Plume : {
+        name: "Time Manipulation",
+        other: "Nova",
+        atk: 21000000,
+        hp: 5400000000,
+        atk2: 29400000,
+        hp2: 7560000000,
+    },
+    Bloom : {
+        name: "Genesis Radiance",
+        other: null,
+        atk: 22500000,
+        hp: 5184000000,
+        atk2: 0,
+        hp2: 0,
+    },
+    Butterfly : {
+        name: "Cosmic Rhythm",
+        other: null,
+        atk: 22500000,
+        hp: 5400000000,
+        atk2: 0,
+        hp2: 0,
+    },
+}
