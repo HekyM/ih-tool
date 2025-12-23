@@ -138,9 +138,11 @@ export function EventsSE()  {
                 )}
             </div>
         </div>
+        {/*
         <div className='ihContainer'>
             <SEBossHP />
         </div>
+        */}
         <div className='ihContainer'>
             <ImgModal src={ImageSrc.events('se', 'imprints-wide')} alt='Star Imprints' style={imgStyle}/>
             <ImgModalLink src={ImageSrc.events('se', 'imprints-2')} alt='Star Imprints (2 piece sets)' text='Star Imprints (2 piece sets)'/>
@@ -148,7 +150,7 @@ export function EventsSE()  {
         <div className='ihContainer'>
             <ImgModal src={ImageSrc.events('se', 'boss')} alt='Abyss Catastrophe' style={imgStyle}/>
             <div className='line-delimiter'/>
-            <ImgModal src={ImageSrc.events('se', 'boss2')} alt='Abyss Catastrophe (difficult)' style={imgStyle}/>
+            <ImgModal src={ImageSrc.events('se', 'bossHM')} alt='Abyss Catastrophe (Hard Mode)' style={imgStyle}/>
             <ImgModalLink src={ImageSrc.events('se', 'blessing-tldr')} alt='Star Blessing (TLDR)' text='Star Blessing (TLDR)'/>
         </div>
       </>

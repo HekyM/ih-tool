@@ -26,6 +26,8 @@ export function Images() {
         <div className='collapsibleTrigger' style={sectionStyle}>Arcade Spells</div>
         <div className='ihContainer'>
             <ImgModal src={ImageSrc.raw('others/arcade')} style={imgStyle} alt='Arcade Spells'/>
+            <br/>
+            <ImgModal src={ImageSrc.raw('others/arcade2')} style={imgStyle} alt='Arcade Spells'/>
         </div>
         </div>
       </div>

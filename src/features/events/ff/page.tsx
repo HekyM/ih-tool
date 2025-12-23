@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ImageSrc } from '../../../components/Images';
+import { Icon, ImageSrc } from '../../../components/Images';
 import { ImgGalery } from '../../../components/ImgGalery';
 import { ImagesListType } from 'react-spring-lightbox';
 import _ from 'lodash';
@@ -21,6 +21,12 @@ export function EventsFF() {
     const dispatch = useAppDispatch();
 
     const [galeryIsOpen, setGaleryIsOpen] = useState(false);
+    const [currentImageIndex, setCurrentIndex] = useState(0);
+    const imgStyle = {
+        width: '150px',
+        heigth: 'auto',
+        borderRadius: '15px',
+    }
 
     const imgW = 600;
     const imgH = 708;
@@ -125,12 +131,17 @@ export function EventsFF() {
                 </div>
             </div>
         </div>
-        <div className='ihContainer'>
-            <ImgGalery images={images} showIndex={0} isOpen={galeryIsOpen} onClose={() => setGaleryIsOpen(false)}/>
-            <span className='btn-role' onClick={() => setGaleryIsOpen(!galeryIsOpen)}>
-                Jigsaw Puzzle Solutions (214-234)
-            </span>
-            
+        <div className='ihContainer icons-picker horizontal'>
+            <div>Jigsaw Puzzles (214-234)</div>
+            <ImgGalery images={images} showIndex={currentImageIndex} isOpen={galeryIsOpen} onClose={() => setGaleryIsOpen(false)}/>
+            {images.map((map, i) => 
+                <Icon
+                    key={`Jigsaw-${i}`}
+                    src={map.src} title={map.alt}
+                    size='preview-l'
+                    style={{...imgStyle}}
+                    onClick={() => { setCurrentIndex(i); setGaleryIsOpen(!galeryIsOpen);}} />
+            )}
         </div>
         </div>
     );

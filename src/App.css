@@ -742,3 +742,7 @@ th.col-img {
   width: 800px;
   margin: auto;
 }
+
+.delimiter-md {
+  height: .5em;
+}

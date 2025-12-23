@@ -6,6 +6,7 @@ import { useSearchParams } from 'react-router-dom'
 
 import { Eggs } from './voidark/page';
 import { RealmsGate } from './realmsgate/page';
+import { EtherealRealm } from './etherealrealm/page';
 
 
 export function Daylies(props: {open?: string}) {
@@ -20,6 +21,9 @@ export function Daylies(props: {open?: string}) {
             </Collapsible>
             <Collapsible open={isOpen('rg')} trigger={<CollapsibleHeader title="Realms Gate | Puppets" icon={ImageSrc.event('rg')} link={<SectionLink onClick={() => setSearchParams('rg')}/>}/>} {...options}>
                 <RealmsGate />
+            </Collapsible>
+            <Collapsible open={isOpen('er')} trigger={<CollapsibleHeader title="Ethereal Realm" icon={ImageSrc.events('ethereal-realm', 'logo')} link={<SectionLink onClick={() => setSearchParams('er')}/>}/>} {...options}>
+                <EtherealRealm />
             </Collapsible>
         </div>
     );
