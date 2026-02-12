@@ -1025,9 +1025,9 @@ function WeeklyEventsTable() {
 }
 
 function SpecialEventsTable() {
-  const days: number[] = Object.entries(SpecialEvents).map(([name, data]) => data.days).filter(i => i !== undefined) as number[]
+  const days: number[] = Object.entries(SpecialEvents).map(([name, data]) => data.ord).filter(i => i !== undefined && i > 0) as number[]
   const next = Math.min(...days, 999)
-  const sorted = Object.entries(SpecialEvents).sort(function([a, av],[b, bv]){return (av.month! - bv.month!)*100+av.day! - bv.day!})
+  const sorted = Object.entries(SpecialEvents).sort(function([a, av],[b, bv]){return av.ord!-bv.ord!})
   return (
     <>
     <table id='special-events' className='ihContainer ihDataTable no-footer w-max' cellPadding="0">
@@ -1035,7 +1035,7 @@ function SpecialEventsTable() {
           {sorted.map(([name, data], i) =>
             <tr key={'wes-' + i}>
               <td  style={{width: '2em'}}>
-                <span>{data.days === next && <FontAwesomeIcon icon={faCircleChevronRight} style={{width: '1.5em'}}/>}</span>
+                <span>{data.ord === next && <FontAwesomeIcon icon={faCircleChevronRight} style={{width: '1.5em'}}/>}</span>
               </td>
               <td style={{width: '7em', textAlign: 'right'}}>
                 <span style={{textAlign: 'right', marginRight: '2em'}}>{data.days} days</span>
@@ -1146,7 +1146,6 @@ export function Counter() {
         <WeaklyEvents/>
         <ModalAddUpdateTimer/>
         <ModalAddUpdateWeekly />
-        <WeeklyEventsTable />
         <SpecialEventsTable/>
         <CountersSettings/>
       </div>

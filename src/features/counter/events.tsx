@@ -23,7 +23,7 @@ const LantersFestival = {
 2023: {d:5, m:1},
 2024: {d:24, m:1},
 2025: {d:14, m:1},
-2026: {d:3, m:1},
+2026: {d:3, m:3},
 2027: {d:23, m:1},
 2028: {d:11, m:1},
 2029: {d:1, m:2},
@@ -112,12 +112,11 @@ const BlackFriday = {
 }
 
 const today: Date = new Date();
+var todayNext = new Date();
+todayNext.setFullYear(todayNext.getFullYear() + 1);
 
 function countDaysTo(today: Date, date: number, month: number): number {
-    let target: Date = new Date(today.getFullYear(), month, date);
-    if (target < today) {
-      target.setFullYear(target.getFullYear() + 1);
-    }
+    let target: Date = new Date(today.getFullYear()+ 1, month, date);
     let diff: number = target.getTime() - today.getTime();
     let days: number = Math.floor(diff / 86400000);
     return days;
@@ -135,17 +134,18 @@ function calcData(thisYear: EvData, nextYear: EvData, utcYear: number, dsc: stri
         return {days: undefined, day: undefined, month: undefined, year: undefined, dsc: dsc}
     }
 
-    let thisDays = countDays(today, thisYear.d, thisYear.m)
-    if (thisDays >= 0) {
-        return {days: thisDays, day: thisYear.d, month: thisYear.m, year: utcYear, dsc: dsc}
+    let days = countDays(today, thisYear.d, thisYear.m)
+    if (days >= 0) {
+        return {ord: days, days: days, day: thisYear.d, month: thisYear.m, year: utcYear, dsc: dsc}
     }
 
     if (nextYear === undefined) {
-        return {days: undefined, day: undefined, month: undefined, year: undefined, dsc: dsc}
+        return {ord: 0, days: undefined, day: undefined, month: undefined, year: undefined, dsc: dsc}
     }
 
-    let nextDays = countDaysTo(today, nextYear.d, nextYear.m)
-    return {days: nextDays, day: nextYear.d, month: nextYear.m, year: utcYear+1, dsc: dsc}
+    days = countDaysTo(today, nextYear.d, nextYear.m)
+    let ordNext = countDays(todayNext, nextYear.d, nextYear.m)
+    return {ord: -1000 + ordNext, days: days, day: nextYear.d, month: nextYear.m, year: utcYear+1, dsc: dsc}
 }
 
 function getData(obj: object, utcYear: number, dsc: string) {
