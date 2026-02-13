@@ -1025,7 +1025,7 @@ function WeeklyEventsTable() {
 }
 
 function SpecialEventsTable() {
-  const days: number[] = Object.entries(SpecialEvents).map(([name, data]) => data.ord).filter(i => i !== undefined && i > 0) as number[]
+  const days: number[] = Object.entries(SpecialEvents).map(([name, data]) => data.ord).filter(i => i !== undefined && i >= 0) as number[]
   const next = Math.min(...days, 999)
   const sorted = Object.entries(SpecialEvents).sort(function([a, av],[b, bv]){return av.ord!-bv.ord!})
   return (
