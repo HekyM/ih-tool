@@ -799,4 +799,12 @@ export const star_souls = {
         atk2: 0,
         hp2: 0,
     },
+    Netherfish : {
+        name: "Convergence",
+        other: null,
+        atk: 22500000,
+        hp: 5400000000,
+        atk2: 0,
+        hp2: 0,
+    },
 }
