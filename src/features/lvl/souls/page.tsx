@@ -145,12 +145,28 @@ function Soul() {
 function DestinyTrail() {
     const [selected, setSelected] = useState<number|null>(null);
 
+    const [resOutput, setResOutput] = useState<number|undefined>(undefined);
+    const [resOutputOther, setResOutputOther] = useState<number|undefined>(undefined);
+    const resOutputDay = resOutput ? resOutput * 48 : 0;
+    const resOutputDayOther = resOutputOther ? resOutputOther * 48 : 0;
+
     const sums = selected === null
         ? {material: [], material2: []}
         : {
             material: accumulate(Array(selected+1).fill(0).concat(destiny_trail.map((data) => data.material).slice(selected+1))),
             material2: accumulate(Array(selected+1).fill(0).concat(destiny_trail.map((data) => data.material2 || 0).slice(selected+1))),
         }
+
+    const resOutputDays = resOutputDay
+        ? selected === null
+        ? destiny_trail.map((data) => Math.ceil(data.material/resOutputDay))
+        : sums.material.map((data) => Math.ceil(data/resOutputDay))
+        : []
+    const resOutputDaysOther = resOutputDay
+        ? selected === null
+        ? destiny_trail.map((data) => Math.ceil((data.material2 || 0)/resOutputDayOther))
+        : sums.material2.map((data) => Math.ceil(data/resOutputDayOther))
+        : []
 
     let destiny_trail_data = selected === null
         ? destiny_trail
@@ -175,6 +191,11 @@ function DestinyTrail() {
                 <tr>
                     <th colSpan={4} style={{color: '#bd916e'}}>Destiny Trail</th>
                     <th></th>
+                    <th colSpan={3} style={{borderBottom: '3px solid #bd916e'}}>
+                        <span style={{width: '2em', display: 'inline-block'}}>{selected === null ? '#' : '\u03A3'}</span>
+                        days
+                    </th>
+                    <th></th>
                     <th colSpan={2} style={{borderBottom: '3px solid #bd916e'}}>{selected === null ? '#' : '\u03A3'}</th>
                     <th></th> 
                 </tr>
@@ -184,6 +205,10 @@ function DestinyTrail() {
                     <td style={{width: '2em'}}></td>
                     <td style={{width: '2em'}}></td>
                     <td></td>
+                    <td style={{width: '5.5em'}}></td>
+                    <td style={{width: '5.5em'}}></td>
+                    <td style={{width: '3em'}}></td>
+                    <td style={{width: '1em'}}></td>
                     <td style={{width: '8em'}}></td>
                     <td style={{width: '8em'}}></td>
 
@@ -193,6 +218,23 @@ function DestinyTrail() {
                     <th>☆</th>
                     <th colSpan={2}>lvl</th>
                     <th><div title='Required Star Soul level'><FontAwesomeIcon icon={faLock} style={{width: '1.5em', fontSize: 'larger'}}/></div></th>
+                    <th></th>
+                    <th colSpan={3}>
+                        <input className='ih-input in-text-input number' aria-label={`Compations Output`}
+                                type="number" 
+                                value={resOutput} 
+                                onChange={(e) => setResOutput(Number(e.target.value))}    
+                                style={{width: '5em', marginLeft: '.1em', marginRight: '.1em'}}
+                        />
+                        |
+                        <input className='ih-input in-text-input number' aria-label={`Compations Output`}
+                                type="number" 
+                                value={resOutputOther} 
+                                onChange={(e) => setResOutputOther(Number(e.target.value))}    
+                                style={{width: '5em', marginLeft: '.1em', marginRight: '.1em'}}
+                        />
+                        <small title={`${resOutputDay} | ${resOutputDayOther} /day`}>/1800s</small>
+                    </th>
                     <th></th>
                     <th colSpan={2}><div><Icon size='sm' src={ImageSrc.resources('Destiny Trail', 'souls')} title={'Destiny Trail'}/></div></th>
                     <th>
@@ -206,12 +248,16 @@ function DestinyTrail() {
             <tbody>
                 {destiny_trail_data.map((data, i) => 
                     <React.Fragment key={'trail-lvl-'+i}>
-                    {(i !== 0 && starUp(i)) && <tr className='spacerRow'><td colSpan={8}/></tr>}
+                    {(i !== 0 && starUp(i)) && <tr className='spacerRow'><td colSpan={12}/></tr>}
                     <tr>
                         {starUp(i) && <td rowSpan={6} style={{borderBottom: 'none'}}>{data.stars}</td>}
                         <td>{data.lvl}</td>
                         <td>{data.sub_lvl}</td>
                         <td style={{color: "darkRed"}}>{data.lock}</td>
+                        <td></td>
+                        <td style={{textAlign: 'right', paddingRight: '.5em'}}>{(resOutput && resOutputDays[i]) ? resOutputDays[i] : undefined}</td>
+                        <td style={{textAlign: 'right', paddingRight: '.5em'}}>{(resOutputOther && resOutputDaysOther[i]) ? resOutputDaysOther[i] : undefined}</td>
+                        <td></td>
                         <td></td>
                         <td style={{textAlign: 'right'}}><BigNumber value={data.material || 0}/></td>
                         <td style={{textAlign: 'right'}}><BigNumber value={data.material2 || 0}/></td>
