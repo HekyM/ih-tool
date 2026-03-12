@@ -1,11 +1,11 @@
 
 import { Icon } from './Images';
 
-export function CollapsibleHeader(props: {icon: string, title: string, link?: React.ReactElement<any>}) {
+export function CollapsibleHeader(props: {icon: string | undefined, title: string, link?: React.ReactElement<any>}) {
     return (
         <div className='collapsibleTrigger'>
-            <Icon size='sm' src={ props.icon } title={props.title} />
-            <span>{props.title}</span>
+            {props.icon && <Icon size='sm' src={ props.icon } title={props.title} />}
+            <span style={{paddingLeft: props.icon ? '0' : '.5em' }}>{props.title}</span>
             {props.link && props.link}
         </div>
     );

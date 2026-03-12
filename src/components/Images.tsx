@@ -41,8 +41,10 @@ export class ImageSrc {
         `${imagesRoot}/${name}${imagesExt}`
     static layout = (name: string) =>
         `${imagesRoot}/layout/${name.replaceAll(' ', '-').toLowerCase()}${imagesExt}`
-    static resources = (name: string) =>
-        `${imagesRoot}/resources/${name.replaceAll(' ', '-').toLowerCase()}${imagesExt}`
+    static resources = (name: string, category: string | undefined = undefined) =>
+        category
+        ? `${imagesRoot}/resources/${category}/${name.replaceAll(' ', '-').toLowerCase()}${imagesExt}`
+        : `${imagesRoot}/resources/${name.replaceAll(' ', '-').toLowerCase()}${imagesExt}`
     static event = (name: string) =>
         `${imagesRoot}/layout/events/${name.replaceAll(' ', '-').toLowerCase()}${imagesExt}`
     static events = (event: string, name: string) =>

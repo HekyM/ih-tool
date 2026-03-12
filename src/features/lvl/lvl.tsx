@@ -10,6 +10,7 @@ import { LevelUp } from './lvlup/page';
 import { Imprints } from './imprints/page';
 import { Tree } from './tree/page';
 import { Destiny } from './destiny/page';
+import { StarSouls } from './souls/page';
 import { Regress } from './regress/page';
 
 
@@ -27,14 +28,17 @@ export function Leveling(props: {open?: string}) {
             <Collapsible open={isOpen('levelup')} trigger={<CollapsibleHeader title="Level Up" icon={ImageSrc.resources('spirit')} link={<SectionLink onClick={() => setSearchParams('levelup')}/>}/>} {...options}>
                 <LevelUp />
             </Collapsible>
-            <Collapsible open={isOpen('imprints')} trigger={<CollapsibleHeader title="Void Imprints" icon={ImageSrc.resources('stellar')} link={<SectionLink onClick={() => setSearchParams('imprints')}/>}/>} {...options}>
+            <Collapsible open={isOpen('imprints')} trigger={<CollapsibleHeader title="Void Imprints" icon={ImageSrc.layout('lvl-imprints')} link={<SectionLink onClick={() => setSearchParams('imprints')}/>}/>} {...options}>
                 <Imprints />
             </Collapsible>
-            <Collapsible open={isOpen('tree')} trigger={<CollapsibleHeader title="Tree of Origin" icon={ImageSrc.resources('Spiritual Essence')} link={<SectionLink onClick={() => setSearchParams('tree')}/>}/>} {...options}>
+            <Collapsible open={isOpen('tree')} trigger={<CollapsibleHeader title="Tree of Origin" icon={ImageSrc.layout('lvl-tree')} link={<SectionLink onClick={() => setSearchParams('tree')}/>}/>} {...options}>
                 <Tree />
             </Collapsible>
-            <Collapsible open={isOpen('destiny')} trigger={<CollapsibleHeader title="Destiny Transition" icon={ImageSrc.resources('Aurora Gem')} link={<SectionLink onClick={() => setSearchParams('destiny')}/>}/>} {...options}>
+            <Collapsible open={isOpen('destiny')} trigger={<CollapsibleHeader title="Destiny Transition" icon={ImageSrc.layout('lvl-destiny')} link={<SectionLink onClick={() => setSearchParams('destiny')}/>}/>} {...options}>
                 <Destiny />
+            </Collapsible>
+            <Collapsible open={isOpen('souls')} trigger={<CollapsibleHeader title="Star Souls" icon={ImageSrc.layout('lvl-souls')} link={<SectionLink onClick={() => setSearchParams('souls')}/>}/>} {...options}>
+                <StarSouls />
             </Collapsible>
         </div>
     );

@@ -9,7 +9,7 @@ function bigNumber(value: number): string | number {
 
     // Nine Zeroes for Billions
     : Math.abs(Number(value)) >= 1.0e+9
-    ? Number((Math.abs(Number(value)) / 1.0e+9).toFixed(2)) + "\xa0B"
+    ? Number((Math.abs(Number(value)) / 1.0e+9)).toFixed(2) + "\xa0B"
 
     // 7 Zeroes for 10 Millions 
     : Math.abs(Number(value)) >= 1.0e+7
@@ -17,7 +17,7 @@ function bigNumber(value: number): string | number {
 
     // Six Zeroes for Millions 
     : Math.abs(Number(value)) >= 1.0e+6
-    ? Number((Math.abs(Number(value)) / 1.0e+6).toFixed(2)) + "\xa0M"
+    ? Number((Math.abs(Number(value)) / 1.0e+6)).toFixed(2) + "\xa0M"
 
     // 4 Zeroes for 10 Thousands
     : Math.abs(Number(value)) >= 1.0e+4
@@ -25,7 +25,7 @@ function bigNumber(value: number): string | number {
 
     // Three Zeroes for Thousands
     : Math.abs(Number(value)) >= 1.0e+3
-    ? Number((Math.abs(Number(value)) / 1.0e+3).toFixed(2)) + "\xa0K"
+    ? Number((Math.abs(Number(value)) / 1.0e+3)).toFixed(2) + "\xa0K"
 
     // Plain
     :Math.abs(Number(value));
@@ -36,16 +36,18 @@ function bigNumber(value: number): string | number {
 interface BigNumberProps extends React.HTMLAttributes<HTMLSpanElement> {
     value: number;
     zero?: boolean;
+    format?: string;
 }
 
 
-export function BigNumber({ value, zero, ...common }: BigNumberProps) {
+export function BigNumber({ value, zero, format, ...common }: BigNumberProps) {
     const appSettings = useAppSelector(settings);
 
     if (!zero && value === 0) {
         return (<span className="big-number"/>)
     }
-    switch(appSettings.numbers) {
+    let numFormat = format || appSettings.numbers
+    switch(numFormat) {
         case 'short':
             return (<span {...common} className="big-number" title={value.toString()}>{bigNumber(value)}</span>);
         case 'long':
