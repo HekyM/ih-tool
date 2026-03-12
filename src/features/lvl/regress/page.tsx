@@ -1,4 +1,4 @@
-import { useState, useRef, useImperativeHandle, forwardRef, Ref } from 'react';
+import { useState, useRef, useImperativeHandle, forwardRef, Ref, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import _ from 'lodash';
 import { minmax } from '../../../components/functions';
@@ -26,12 +26,11 @@ import {
     setHaveTemple, setBuildTemple,
     saveRegress, loadRegress, resetRegress,
     templeHeroRequires,
+    HeroLevel, HeroCost,
 } from './slice';
 
-import { HeroLevel, HeroCost } from './slice';
 
-
-function SelectNode(props: {text: string, value: number, max: number, setValue: (value: number) => void}) {
+function SelectNode(props: Readonly<{text: string, value: number, max: number, setValue: (value: number) => void}>) {
     return (
         <Dropdown autoClose={true} display='inline-block' dropdownWidth={200}
             trigger={
@@ -41,18 +40,29 @@ function SelectNode(props: {text: string, value: number, max: number, setValue: 
                 <div style={{fontSize: 'smaller', marginLeft: '.6em', marginRight: '.6em'}}>
                     {props.text} Node
                 </div>
-                <div className='btn btn-primary' style={{display: 'inline-block', fontSize: 'smaller', width: '40%', marginLeft: '.3em', marginRight: '.3em'}} onClick={() => props.setValue(0)}>
+                <button
+                    className='btn btn-primary'
+                    style={{display: 'inline-block', fontSize: 'smaller', width: '40%', marginLeft: '.3em', marginRight: '.3em'}}
+                    onClick={() => props.setValue(0)}
+                >
                     {0}
-                </div>
-                <div className='btn btn-primary' style={{display: 'inline-block', fontSize: 'smaller', width: '40%', marginLeft: '.3em', marginRight: '.3em'}} onClick={() => props.setValue(props.max)}>
+                </button>
+                <button
+                    className='btn btn-primary'
+                    style={{display: 'inline-block', fontSize: 'smaller', width: '40%', marginLeft: '.3em', marginRight: '.3em'}}
+                    onClick={() => props.setValue(props.max)}
+                >
                     {props.max}
-                </div>
-                {_.range(1, props.max+1, 1).map((val) => 
-                    <div key={'numpad-'+val} className='btn btn-primary' 
-                         style={{display: 'inline-block', padding: '0', width: '18%', fontSize: 'smaller'}} 
-                         onClick={() => props.setValue(val)}>
+                </button>
+                {_.range(1, props.max+1, 1).map((val) =>
+                    <button
+                        key={'numpad-'+val}
+                        className='btn btn-primary'
+                        style={{display: 'inline-block', padding: '0', width: '18%', fontSize: 'smaller'}}
+                        onClick={() => props.setValue(val)}
+                    >
                         {val}
-                    </div>
+                    </button>
                 )}
             </div>
         </Dropdown>
@@ -82,14 +92,14 @@ const HeroUpsert = forwardRef((props: {
     const [node2, setNode2] = useState(0);
     const [lvl, setLvl] = useState(0);
 
-    function selectHero(hero: HeroLevel | null ) {
-        setUpdating(hero !== null)
-        setHero(hero?.hero)
-        setRank(hero?.rank || 'E5')
-        setNode0(hero?.nodes ? hero?.nodes[0] : 0)
-        setNode1(hero?.nodes ? hero?.nodes[1] : 0)
-        setNode2(hero?.nodes ? hero?.nodes[2] : 0)
-        setLvl(hero?.lvl || 0)
+    function selectHero(heroLevel: HeroLevel | null ) {
+        setUpdating(heroLevel !== null)
+        setHero(heroLevel?.hero)
+        setRank(heroLevel?.rank || 'E5')
+        setNode0(heroLevel?.nodes ? heroLevel?.nodes[0] : 0)
+        setNode1(heroLevel?.nodes ? heroLevel?.nodes[1] : 0)
+        setNode2(heroLevel?.nodes ? heroLevel?.nodes[2] : 0)
+        setLvl(heroLevel?.lvl || 0)
     }
 
     const ranksV = ['E5', 'V1', 'V2', 'V3', 'V4']
@@ -97,16 +107,16 @@ const HeroUpsert = forwardRef((props: {
     const ranksD = ['D1', 'D2', 'D3', 'D4', 'D5', 'D6']
 
     const selectHeroType = (rank: string): string => {
-        return ranksV.includes(rank) ? 'void' :
-               ranksT.includes(rank) ? 'tree' :
-               ranksD.includes(rank) ? 'destiny' :
-               '?'
+        if (ranksV.includes(rank)) return 'void'
+        if (ranksT.includes(rank)) return 'tree'
+        if (ranksD.includes(rank)) return 'destiny'
+        return '?'
     }
 
     const heroType = selectHeroType(rank)
 
     const create = (): HeroLevel => {
-        let h: HeroLevel = {
+        const h: HeroLevel = {
             hero: hero,
             enabled: true,
             trans: hero !== undefined && heroesByName[hero].faction === "Transcendence",
@@ -135,7 +145,7 @@ const HeroUpsert = forwardRef((props: {
                 setRank(rank); setNode0(0); setNode1(0); setNode2(0);
                 break;
             case 'tree':
-                setRank(rank); setLvl(_.get({'T0':1, 'T1':20, 'T2':40, 'T3':60, 'T4':80, 'T5':100}, rank));
+                setRank(rank); setLvl(_.get({'T0':1, 'T1':20, 'T2':40, 'T3':60, 'T4':80, 'T5':100}, rank, 1));
                 break;
             case 'destiny':
                 setRank(rank); setLvl(1);
@@ -144,8 +154,6 @@ const HeroUpsert = forwardRef((props: {
                 return;
         }
     }
-
-
     const treeRange = (rank: string): {min: number, max: number} => {
         const _min = _.get({'T0':0, 'T1':20, 'T2':40, 'T3':60, 'T4':80, 'T5':100}, rank)
         const _max = _.get({'T0':19, 'T1':39, 'T2':59, 'T3':79, 'T4':99, 'T5':120}, rank)
@@ -155,15 +163,15 @@ const HeroUpsert = forwardRef((props: {
     return (
         
         <div className='ihContainer' style={{padding: '0', margin: '3px 2px', backgroundColor: '#e8ce8c'}}>
-        <table className='w-max'><tbody><tr>
+        <table className='w-max'><thead><tr><th colSpan={6}></th></tr></thead><tbody><tr>
             <td >
                 {hero && herosList.includes(hero) ? heroesByName[hero].icon('hero', {'size': 'xsm'}) : <Icon size="xsm" src={ImageSrc.hero("shards/any-puppet", 10)} />}
             </td>
             <td style={{width: '13em'}}>
-                <input name="hero" list="heroes" value={hero || ''} onChange={e => setHero(e.target.value)} style={{width: '97%', marginBottom: ".4em"}}/>
+                <input name="hero" list="heroes" value={hero || ''} onChange={e => setHero(e.target.value)} style={{width: '97%', marginBottom: ".4em"}} />
                 <datalist id="heroes">
-                    {Object.values(heroesByName).map(hero => <option key={hero.name} value={hero.name}>{hero.short || hero.name}</option>)}
-                </datalist> 
+                    {Object.values(heroesByName).map(h => <option key={h.name} value={h.name}>{h.short || h.name}</option>)}
+                </datalist>
             </td>
             <td style={{width: '3em'}}>
                 <Dropdown autoClose={true} display='inline-block' dropdownWidth={300}
@@ -175,74 +183,71 @@ const HeroUpsert = forwardRef((props: {
                             Void Imprints
                         </div>
                         {ranksV.map((val) => 
-                            <div key={'numpad-'+val} className='btn btn-primary' 
+                            <button key={'numpad-'+val} className='btn btn-primary' 
                                 style={{display: 'inline-block', padding: '0', width: '2.5em', fontSize: 'smaller'}} 
-                                onClick={() => {selectRank(val)}}>
+                                onClick={() => selectRank(val)}>
                                 {val}
-                            </div>
+                            </button>
                         )}
                         <div style={{fontSize: 'smaller', marginLeft: '.6em', marginRight: '.6em'}}>
                             Tree of Origin
                         </div>
                         {ranksT.map((val) => 
-                            <div key={'numpad-'+val} className='btn btn-primary' 
+                            <button key={'numpad-'+val} className='btn btn-primary' 
                                 style={{display: 'inline-block', padding: '0', width: '2.5em', fontSize: 'smaller'}} 
-                                onClick={() => {selectRank(val)}}>
+                                onClick={() => selectRank(val)}>
                                 {val}
-                            </div>
+                            </button>
                         )}
                         <div style={{fontSize: 'smaller', marginLeft: '.6em', marginRight: '.6em'}}>
                             Destiny Transition
                         </div>
                         {ranksD.map((val) => 
-                            <div key={'numpad-'+val} className='btn btn-primary' 
+                            <button key={'numpad-'+val} className='btn btn-primary' 
                                 style={{display: 'inline-block', padding: '0', width: '2.5em', fontSize: 'smaller'}} 
-                                onClick={() => {selectRank(val)}}>
+                                onClick={() => selectRank(val)}>
                                 {val}
-                            </div>
+                            </button>
                         )}
                     </div>
                 </Dropdown>
             </td>
-            <td style={{width: '20em'}}> 
+            <td style={{width: '20em'}}>
                 {heroType === 'void' && rank !== 'V4' &&
-                    <>
+                    <div>
                     <SelectNode text="HP" value={node0} max={30} setValue={setNode0}/>
                     &nbsp;-&nbsp;
                     <SelectNode text="Attack" value={node1} max={30} setValue={setNode1} />
                     &nbsp;-&nbsp;
                     <SelectNode text={rank === 'V3' ? 'Speed' : 'Attack HP'} value={node2} max={10} setValue={setNode2} />
-                    </>
+                    </div>
                 }
                 {heroType === 'tree' &&
-                    <>
-                        Level
-                        <input className='ih-input in-text-input number' aria-label={`stellar`} type="number" style={{width: '3em'}} 
-                            value={lvl} 
-                            onChange={(e) => setLvl(Math.min(Number(e.target.value), 120))}
-                        />
-                    
+                    <div>
+                        Level{' '}
+                        <input className='ih-input in-text-input number' aria-label="stellar" type="number" style={{width: '3em'}} value={lvl} onChange={(e) => setLvl(Math.min(Number(e.target.value), 120))} />
+
                         <Dropdown autoClose={true} display='inline-block' dropdownWidth={300}
                             trigger={
                                 <FontAwesomeIcon icon={faChevronDown} style={{width: '1em'}} className='btn-role' title='select hero level'/>
                             }>
                             <div style={{padding: '.5em', paddingTop: '.25em'}}>
                                 {_.range(treeRange(rank).min, treeRange(rank).max+1, 1).map((val) => 
-                                    <div key={'numpad-'+val} className='btn btn-primary' 
-                                        style={{visibility: val === 0 ? 'hidden' : undefined,  display: 'inline-block', padding: '0', width: '18%', fontSize: 'smaller'}} 
+                                    <button key={'numpad-'+val} className='btn btn-primary'
+                                        style={{visibility: val === 0 ? 'hidden' : undefined, display: 'inline-block', padding: '0', width: '18%', fontSize: 'smaller'}}
                                         onClick={() => setLvl(val)}>
                                         {val}
-                                    </div>
+                                    </button>
                                 )}
                             </div>
                         </Dropdown>
-                    </>
+                    </div>
                 }
                 {heroType === 'destiny' &&
-                    <>
-                        Level
-                        <input className='ih-input in-text-input number' aria-label={`stellar`} type="number" style={{width: '3em'}} 
-                            value={lvl} 
+                    <div>
+                        Level{' '}
+                        <input className='ih-input in-text-input number' aria-label="stellar" type="number" style={{width: '3em'}}
+                            value={lvl}
                             onChange={(e) => setLvl(Math.min(Number(e.target.value), 100))}
                         />
                         <Dropdown autoClose={true} display='inline-block' dropdownWidth={450}
@@ -250,30 +255,22 @@ const HeroUpsert = forwardRef((props: {
                                 <FontAwesomeIcon icon={faChevronDown} style={{width: '1em'}} className='btn-role' title='select hero level'/>
                             }>
                             <div style={{padding: '.5em', paddingTop: '.25em'}}>
-                                {_.range(1, 100+1, 1).map((val) => 
-                                    <div key={'numpad-'+val} className='btn btn-primary' 
-                                        style={{display: 'inline-block', padding: '0', width: '9%', fontSize: 'smaller'}} 
+                                {_.range(1, 100+1, 1).map((val) =>
+                                    <button key={'numpad-'+val} className='btn btn-primary'
+                                        style={{display: 'inline-block', padding: '0', width: '9%', fontSize: 'smaller'}}
                                         onClick={() => setLvl(val)}>
                                         {val}
-                                    </div>
+                                    </button>
                                 )}
                             </div>
                         </Dropdown>
-                    </>
+                    </div>
                 }
             </td>
             <td></td>
             <td style={{width: '7em'}}>
-                {!updating
-                 ? <>
-                    <button
-                        className={'inline in-text btn btn-primary right'}
-                        onClick={() => add()}
-                    >
-                        <FontAwesomeIcon icon={faPlus} title='Add Hero' style={{width: '2em'}} />
-                    </button>
-                 </>
-                 : <>
+                {updating
+                 ? <div>
                     <button
                         className={'inline in-text btn btn-primary'}
                         onClick={() => props.onMove(-1)}
@@ -292,47 +289,54 @@ const HeroUpsert = forwardRef((props: {
                     >
                         <FontAwesomeIcon icon={faRotate} title='Update Hero' style={{width: '2em'}} />
                     </button>
-                 </>
+                 </div>
+                 : <button
+                    className={'inline in-text btn btn-primary right'}
+                    onClick={() => add()}
+                >
+                    <FontAwesomeIcon icon={faPlus} title='Add Hero' style={{width: '2em'}} />
+                </button>
                 }
-                
+
             </td>
         </tr></tbody></table>
       </div>
     )
 });
 
-function ResourceHeader(props: {
+HeroUpsert.displayName = 'HeroUpsert';
+
+function ResourceHeader(props: Readonly<{
     text: string,
-    temple_id?: number|undefined,
+    temple_id?: number,
     onChange?: (index: number|undefined) => void
-}) {
+}>) {
     return (
-        <>
         <tr>
             <th colSpan={5} style={{textAlign: 'left', paddingLeft: '.35em'}}>
-                {props.onChange !== undefined
-                ? <Dropdown autoClose={true} display='inline-block' dropdownWidth={160}
+                {props.onChange === undefined
+                ? props.text
+                : <Dropdown autoClose={true} display='inline-block' dropdownWidth={160}
                         trigger={
                             <span>{props.temple_id === undefined ? props.text : "Temple " + (props.temple_id+1) } 
                                 <FontAwesomeIcon icon={faChevronDown} style={{width: '1em'}} className='btn-role' title='select hero level'/>
                             </span>
                         }>
                         <div style={{padding: '.5em', paddingTop: '.25em'}}>
-                            <div key={'numpad-'+0} className='btn btn-primary' 
+                            <button key={'numpad-'+0} className='btn btn-primary' 
                                     style={{display: 'inline-block', padding: '0', width: '95%', fontSize: 'smaller'}} 
                                     onClick={() => props.onChange!(undefined)}>
                                     {props.text}
-                            </div>
+                            </button>
                             {Object.keys(templeHeroRequires).map((val) => 
-                                <div key={'numpad-'+val} className='btn btn-primary' 
+                                <button key={'numpad-'+val} className='btn btn-primary' 
                                     style={{display: 'inline-block', padding: '0', width: '95%', fontSize: 'smaller'}} 
                                     onClick={() => props.onChange!(Number(val))}>
                                     Temple {Number(val)+1}
-                                </div>
+                                </button>
                             )}
                         </div>
                     </Dropdown>
-                : props.text
                 }
             </th>
             <th className='dataIconCell'><div><Icon size='xsm' src={ImageSrc.hero("shards/any-puppet", 9)} title={'9★ Puppet'}/></div></th>
@@ -344,11 +348,10 @@ function ResourceHeader(props: {
             <th className='dataIconCell'><div><Icon size='xsm' src={ImageSrc.resources('spiritvein shard')} title={'Spiritvein Shards'}/></div></th>
             <th></th>
         </tr>
-        </>
     )
 }
 
-function HeroRow(props: {
+function HeroRow(props: Readonly<{
     index: number,
     hero: HeroLevel,
     cost: HeroCost,
@@ -358,7 +361,7 @@ function HeroRow(props: {
     onSelect: (index: number, selected: boolean) => void
     onRemove: (index: number) => void
     onEnable: (index: number, enabled: boolean) => void
-}) {
+}>) {
     const displayRankExtra = (hero: HeroLevel): string => {
         if (hero.nodes !== undefined && hero.rank !== 'V4') {
             return hero.nodes.join('-')
@@ -371,6 +374,15 @@ function HeroRow(props: {
 
     const lockedVisibility = (props.locked || props.temple) ? 'hidden' : 'visible'
     const selectedClassName = !props.locked && props.selected ? 'selected' : ''
+    const renderHeroIcon = () => {
+        if (props.hero.hero) {
+            return heroesByName[props.hero.hero as keyof typeof heroesByName].rank(props.hero.rank, {size: 'xsm', className: selectedClassName})
+        }
+        if (props.hero.trans) {
+            return heroRank('puppet', ImageSrc.hero("shards/transcendence-puppet", 10), props.hero.rank, {size: 'xsm', className: selectedClassName}, 'Transcendence Hero')
+        }
+        return heroRank('puppet', ImageSrc.hero("shards/any-puppet", 10), props.hero.rank, {size: 'xsm', className: selectedClassName}, 'Hero')
+    }
 
     return (
         <tr className={props.hero.enabled ? '' : 'disabled'}>
@@ -385,12 +397,7 @@ function HeroRow(props: {
                 }
             </td>
             <td className='hero-picker' onClick={() => !props.locked && props.onSelect(props.index, !props.selected)}>
-                {props.hero.hero 
-                    ? heroesByName[props.hero.hero as keyof typeof heroesByName].rank(props.hero.rank, {size: 'xsm', className: selectedClassName}) 
-                    : props.hero.trans
-                    ? heroRank('puppet', ImageSrc.hero("shards/transcendence-puppet", 10), props.hero.rank, {size: 'xsm', className: selectedClassName}, 'Transcendence Hero')
-                    : heroRank('puppet', ImageSrc.hero("shards/any-puppet", 10), props.hero.rank, {size: 'xsm', className: selectedClassName}, 'Hero')
-                }
+                {renderHeroIcon()}
             </td>
             <td><Icon size="tiny" src={ImageSrc.hero_star(props.hero.rank)} title={props.hero.rank} /></td>
             <td style={{fontSize: 'smaller'}}>{displayRankExtra(props.hero)}</td>
@@ -411,33 +418,35 @@ function HeroRow(props: {
     )
 }
 
-function TotalRow(props: {
+function TotalRow(props: Readonly<{
     cost: HeroCost,
     text: string,
     colors: boolean,
-}) {
+}>) {
+    const valueColor = (value: number): string => value < 0 ? 'darkred' : 'darkgreen'
+    const cellColor = (value: number): string => props.colors ? valueColor(value) : 'inherit'
     return (
         <tr>
             <td colSpan={2}><FontAwesomeIcon icon={faForward} /><FontAwesomeIcon icon={faForward} /></td>
             <td colSpan={3} style={{textAlign: 'left'}}>&Sigma; {props.text}</td>
-            <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.food9} style={{color: !props.colors ? 'inherit' : props.cost.food9 < 0 ? 'darkred' : 'darkgreen'}} /></td>
-            <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.food10} style={{color: !props.colors ? 'inherit' : props.cost.food10 < 0 ? 'darkred' : 'darkgreen'}} /></td>
-            <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.stellar} style={{color: !props.colors ? 'inherit' : props.cost.stellar < 0 ? 'darkred' : 'darkgreen'}} /></td>
-            <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.esence} style={{color: !props.colors ? 'inherit' : props.cost.esence < 0 ? 'darkred' : 'darkgreen'}}/></td>
-            <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.aurora} style={{color: !props.colors ? 'inherit' : props.cost.aurora < 0 ? 'darkred' : 'darkgreen'}}/></td>
-            <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.cot} style={{color: !props.colors ? 'inherit' : props.cost.cot < 0 ? 'darkred' : 'darkgreen'}}/></td>
-            <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.spiritvein} style={{color: !props.colors ? 'inherit' : props.cost.spiritvein < 0 ? 'darkred' : 'darkgreen'}}/></td>
+            <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.food9} style={{color: cellColor(props.cost.food9)}} /></td>
+            <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.food10} style={{color: cellColor(props.cost.food10)}} /></td>
+            <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.stellar} style={{color: cellColor(props.cost.stellar)}} /></td>
+            <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.esence} style={{color: cellColor(props.cost.esence)}}/></td>
+            <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.aurora} style={{color: cellColor(props.cost.aurora)}}/></td>
+            <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.cot} style={{color: cellColor(props.cost.cot)}}/></td>
+            <td style={{textAlign: 'right'}}><BigNumber zero={true} value={props.cost.spiritvein} style={{color: cellColor(props.cost.spiritvein)}}/></td>
             <td></td>
         </tr>
     )
 }
 
-function InputItem(props: {
+function InputItem(props: Readonly<{
     value: number,
     locked: boolean,
     onChange: (value: number) => void
     id: string
-}) {
+}>) {
     const inputStyle = {marginLeft: '0', marginRight: '1px', width: 'calc(100% - 3px)', backgroundColor: '#ecdfbf', borderColor: 'darkgray', float: 'right' as const, paddingRight: '.1em'}
     if (props.locked) {
         return (
@@ -458,9 +467,29 @@ export function Regress() {
     const [selectedHave, setSelectedHave] = useState<number|null>(null);
     const [selectedBuild, setSelectedBuild] = useState<number|null>(null);
     const [locked, setLocked] = useState(false);
+    const [activeSlot, setActiveSlot] = useState(() => {
+        const saved = localStorage.getItem('ih-tool:regression:activeSlot')
+        return saved ? parseInt(saved, 10) : 0
+    });
+    const [savingSlot, setSavingSlot] = useState(() => {
+        const saved = localStorage.getItem('ih-tool:regression:savingSlot')
+        return saved ? parseInt(saved, 10) : 0
+    });
 
     const resources = useAppSelector(regressionResources);
     const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        localStorage.setItem('ih-tool:regression:activeSlot', activeSlot.toString())
+    }, [activeSlot])
+
+    useEffect(() => {
+        localStorage.setItem('ih-tool:regression:savingSlot', savingSlot.toString())
+    }, [savingSlot])
+
+    useEffect(() => {
+        dispatch(loadRegress(activeSlot))
+    }, [])
 
     const refHave = useRef<UpsertRefObject>(null)
     const refBuild = useRef<UpsertRefObject>(null)
@@ -492,11 +521,11 @@ export function Regress() {
     }
     const _selectedHave = (index: number|null) => {
         setSelectedHave(index)
-        refHave.current?.selectHero((index !== null) ? resources.have.heroes[index].hero : null)
+        refHave.current?.selectHero(index === null ? null : resources.have.heroes[index].hero)
     }
     const _selectedBuild = (index: number|null) => {
         setSelectedBuild(index)
-        refBuild.current?.selectHero((index !== null) ? resources.build.heroes[index].hero : null)
+        refBuild.current?.selectHero(index === null ? null : resources.build.heroes[index].hero)
     }
 
     const headerClass = locked ? '' : 'multi-row with-title'
@@ -504,15 +533,43 @@ export function Regress() {
     return (
         <>
         <div className='ihContainer' style={{textAlign: 'left', fontSize: '.7em'}}>
-            <button type="button" className="btn btn-primary" style={{paddingRight: '1em'}}  onClick={() => dispatch(loadRegress())} title="Load">
+            <button type="button" className="btn btn-primary" style={{paddingRight: '1em'}}  onClick={() => dispatch(loadRegress(activeSlot))} title="Load">
               <FontAwesomeIcon icon={faArrowRotateRight} style={{width: '2em'}}/> Load
             </button>
             <button type="button" className="btn btn-primary" style={{paddingRight: '1em'}}  onClick={() => dispatch(resetRegress())} title="Reset">
               <FontAwesomeIcon icon={faXmark} style={{width: '2em'}}/> Reset
             </button>
-            <button type="button" className="btn btn-primary" style={{paddingRight: '1em'}}  onClick={() => dispatch(saveRegress())} title="Save">
+            <button type="button" className="btn btn-primary" style={{paddingRight: '1em'}}  onClick={() => dispatch(saveRegress(savingSlot))} title="Save">
               <FontAwesomeIcon icon={faFloppyDisk} style={{width: '2em'}}/> Save
             </button>
+            {[0,1,2,3,4].map(slot => (
+                <button key={slot} type="button"
+                    className='btn btn-primary'
+                    style={{
+                        padding: '0 .5em',
+                        marginRight: '1px',
+                        backgroundColor: activeSlot === slot ? '#0d6efd' : '#f8f9fa',
+                        color: activeSlot === slot ? 'white' : '#212529',
+                        border: savingSlot === slot ? '2px solid #0d6efd' : '1px solid #dee2e6',
+                        fontWeight: activeSlot === slot ? 'bold' : 'normal'
+                    }}
+                    onClick={() => {
+                        setActiveSlot(slot)
+                        setSavingSlot(slot)
+                        dispatch(loadRegress(slot))
+                    }}
+                    onContextMenu={(e) => {
+                        e.preventDefault()
+                        setSavingSlot(slot)
+                    }}
+                    title={`Slot ${slot + 1} (Right-click to set save target only)`}
+                >
+                    {slot + 1}
+                </button>
+            ))}
+            <span style={{marginLeft: '1em', fontSize: '0.85em', color: '#666'}}>
+                Click to load • Right-click to select save target
+            </span>
             <button type="button" className="btn btn-primary" onClick={() => _setLocked(!locked)} title="Lock Editing" style={{float: 'right'}}>
               <FontAwesomeIcon icon={locked ? faLock : faLockOpen} style={{width: '2em'}}/>
             </button>

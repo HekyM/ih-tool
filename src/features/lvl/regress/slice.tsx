@@ -2,8 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../../app/store';
 import { array_move } from '../../../components/functions';
 import _ from 'lodash';
-import { nodesCost, treeCost, destinyCost } from '../../../data/lvl';
-import { temple } from '../../../data/lvl';
+import { nodesCost, treeCost, destinyCost, temple } from '../../../data/lvl';
 
 export interface HeroCost {
     aurora: number;
@@ -189,14 +188,14 @@ export const rankCost: HeroRankCost = {
 };
 
 const calcTotal = (heroes: HeroItem[], bag: {enabled: boolean, cost: HeroCost} | undefined): HeroCost => {
-    let total: HeroCost = {...emptyHeroCost}
-    let heroesCost: HeroCost[] = heroes.filter(h => h.hero.enabled).map(h => h.cost)
+    const total: HeroCost = {...emptyHeroCost}
+    const heroesCost: HeroCost[] = heroes.filter(h => h.hero.enabled).map(h => h.cost)
 
     for (const key of Object.keys(total)) {
         total[key as keyof HeroCost] = _.sumBy(heroesCost, key)
     }
 
-    if (bag && bag.enabled) {
+    if (bag?.enabled) {
         for (const [key, value] of Object.entries(total)) {
             total[key as keyof HeroCost] = value + _.get(bag.cost, key)
         }
@@ -206,7 +205,7 @@ const calcTotal = (heroes: HeroItem[], bag: {enabled: boolean, cost: HeroCost} |
 }
 
 const calcBalance = (have: HeroCost, build: HeroCost): HeroCost => {
-    let total: HeroCost = {...emptyHeroCost}
+    const total: HeroCost = {...emptyHeroCost}
     for (const key of Object.keys(total)) {
         let _key = key as keyof HeroCost
         total[_key] = have[_key] - build[_key]
@@ -224,17 +223,17 @@ export interface HeroLevel {
 }
 
 export const heroCost = (hero: HeroLevel): HeroCost => {
-    let cost = {..._.get(rankCost, hero.rank)}
+    const cost = {..._.get(rankCost, hero.rank)}
     if (hero.nodes !== undefined) {
         cost.stellar = cost.stellar + nodesCost(hero.rank, hero.nodes)
     }
     if (hero.lvl !== undefined) {
-        if (hero.rank[0] === 'T') {
+        if (hero.rank.startsWith('T')) {
             let x = treeCost(hero.lvl)
             cost.stellar = rankCost.V4.stellar + x.stellar
             cost.esence = rankCost.V4.esence + x.esence
         }
-        if (hero.rank[0] === 'D') {
+        if (hero.rank.startsWith('D')) {
             let x = destinyCost(hero.rank, hero.lvl)
             cost.spiritvein = cost.spiritvein + x.spiritvein
             cost.stellar = cost.stellar + x.stellar
@@ -249,9 +248,9 @@ export const heroCost = (hero: HeroLevel): HeroCost => {
 
 const destinyMap  = ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'Dmax'];
 const templeHeros = (require: number[]): HeroItem[] => {
-    let heroes: HeroItem[] = [];
+    const heroes: HeroItem[] = [];
     require.forEach( (count, d_lvl) => {
-        for (var i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
             let hero: HeroLevel = {
                 hero: undefined,
                 enabled: true,
@@ -335,8 +334,11 @@ const recalcBalance = (state: Resources): HeroCost => {
 }
 
 const version = '3'
-const patch = (data: Resources): Resources => {
-    let v = localStorage.getItem('ih-tool:regression:v') || '1'
+const slotKey = (slot: number): string => slot === 0 ? 'ih-tool:regression' : `ih-tool:regression:${slot}`;
+const slotVKey = (slot: number): string => `${slotKey(slot)}:v`;
+
+const patch = (data: Resources, slot: number): Resources => {
+    const v = localStorage.getItem(slotVKey(slot)) || '1'
     if (v === version) return data;
 
     if (v === '1') {
@@ -359,8 +361,8 @@ const patch = (data: Resources): Resources => {
         });
     }
 
-    localStorage.setItem('ih-tool:regression', JSON.stringify(data));
-    localStorage.setItem('ih-tool:regression:v', version);
+    localStorage.setItem(slotKey(slot), JSON.stringify(data));
+    localStorage.setItem(slotVKey(slot), version);
     return data;
 }
 
@@ -399,14 +401,14 @@ export const regressionSlice = createSlice({
         state.total = recalcBalance(state)
       },
       moveHaveHero: (state, action: PayloadAction<{index: number, add: number}> ) => {
-        let new_index = action.payload.index + action.payload.add
+        const new_index = action.payload.index + action.payload.add
         if (new_index < 0 || new_index >= state.have.heroes.length) {
             return
         }
         state.have.heroes = array_move(state.have.heroes, action.payload.index, new_index)
       },
       moveBuildHero: (state, action: PayloadAction<{index: number, add: number}> ) => {
-        let new_index = action.payload.index + action.payload.add
+        const new_index = action.payload.index + action.payload.add
         if (new_index < 0 || new_index >= state.have.heroes.length) {
             return
         }
@@ -445,16 +447,16 @@ export const regressionSlice = createSlice({
         state.build.temple_id = action.payload
         state.total = recalcBalance(state)
       },
-      saveRegress: (state) => {
-        localStorage.setItem('ih-tool:regression', JSON.stringify(state));
-        localStorage.setItem('ih-tool:regression:v', version);
+            saveRegress: (state, action: PayloadAction<number>) => {
+                localStorage.setItem(slotKey(action.payload), JSON.stringify(state));
+                localStorage.setItem(slotVKey(action.payload), version);
       },
-      loadRegress: (state) => {
-        let localData = localStorage.getItem('ih-tool:regression');
-        let data: Resources = localData ? patch(JSON.parse(localData)) : initialState;
-        state.have.heroes = data.have.heroes.map((h, i) => {return {hero: h.hero, cost: heroCost(h.hero)}})
-        state.have.bag.cost = {...emptyHeroCost, ...data.have.bag.cost}
-        state.build.heroes = data.build.heroes.map((h, i) => {return {hero: h.hero, cost: heroCost(h.hero)}})
+            loadRegress: (state, action: PayloadAction<number>) => {
+                const localData = localStorage.getItem(slotKey(action.payload));
+                const data: Resources = localData ? patch(JSON.parse(localData), action.payload) : initialState;
+                state.have.heroes = data.have.heroes.map(h => ({hero: h.hero, cost: heroCost(h.hero)}))
+                state.have.bag.cost = {...emptyHeroCost, ...data.have.bag.cost}
+                state.build.heroes = data.build.heroes.map(h => ({hero: h.hero, cost: heroCost(h.hero)}))
         state.have.total = calcTotal(data.have.heroes, data.have.bag)
         state.build.total = calcTotal(data.build.heroes, undefined)
         state.total = state.total = calcBalance(state.have.total, state.build.total) // ignore temple
