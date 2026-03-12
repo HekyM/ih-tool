@@ -23,7 +23,7 @@ import {
     rmHaveHero, rmBuildHero, 
     enabledHaveHero, enabledBuildHero,
     setBag, resetBag, enabledBag,
-    setHaveTemple, setBuildTemple,
+    setHaveTemple, applyBuildTemplePreset,
     saveRegress, loadRegress, resetRegress,
     templeHeroRequires,
     HeroLevel, HeroCost,
@@ -70,6 +70,16 @@ function SelectNode(props: Readonly<{text: string, value: number, max: number, s
 }
 
 const herosList: string[] = Object.keys(heroesByName)
+
+const templeSummaryText = (index: number): string => {
+    const counts: Record<string, number> = {};
+    templeHeroRequires[index].heroes.forEach(h => {
+        counts[h.hero.rank] = (counts[h.hero.rank] || 0) + 1;
+    });
+    return Object.entries(counts)
+        .map(([rank, count]) => `${count} ${rank} L100`)
+        .join(', ');
+}
 
 interface UpsertRefObject {
     selectHero: (hero: HeroLevel | null ) => void
@@ -311,14 +321,18 @@ function ResourceHeader(props: Readonly<{
     temple_id?: number,
     onChange?: (index: number|undefined) => void
 }>) {
+    const selectedTempleText = props.temple_id === undefined
+        ? props.text
+        : `Temple ${props.temple_id + 1}: ${templeSummaryText(props.temple_id)}`;
+
     return (
         <tr>
             <th colSpan={5} style={{textAlign: 'left', paddingLeft: '.35em'}}>
                 {props.onChange === undefined
                 ? props.text
-                : <Dropdown autoClose={true} display='inline-block' dropdownWidth={160}
+                : <Dropdown autoClose={true} display='inline-block' dropdownWidth={320}
                         trigger={
-                            <span>{props.temple_id === undefined ? props.text : "Temple " + (props.temple_id+1) } 
+                            <span>{selectedTempleText} 
                                 <FontAwesomeIcon icon={faChevronDown} style={{width: '1em'}} className='btn-role' title='select hero level'/>
                             </span>
                         }>
@@ -332,7 +346,7 @@ function ResourceHeader(props: Readonly<{
                                 <button key={'numpad-'+val} className='btn btn-primary' 
                                     style={{display: 'inline-block', padding: '0', width: '95%', fontSize: 'smaller'}} 
                                     onClick={() => props.onChange!(Number(val))}>
-                                    Temple {Number(val)+1}
+                                    Temple {Number(val)+1}: {templeSummaryText(Number(val))}
                                 </button>
                             )}
                         </div>
@@ -469,15 +483,19 @@ export function Regress() {
     const [locked, setLocked] = useState(false);
     const [activeSlot, setActiveSlot] = useState(() => {
         const saved = localStorage.getItem('ih-tool:regression:activeSlot')
-        return saved ? parseInt(saved, 10) : 0
+        return saved ? Number.parseInt(saved, 10) : 0
     });
     const [savingSlot, setSavingSlot] = useState(() => {
         const saved = localStorage.getItem('ih-tool:regression:savingSlot')
-        return saved ? parseInt(saved, 10) : 0
+        return saved ? Number.parseInt(saved, 10) : 0
     });
 
     const resources = useAppSelector(regressionResources);
     const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(loadRegress(activeSlot))
+    }, [dispatch, activeSlot])
 
     useEffect(() => {
         localStorage.setItem('ih-tool:regression:activeSlot', activeSlot.toString())
@@ -486,10 +504,6 @@ export function Regress() {
     useEffect(() => {
         localStorage.setItem('ih-tool:regression:savingSlot', savingSlot.toString())
     }, [savingSlot])
-
-    useEffect(() => {
-        dispatch(loadRegress(activeSlot))
-    }, [])
 
     const refHave = useRef<UpsertRefObject>(null)
     const refBuild = useRef<UpsertRefObject>(null)
@@ -512,7 +526,7 @@ export function Regress() {
     const dispatch_enabledBuildHero = (index: number, enabled: boolean) => dispatch(enabledBuildHero({index: index, enabled: enabled}))
 
     const dispatch_setHaveTemple = (id: number|undefined) => dispatch(setHaveTemple(id))
-    const dispatch_setBuildTemple = (id: number|undefined) => dispatch(setBuildTemple(id))
+    const dispatch_applyBuildTemplePreset = (id: number) => dispatch(applyBuildTemplePreset(id))
 
     const _setLocked = (state: boolean) => {
         setLocked(state)
@@ -659,26 +673,46 @@ export function Regress() {
 
             <thead className={headerClass}>
                 {!locked &&
+                <>
                 <tr><th colSpan={columnsCount}>
                     <HeroUpsert ref={refBuild} onAdd={dispatch_addBuildHero} onUpdate={dispatch_updateBuildHero} onMove={dispatch_moveBuildHero} />
                 </th></tr>
+                <tr><th colSpan={columnsCount} style={{textAlign: 'left', paddingLeft: '.35em'}}>
+                    <Dropdown autoClose={true} display='inline-block' dropdownWidth={360}
+                        trigger={
+                            <span className='btn btn-primary' style={{fontSize: 'smaller'}}>
+                                Auto-fill Build From Temple <FontAwesomeIcon icon={faChevronDown} style={{width: '1em'}} className='btn-role' />
+                            </span>
+                        }>
+                        <div style={{padding: '.5em', paddingTop: '.25em'}}>
+                            {Object.keys(templeHeroRequires).map((val) => 
+                                <button key={'build-temple-'+val} className='btn btn-primary'
+                                    style={{display: 'inline-block', padding: '0', width: '95%', fontSize: 'smaller'}}
+                                    onClick={() => dispatch_applyBuildTemplePreset(Number(val))}>
+                                    Temple {Number(val)+1}
+                                </button>
+                            )}
+                        </div>
+                    </Dropdown>
+                </th></tr>
+                </>
                 }
-                <ResourceHeader text="Build Heroes" temple_id={resources.build.temple_id} onChange={dispatch_setBuildTemple}/>
+                <ResourceHeader text="Build Heroes"/>
             </thead>
             <tbody>
-                {(resources.build.temple_id === undefined ? resources.build.heroes : templeHeroRequires[resources.build.temple_id].heroes).map((x, i) => 
+                {resources.build.heroes.map((x, i) => 
                     <HeroRow key={'build-'+i+locked} 
                         index={i} 
                         hero={x.hero} 
                         cost={x.cost} 
                         selected={selectedBuild === i}
-                        locked={locked || resources.build.temple_id !== undefined}
-                        temple={resources.build.temple_id !== undefined} 
+                        locked={locked}
+                        temple={false} 
                         onRemove={dispatch_rmBuildHero} 
                         onEnable={dispatch_enabledBuildHero}
                         onSelect={(index, selected) => _selectedBuild(selected ? index : null)} />
                 )}
-                <TotalRow text='Use' cost={resources.build.temple_id === undefined ? resources.build.total : templeHeroRequires[resources.build.temple_id].total} colors={false}/>
+                <TotalRow text='Use' cost={resources.build.total} colors={false}/>
             </tbody>
 
             <thead>

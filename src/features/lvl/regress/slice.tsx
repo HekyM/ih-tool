@@ -447,6 +447,22 @@ export const regressionSlice = createSlice({
         state.build.temple_id = action.payload
         state.total = recalcBalance(state)
       },
+                applyBuildTemplePreset: (state, action: PayloadAction<number>) => {
+                const preset = templeHeroRequires[action.payload].heroes.map(h => {
+                    const hero: HeroLevel = {
+                        ...h.hero,
+                        nodes: h.hero.nodes ? [...h.hero.nodes] : undefined,
+                    }
+                    return { hero, cost: heroCost(hero) }
+                }).sort((a, b) => {
+                    const rankNumber = (rank: string): number => rank.startsWith('D') ? Number(rank.slice(1)) : 0
+                    return rankNumber(b.hero.rank) - rankNumber(a.hero.rank)
+                })
+                state.build.heroes = preset
+                state.build.temple_id = undefined
+                state.build.total = calcTotal(state.build.heroes, undefined)
+                state.total = recalcBalance(state)
+            },
             saveRegress: (state, action: PayloadAction<number>) => {
                 localStorage.setItem(slotKey(action.payload), JSON.stringify(state));
                 localStorage.setItem(slotVKey(action.payload), version);
@@ -474,7 +490,7 @@ export const {
     moveHaveHero, moveBuildHero,
     enabledHaveHero, enabledBuildHero, 
     setBag, resetBag, enabledBag,
-    setHaveTemple, setBuildTemple,
+    setHaveTemple, setBuildTemple, applyBuildTemplePreset,
     saveRegress, loadRegress, resetRegress,
 } = regressionSlice.actions;
   
