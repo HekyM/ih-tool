@@ -92,9 +92,9 @@ const HeroUpsert = forwardRef((props: {
         setLvl(hero?.lvl || 0)
     }
 
-    const ranksV = ['E5', 'V1', 'V2', 'V3', 'V4']
-    const ranksT = ['T0', 'T1', 'T2', 'T3', 'T4', 'T5']
-    const ranksD = ['D1', 'D2', 'D3', 'D4', 'D5', 'D6']
+    const ranksV = ['E5', 'V1', 'V2', 'V3', 'V3+', 'V4']
+    const ranksT = ['T0', 'T1', 'T2', 'T3', 'T4', 'T5', 'TM']
+    const ranksD = ['D0', 'D1', 'D2', 'D3', 'D4', 'D5', 'D6']
 
     const selectHeroType = (rank: string): string => {
         return ranksV.includes(rank) ? 'void' :
@@ -132,13 +132,16 @@ const HeroUpsert = forwardRef((props: {
     const selectRank = (rank: string) => {
         switch(selectHeroType(rank)) {
             case 'void':
-                setRank(rank); setNode0(0); setNode1(0); setNode2(0);
+                if (rank === 'V3+') {setRank('V3'); setNode0(0); setNode1(30); setNode2(0);}
+                else {setRank(rank); setNode0(0); setNode1(0); setNode2(0);}
                 break;
             case 'tree':
-                setRank(rank); setLvl(_.get({'T0':1, 'T1':20, 'T2':40, 'T3':60, 'T4':80, 'T5':100}, rank));
+                if (rank === 'TM') {setRank('T5'); setLvl(120);}
+                else {setRank(rank); setLvl(_.get({'T0':1, 'T1':20, 'T2':40, 'T3':60, 'T4':80, 'T5':100}, rank));}
                 break;
             case 'destiny':
-                setRank(rank); setLvl(1);
+                if (rank === 'D0') {setRank('D1'); setLvl(1);}
+                else {setRank(rank); setLvl(100);}
                 break;
             default:
                 return;
