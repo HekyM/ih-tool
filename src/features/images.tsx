@@ -43,6 +43,8 @@ export function Images() {
                     <ImgModal src={ImageSrc.raw('others/monster/apparation')} style={imgStyle} alt='Apparation'/>
                     <div className='line-delimiter'/>
                     <ImgModal src={ImageSrc.raw('others/monster/nemean')} style={imgStyle} alt='Nemean'/>
+                    <div className='line-delimiter'/>
+                    <ImgModal src={ImageSrc.raw('others/monster/fox')} style={imgStyle} alt='Fox'/>
                 </div>
             </Collapsible>
 
